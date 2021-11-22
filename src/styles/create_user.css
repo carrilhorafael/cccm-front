@@ -1,0 +1,13 @@
+.formUser{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.containerUser{
+  border-radius: 20px;
+  box-shadow: #33333305 inset;
+}
+.formUser fieldset {
+  display: flex;
+  flex-direction: column;
+}
+

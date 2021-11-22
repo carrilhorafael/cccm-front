@@ -1,0 +1,148 @@
+.formMain{
+  background-color: #E9D7C7;
+  border-radius: 20px;
+  box-shadow: #11111140 6px 6px;
+  padding: 30px 0;
+}
+.formMain fieldset{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+}
+.formMain fieldset > label {
+  font-size: 24px;
+  font-weight: 400;
+}
+.formLogin fieldset:nth-child(2){
+  margin-top: 30px;
+}
+.formLogin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+fieldset input{
+  border: none;
+  border-bottom: 2px solid #840606;
+  background: none;
+  padding: 4px 0;
+  padding-inline-start: 1px;
+  margin-top: 12px;
+  font-size: 18px;
+  width: 100%;
+}
+fieldset select{
+  border: none;
+  border-bottom: 2px solid #840606;
+  background: none;
+  padding: 4px 0;
+  margin-top: 12px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.formMain fieldset > .inputPassword {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.inputPassword img {
+  position: absolute;
+  right: 0;
+  bottom: 11%;
+  width: 25px;
+}
+.formMain input[type=submit] {
+  background-color: #3DBD00;
+  width: 30%;
+  height: 45px;
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: #11111140 4px 4px;
+  margin: 30px 0;
+}
+.formMain input[type=submit]:hover {
+  background-color: #01A89E;
+  cursor: pointer;
+}
+.name{
+  grid-area: name;
+}
+.birthdate{
+  grid-area: birthdate;
+}
+.cpf{
+  grid-area: cpf;
+}
+.rg{
+  grid-area: rg;
+}
+.email{
+  grid-area: email;
+}
+.phone{
+  grid-area: phone;
+}
+.member_since{
+  grid-area: member_since;
+}
+.gender{
+  grid-area: gender;
+}
+.branch{
+  grid-area: branch;
+}
+.marital_status{
+  grid-area: marital_status;
+}
+.baptized{
+  grid-area: baptized;
+  flex-direction: row !important;
+  align-items: center;
+}
+.formCreateMember .btn{
+  grid-area: button;
+  width: 40%;
+  margin: 0 auto;
+}
+.baptized input[type=checkbox]{
+  margin: 0;
+  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+}
+.baptized label{
+  width: fit-content;
+}
+.location{
+  grid-area: location;
+}
+.location textarea{
+  background: none;
+  border: 2px solid #840606;
+  height: 80px;
+  margin-top: 12px;
+  border-radius: 10px;
+}
+.formCreateMember{
+  display: grid;
+  grid-template-areas:
+    "name birthdate"
+    "cpf rg"
+    "email phone"
+    "member_since gender"
+    "branch marital_status"
+    "baptized baptized"
+    "location location"
+    "button button"
+  ;
+  row-gap: 30px;
+  column-gap: 10px;
+}
+.formCreateMember fieldset{
+  width: 100%;
+}
+

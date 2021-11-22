@@ -1,0 +1,83 @@
+.card-header{
+  display: flex !important;
+}
+.cardHeader{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 0;
+}
+.szh-menu-button{
+  background: none;
+  border: none;
+}
+.accordion{
+  border-radius: 20px !important;
+}
+.card{
+  background-color: #E9D7C7 !important;
+}
+.card:nth-child(2n){
+  background-color: #FFF6F6 !important;
+}
+.card-body{
+  display: flex !important;
+  flex-direction: column !important;
+}
+.card-body .accordionRow{
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.card-body .accordionRow > div > p {
+  margin-bottom: 5px;
+  width: fit-content;
+}
+.linkOpenModal{
+  color: #00959E;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.buttonExcluir{
+  color: #840606;
+}
+.menuItem{
+  font-weight: 400;
+  font-size: 16px;
+}
+.configUsersPerPage{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.configUsersPerPage > p{
+  display: flex;
+  align-self: center;
+}
+.configUsersPerPage select {
+  background: none;
+  margin-left: 15px;
+  border: none;
+  border-bottom: 2px solid #840606;
+}
+.configPage button {
+  background: none;
+  border: none;
+  font-weight: 900;
+}
+.pagination{
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+.modal-header{
+  background-color: #8A4040;
+  color: #fafafa;
+  font-weight: 700;
+}
+.modal-body fieldset{
+  margin: 20px 0;
+}
+.modal-body fieldset label{
+  font-weight: 600;
+}
