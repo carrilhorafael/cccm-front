@@ -17,7 +17,7 @@ export default function DeleteUserModal({show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="danger">Confirmar</Button>
+        <Button variant="primary">Confirmar</Button>
       </Modal.Footer>
     </Modal>
   )

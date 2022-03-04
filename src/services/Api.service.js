@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const api = axios.create({
   baseURL: "https://cccm-back.herokuapp.com/",
-  Headers: {
+  headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": ""
   }
@@ -19,6 +19,13 @@ export function getValidateUser(){
 
 export function getUsers(){
   return api.get("users")
+}
+
+export function getChurch(id) {
+  return api.get("churches/" + id)
+}
+export function getChurches() {
+  return api.get("churches/")
 }
 
 export function deleteUser(id){

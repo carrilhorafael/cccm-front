@@ -15,7 +15,7 @@ export default function AccessGarantiedModal({show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="success">Confirmar</Button>
+        <Button variant="primary">Confirmar</Button>
       </Modal.Footer>
     </Modal>
   )

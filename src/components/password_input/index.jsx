@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import eye from '../img/eye_password.svg'
-import eye_corted from '../img/eye_password_corted.svg'
+import './styles.css'
+import eye from '../../img/eye_password.svg'
+import eye_corted from '../../img/eye_password_corted.svg'
 
 export default function PasswordInput({value, onChange, id}){
   const [type, setType] = useState("password")

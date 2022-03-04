@@ -2,8 +2,7 @@ import React from 'react'
 import { AuthProvider } from './context/AuthContext';
 import CustomRoutes from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./styles/index.css"
-import './styles/forms.css'
+import "./index.css"
 
 function App() {
   return (

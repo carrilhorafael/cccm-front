@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;400;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -47,14 +47,49 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-main{
-  max-width: 1024px;
-  margin: 0 auto;
-}
 :root{
-	font-family: "Mortel Sans", sans-serif;
+	font-family: "Quicksand", sans-serif !important;
+}
+header{
+	background-color: #D6F2FB;
+}
+header h1{
+	font-size: 42px;
+	color: #333;
+	text-align: center;
+	font-weight: 700;
+}
+input {
+  border-radius: 5px;
+  border: #0400D8 2px solid;
+  height: 42px;
+  font-size: 24px;
 }
 p {
 	padding: 0px;
 }
-
+.gradientLayout{
+	background: linear-gradient(115deg, #FAFAFA80, #73ADBF80, #FAFAFA80);
+	width: 100%;
+	height: calc(100vh - 42px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.container{
+	width: 100%;
+	max-width: 1024px;
+	margin: auto;
+}
+.btn-primary{
+	background-color: #0400D8;
+	color: #e5e5e5;
+	padding: 10px 40px;
+	border: none;
+	border-radius: 10px;
+	font-weight: bold;
+}
+.btn-primary:hover{
+	background-color: #8683EA;
+	color: #333;
+}

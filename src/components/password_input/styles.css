@@ -1,0 +1,15 @@
+.inputPassword{
+  width: 100%;
+  position: relative;
+}
+.inputPassword img{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  height: 32px;
+  width: 32px;
+
+}
+.inputPassword input{
+  width: 100%;
+}

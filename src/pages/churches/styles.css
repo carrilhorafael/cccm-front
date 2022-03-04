@@ -1,0 +1,50 @@
+.churchesLayout {
+  padding: 0 70px;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+.churchesHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+.churchesHeader h2 {
+  font-size: 36px;
+  text-transform: capitalize;
+}
+.churchesContainer {
+  display: flex;
+  width: 100%;
+}
+.churchCard {
+  min-width: 350px;
+  border-radius: 20px;
+  padding: 70px 16px 70px 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: #596B6F;
+}
+.churchCard h2 {
+  font-size: 36px;
+  color: #fafafa;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+.churchCard h3 {
+  font-size: 24px;
+  color: #fafafa;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+.churchCard p {
+  font-size: 16px;
+  color: #fafafa;
+  margin-bottom: 24px;
+}
+.churchCard .btn-primary {
+  padding: 5px 10px;
+  align-self: flex-end;
+}

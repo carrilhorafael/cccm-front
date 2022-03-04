@@ -11,7 +11,6 @@ export default function UserMenu ({showAccessModal, showDeleteModal, showTitheMo
       <MenuButton><img src={kebab_icon} alt=""/></MenuButton>
     }>
       <MenuItem className="menuItem">Editar informações</MenuItem>
-      <MenuItem onClick={() => showTitheModal()} className="menuItem">Cadastrar dízimo</MenuItem>
       <MenuItem onClick={() => showAccessModal()} className="menuItem">Conceder acesso</MenuItem>
       <MenuItem onClick={() => showDeleteModal()} className="menuItem buttonExcluir">Excluir</MenuItem>
     </Menu>
