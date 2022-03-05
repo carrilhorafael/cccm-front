@@ -1,43 +1,55 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import ChurchHeader from '../../components/church_header'
 import { AuthContext } from '../../context/AuthContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import { getChurch } from '../../services/Api.service'
-import ChurchGeneralPage from './components/general'
-import ChurchMinisteriesPage from './components/ministeries'
-import ChurchUsersPage from './components/users'
+import GeneralPage from './components/general'
+import MinisteriesPage from './components/ministeries'
+import UsersPage from './components/users'
 
-export default function ChurchSwitch(props) {
+export default function ChurchPage(props) {
   const history = useHistory()
-  const [churchShow, setChurchShow] = useState()
-  const {user, userChurch} = useContext(AuthContext)
+  const { tab, setChurch } = useContext(ChurchContext)
+  const { user, userChurch } = useContext(AuthContext)
 
   useEffect(() => {
     let churchId = props.location.search.split('?id=')[1]
     if(user.president_pastor || churchId === userChurch.id){
       getChurch(churchId)
         .then(({data}) => {
-          setChurchShow(data)
+          setChurch(data)
         })
         .catch(err => {
           console.log("Igreja não encontrada")
+          setChurch(userChurch)
           history.push(`/church?id=${userChurch.id}`)
         })
-    } else {
+      } else {
+      setChurch(userChurch)
       history.push(`/church?id=${userChurch.id}`)
     }
   }, [])
 
+  const getTabScreen = () => {
+    switch (tab) {
+      case "general":
+        return <GeneralPage/>
+      case "users":
+        return <UsersPage/>
+      case "ministeries":
+        return <MinisteriesPage/>
+      default:
+        break;
+    }
+  }
+
   return(
-    <>
-      <ChurchHeader name={userChurch.name} />
-      <Switch>
-        <Route path={`church/general?id=${userChurch.id}`} component={ChurchGeneralPage}/>
-        <Route path={`church/users?id=${userChurch.id}`} component={ChurchUsersPage}/>
-        <Route path={`church/ministeries?id=${userChurch.id}`} component={ChurchMinisteriesPage}/>
-      </Switch>
-    </>
+    <main className='churchLayout'>
+      <ChurchHeader/>
+      {getTabScreen()}
+    </main>
   )
 
 }
