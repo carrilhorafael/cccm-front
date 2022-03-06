@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import ChurchHeader from '../../components/church_header'
+import ChurchHeader from '../../components/churchHeader'
 import { AuthContext } from '../../context/AuthContext'
 import { ChurchContext } from '../../context/ChurchContext'
 import { getChurch } from '../../services/Api.service'
+import CreateUserPage from './components/createUser'
 import GeneralPage from './components/general'
 import MinisteriesPage from './components/ministeries'
 import UsersPage from './components/users'
+import './styles.css'
 
 export default function ChurchPage(props) {
   const history = useHistory()
@@ -40,6 +42,8 @@ export default function ChurchPage(props) {
         return <UsersPage/>
       case "ministeries":
         return <MinisteriesPage/>
+      case "create_user":
+        return <CreateUserPage/>
       default:
         break;
     }
@@ -48,7 +52,9 @@ export default function ChurchPage(props) {
   return(
     <main className='churchLayout'>
       <ChurchHeader/>
-      {getTabScreen()}
+      <section className='pageLayout'>
+        {getTabScreen()}
+      </section>
     </main>
   )
 

@@ -1,0 +1,86 @@
+.pageLayout{
+  max-width: calc(100vw - 140px);
+  margin: 32px auto;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 30px;
+}
+.cardHeader div {
+  display: flex;
+}
+.isLeader {
+  color: #0400D8 !important;
+  font-weight: bold;
+  margin-left: 16px;
+}
+.has-access {
+  color: #043C1A !important;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+.no-access {
+  color: #7C0404 !important;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+.accordionRow:last-of-type {
+  flex-direction: column;
+}
+.accordionRow:last-of-type div {
+  display: flex;
+  flex-direction: row;
+}
+.accordionRow:last-of-type p {
+  margin-right: 70px;
+}
+.usersPageHeader {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+}
+.usersPageHeader .iconButton:first-of-type {
+  margin-right: 8px;
+}
+
+/* .cardHeader .name {
+  margin-right: 32px;
+} */
+
+.createUserForm .formGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 16px;
+  margin-bottom: 16px;
+}
+.createUserForm label{
+  padding-bottom: 8px;
+  font-size: 18px;
+}
+.createUserForm fieldset{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.createUserForm textarea{
+  min-height: 80px;
+}
+.createUserForm .flexRowDisplay{
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.createUserForm .flexRowDisplay > label{
+  padding: 0;
+  margin-left: 16px;
+}
+.createUserForm .leaderField {
+  margin-left: 40px;
+}
+.createUserForm .buttonWrapper {
+  display: flex;
+  justify-content: center;
+}
+

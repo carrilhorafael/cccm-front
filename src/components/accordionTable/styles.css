@@ -1,0 +1,52 @@
+.accordion{
+  border-radius: 20px !important;
+}
+.card .card-header{
+  background-color: #F3FCFF !important;
+  position: relative;
+}
+.card p{
+  font-size: 18px;
+  line-height: 24px;
+  color: #333
+}
+.card:nth-child(2n) .card-header{
+  background-color: #D6F2FB !important;
+}
+.cardHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 12px 0px;
+  padding-left: 20px;
+
+}
+.accordionRow {
+  display: flex;
+  padding: 0 20px 24px 20px;
+  width: 100%;
+  justify-content: space-between;
+}
+.configResourcesPerPage{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.configResourcesPerPage > p{
+  display: flex;
+  align-self: center;
+}
+.configResourcesPerPage select {
+  background: none;
+  margin-left: 15px;
+  border: none;
+  border-bottom: 2px solid #0400D8;
+}
+.configPage button {
+  background: none;
+  border: none;
+  font-weight: 900;
+}
+.pagination{
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}

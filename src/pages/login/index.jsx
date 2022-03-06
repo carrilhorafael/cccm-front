@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import PasswordInput from '../../components/password_input'
+import PasswordInput from '../../components/passwordInput'
 import { AuthContext } from '../../context/AuthContext'
 import './styles.css'
 
