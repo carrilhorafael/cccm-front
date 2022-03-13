@@ -64,7 +64,10 @@ input, textarea, select {
   border: #0400D8 2px solid;
 	background-color: #fafafa;
   min-height: 42px;
-  font-size: 18px;
+	font-size: 18px;
+}
+input:hover, textarea:hover, select:hover {
+  border: #0400aa 2px solid;
 }
 p {
 	padding: 0px;

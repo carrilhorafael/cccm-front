@@ -28,6 +28,12 @@ export function CardBody ({ resource }) {
         <p>Endereço: {resource.location}</p>
       </div>
 
+      {!!resource.notes && (
+        <div className="accordionRow">
+          <p>Observações: {resource.notes}</p>
+        </div>
+      )}
+
       <div className="accordionRow">
         {resource.has_access ?
           <>

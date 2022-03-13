@@ -15,6 +15,7 @@ export default function CreateUserPage () {
   const marital_status = useRef()
   const gender = useRef()
   const location = useRef()
+  const notes = useRef()
   const [shouldHaveAccess, setShouldHaveAccess] = useState(false)
   const [isBaptized, setIsBaptized] = useState(false)
   const [isLeader, setIsLeader] = useState(false)
@@ -44,6 +45,7 @@ export default function CreateUserPage () {
         gender: gender.current.value,
         location: location.current.value,
         is_baptized: isBaptized,
+        notes: notes.current.value,
         should_have_access: shouldHaveAccess,
         is_leader: isLeader
       }
@@ -104,9 +106,13 @@ export default function CreateUserPage () {
             </select>
           </fieldset>
         </div>
-        <fieldset>
+        <fieldset className='flexColumnDisplay'>
           <label>Endereço completo:</label>
-          <textarea ref={location}/>
+          <textarea className='addressTextarea' ref={location}/>
+        </fieldset>
+        <fieldset className='flexColumnDisplay'>
+          <label>Observações sobre membro:</label>
+          <textarea rows={2} className='notesTextarea' ref={notes}/>
         </fieldset>
         <fieldset className='flexRowDisplay'>
           <Checkbox checked={isBaptized} handleToggle={() => setIsBaptized(!isBaptized)} />

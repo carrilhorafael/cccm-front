@@ -4,6 +4,7 @@
 .card .card-header{
   background-color: #F3FCFF !important;
   position: relative;
+  cursor: pointer;
 }
 .card p{
   font-size: 18px;
