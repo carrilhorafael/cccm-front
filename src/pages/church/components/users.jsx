@@ -6,21 +6,18 @@ import { CardBody, CardHeader } from './accordionItems'
 import IconButton from '../../../components/iconButton'
 import GrantAccessModal from '../../../components/modals/grantAccessModal'
 import RevokeAccessModal from '../../../components/modals/revokeAccessModal'
-import { deleteUser, grantUserAccess, revokeUserAccess } from '../../../services/Api.service'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import DeleteUserModal from '../../../components/modals/deleteUserModal'
 import FilterSidebar from './filterSidebar'
+import MinisteriesAssignModal from '../../../components/modals/ministeriesAssignModal'
 
 export default function ChurchUsersPage () {
-  const history = useHistory()
-  const { church, setChurch, setTab } = useContext(ChurchContext)
+  const { church, setResource, setTab } = useContext(ChurchContext)
   const { user } = useContext(AuthContext)
   const [showGrantAccessModal, setShowGrantAccessModal] = useState(false)
   const [showRevokeAccessModal, setShowRevokeAccessModal] = useState(false)
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false)
   const [showMinisteriesAssignModal, setShowMinisteriesAssignModal] = useState(false)
   const [showFilterSidebar, setShowFilterSidebar] = useState(false)
-  const [resource, setResource] = useState({})
 
   const getMenuConfigs = (resource) => {
     return [
@@ -30,7 +27,8 @@ export default function ChurchUsersPage () {
         hidden: !user.president_pastor && resource.president_pastor,
         hasIcon: true,
         onClick: () => {
-          console.log("Editar informações de " + resource.name)
+          setResource(resource)
+          setTab('update_user')
         }
       },
       {
@@ -43,9 +41,10 @@ export default function ChurchUsersPage () {
       },
       {
         icon: "fa-solid fa-person-praying",
-        title: "Adicionar ao ministério",
+        title: "Ministérios",
         hasIcon: true,
         onClick: () => {
+          setResource(resource)
           setShowMinisteriesAssignModal(true)
         }
       },
@@ -78,61 +77,13 @@ export default function ChurchUsersPage () {
     ]
   }
 
-  const handleUpdateResource = (resource) => {
-    let newUsers = church.users
-    const resourceIndex = newUsers.findIndex(user => user.id === resource.id)
-
-    newUsers = [
-      ...newUsers.slice(0, resourceIndex),
-      resource,
-      ...newUsers.slice(resourceIndex + 1)
-    ]
-    setChurch(prevState => ({...prevState, users: newUsers}))
-  }
-
-  const handleDestroyResource = () => {
-    let newUsers = church.users.filter(user => user.id !== resource.id)
-    setChurch(prevState => ({...prevState, users: newUsers}))
-  }
-
-  const grantAccess = (accessParams) => {
-    grantUserAccess(resource.id, accessParams)
-      .then(({data}) => {
-        handleUpdateResource(data)
-        setResource({})
-        setShowGrantAccessModal(false)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const revokeAccess = () => {
-    revokeUserAccess(resource.id)
-      .then(({data}) => {
-        handleUpdateResource(data)
-        setResource({})
-        setShowRevokeAccessModal(false)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const deleteMember = () => {
-    deleteUser(resource.id)
-      .then(() => {
-        handleDestroyResource()
-        setShowDeleteUserModal(false)
-      })
-  }
-
   return (
     <>
-      <DeleteUserModal show={showDeleteUserModal} onHide={() => setShowDeleteUserModal(false)} onConfirm={deleteMember}/>
-      <GrantAccessModal resource={resource} show={showGrantAccessModal} onHide={() => setShowGrantAccessModal(false)} onConfirm={grantAccess}/>
-      <RevokeAccessModal show={showRevokeAccessModal} onHide={() => setShowRevokeAccessModal(false)} onConfirm={revokeAccess}/>
-      <FilterSidebar show={showFilterSidebar} onHide={() => setShowFilterSidebar(false)} />
+      <MinisteriesAssignModal show={showMinisteriesAssignModal} onHide={() => setShowMinisteriesAssignModal(false)}/>
+      <DeleteUserModal show={showDeleteUserModal} onHide={() => setShowDeleteUserModal(false)}/>
+      <GrantAccessModal show={showGrantAccessModal} onHide={() => setShowGrantAccessModal(false)}/>
+      <RevokeAccessModal show={showRevokeAccessModal} onHide={() => setShowRevokeAccessModal(false)}/>
+      <FilterSidebar show={showFilterSidebar} onHide={() => setShowFilterSidebar(false)}/>
       <section className='usersPageHeader'>
         <IconButton icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
         <IconButton icon="fa-solid fa-user-plus" onClick={() => setTab("create_user")} />

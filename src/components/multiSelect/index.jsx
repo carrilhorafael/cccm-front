@@ -1,44 +1,46 @@
 import React, { useState } from 'react'
 import './styles.css'
 
-export default function MultiSelect ({
-  values,
-  clearValues,
-  insertValue,
-  removeValue,
-  items,
-  defaultValues
-}) {
-  const [options, setOptions] = useState(items)
+export default function MultiSelect ({defaultOptionPlaceholder, clearValues, onChange, initialOptions}) {
+  const [options, setOptions] = useState(initialOptions)
+  const [selectedOptions, setSelectedOptions] = useState([])
 
-  const handleChange = (value) => {
-    insertValue(value)
-    setOptions(options.filter(option => option !== value))
+  const handleInclude = (idx) => {
+    const selectedOption = options[parseInt(idx)]
+
+    onChange(selectedOption.value)
+    setSelectedOptions([...selectedOptions, selectedOption])
+    setOptions(options.filter(option => option.value !== selectedOption.value))
   }
 
-  const handleRemove = (value) => {
-    removeValue(value)
-    setOptions(prev => items.filter(item => prev.includes(item) || item === value))
+  const handleRemove = (removedOption) => {
+    const selectAux = selectedOptions.map(item => item.value)
+
+    onChange(removedOption)
+    setSelectedOptions(selectedOptions.filter(old => old.value !== removedOption.value))
+    setOptions(initialOptions.filter(initialOption => initialOption.value === removedOption.value || !selectAux.includes(initialOption.value)))
   }
 
   const handleClear = () => {
     clearValues()
-    setOptions(items)
+    setOptions(initialOptions)
+    setSelectedOptions([])
   }
 
   return (
     <div className='multiSelect'>
-      <select value={0} onChange={e => handleChange(e.target.value)}>
-        <option defaultValue value={0}></option>
-        {options.map((element) => (
-          <option>{element}</option>
+      <i className='fa-solid fa-magnifying-glass'/>
+      <select value={0} onChange={e => handleInclude(e.target.value)}>
+        <option defaultValue disabled value={0}>{defaultOptionPlaceholder}</option>
+        {options.map((item, idx) => (
+          <option value={idx}>{item.label}</option>
         ))}
       </select>
-      {values.length > 0 && (<div className='resultsWrapper'>
+      {selectedOptions.length > 0 && (<div className='resultsWrapper'>
         <div className='resultsChoosed'>
-          {values.map((value) => (
-            <div className='optionItem' onClick={() => handleRemove(value)}>
-              <p>{value}</p>
+          {selectedOptions.map((selectedOption, idx) => (
+            <div key={idx} className='optionItem' onClick={() => handleRemove(selectedOption)}>
+              <p>{selectedOption.label}</p>
             </div>
           ))}
         </div>

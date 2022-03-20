@@ -8,6 +8,7 @@ import { getChurch } from '../../services/Api.service'
 import CreateUserPage from './components/createUser'
 import GeneralPage from './components/general'
 import MinisteriesPage from './components/ministeries'
+import UpdateUserPage from './components/updateUser'
 import UsersPage from './components/users'
 import './styles.css'
 
@@ -44,6 +45,8 @@ export default function ChurchPage(props) {
         return <MinisteriesPage/>
       case "create_user":
         return <CreateUserPage/>
+      case "update_user":
+        return <UpdateUserPage/>
       default:
         break;
     }

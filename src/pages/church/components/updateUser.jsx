@@ -2,10 +2,10 @@ import { Button } from 'react-bootstrap'
 import React, { useContext, useRef, useState } from 'react'
 import Checkbox from '../../../components/checkbox'
 import { ChurchContext } from '../../../context/ChurchContext'
-import { postUser } from '../../../services/Api.service'
+import { updateUser } from '../../../services/Api.service'
 
-export default function CreateUserPage () {
-  const { church, handleCreateResource, setTab } = useContext(ChurchContext)
+export default function UpdateUserPage () {
+  const { resource, setResource, handleUpdateResource, setTab } = useContext(ChurchContext)
   const name = useRef()
   const title = useRef()
   const phone = useRef()
@@ -17,7 +17,7 @@ export default function CreateUserPage () {
   const location = useRef()
   const notes = useRef()
   const [shouldHaveAccess, setShouldHaveAccess] = useState(false)
-  const [isBaptized, setIsBaptized] = useState(false)
+  const [isBaptized, setIsBaptized] = useState(!!resource ? resource.is_baptized : false)
   const [isLeader, setIsLeader] = useState(false)
 
   const submitForm = () => {
@@ -38,13 +38,13 @@ export default function CreateUserPage () {
         is_leader: isLeader
       }
     }
-    postUser(church.id, user)
+    updateUser(resource.id, user)
       .then(({data}) => {
-        alert("Usuário criado com sucesso")
-        handleCreateResource(data)
+        alert("Usuário editado com sucesso")
+        handleUpdateResource(data, 'user')
+        setResource({})
         setTab("users")
       })
-
   }
 
   return (
@@ -53,31 +53,31 @@ export default function CreateUserPage () {
         <div className='formGrid'>
           <fieldset>
             <label>Nome: </label>
-            <input type='text' ref={name}/>
+            <input type='text' defaultValue={resource.name} ref={name}/>
           </fieldset>
           <fieldset>
             <label>Titulo</label>
-            <input type='text' ref={title}/>
+            <input type='text' defaultValue={resource.title} ref={title}/>
           </fieldset>
           <fieldset>
             <label>Telefone</label>
-            <input type={'tel'} pattern="([0-9]{2})9[0-9]{4}-[0-9]{4}" ref={phone}/>
+            <input type={'tel'} defaultValue={resource.phone} pattern="([0-9]{2})9[0-9]{4}-[0-9]{4}" ref={phone}/>
           </fieldset>
           <fieldset>
             <label>Email</label>
-            <input type='text' ref={email}/>
+            <input type='text'  defaultValue={resource.email} ref={email}/>
           </fieldset>
           <fieldset>
             <label>Data de nascimento</label>
-            <input type='date' ref={birthdate}/>
+            <input type='date'  defaultValue={resource.birthdate} ref={birthdate}/>
           </fieldset>
           <fieldset>
             <label>Membro desde</label>
-            <input type='date' ref={member_since}/>
+            <input type='date'  defaultValue={resource.member_since} ref={member_since}/>
           </fieldset>
           <fieldset>
             <label>Estado civil</label>
-            <select ref={marital_status}>
+            <select ref={marital_status} defaultValue={(resource.marital_status) || -1}>
               <option value={-1} disabled>Escolha o estado civil</option>
               <option value={"Solteiro(a)"}>Solteiro(a)</option>
               <option value={"Casado(a)"}>Casado(a)</option>
@@ -88,7 +88,7 @@ export default function CreateUserPage () {
           </fieldset>
           <fieldset>
             <label>Gênero</label>
-            <select ref={gender}>
+            <select ref={gender} defaultValue={(resource.gender) || -1}>
               <option value={-1} disabled>Escolha o genero</option>
               <option value={"Masculino"}>Masculino</option>
               <option value={"Feminino"}>Feminino</option>
@@ -97,30 +97,16 @@ export default function CreateUserPage () {
         </div>
         <fieldset className='flexColumnDisplay'>
           <label>Endereço completo:</label>
-          <textarea className='addressTextarea' ref={location}/>
+          <textarea className='addressTextarea' defaultValue={resource.location} ref={location}/>
         </fieldset>
         <fieldset className='flexColumnDisplay'>
           <label>Observações sobre membro:</label>
-          <textarea rows={2} className='notesTextarea' ref={notes}/>
+          <textarea rows={2} className='notesTextarea' defaultValue={resource.notes} ref={notes}/>
         </fieldset>
         <fieldset className='flexRowDisplay'>
           <Checkbox checked={isBaptized} handleToggle={() => setIsBaptized(!isBaptized)} />
           <label>É batizado?</label>
         </fieldset>
-
-        <fieldset className='flexRowDisplay'>
-          <Checkbox checked={shouldHaveAccess} handleToggle={() => {
-            setShouldHaveAccess(!shouldHaveAccess)
-            setIsLeader(false)
-          }} />
-          <label>Conceder acesso ao sistema?</label>
-        </fieldset>
-        {shouldHaveAccess && (
-          <fieldset className='flexRowDisplay leaderField'>
-            <Checkbox checked={isLeader} handleToggle={() => setIsLeader(!isLeader)} />
-            <label>É administrador do sistema?</label>
-          </fieldset>
-        )}
         <div className='buttonWrapper'>
           <Button variant="primary" onClick={submitForm}> Enviar </Button>
         </div>

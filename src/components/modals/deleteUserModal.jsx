@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import { ChurchContext } from '../../context/ChurchContext'
+import { deleteUser } from '../../services/Api.service'
 
 export default function DeleteUserModal({show, onHide, onConfirm}) {
+  const { resource, setResource, handleDestroyResource } = useContext(ChurchContext)
+
+  const deleteMember = () => {
+    deleteUser(resource.id)
+      .then(() => {
+        handleDestroyResource()
+        setResource({})
+        onHide()
+      })
+  }
+
+  const handleHide = () => {
+    setResource({})
+    onHide()
+  }
+
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={handleHide}>
       <Modal.Header closeButton>
         <Modal.Title>Excluir usuário</Modal.Title>
       </Modal.Header>
@@ -15,7 +33,7 @@ export default function DeleteUserModal({show, onHide, onConfirm}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="danger" onClick={onConfirm}>Excluir</Button>
+        <Button variant="danger" onClick={deleteMember}>Excluir</Button>
       </Modal.Footer>
     </Modal>
   )

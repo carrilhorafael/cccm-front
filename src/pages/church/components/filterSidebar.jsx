@@ -1,11 +1,13 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Button, Offcanvas } from 'react-bootstrap'
 import Checkbox from '../../../components/checkbox'
-import SearchInput from '../../../components/searchInput'
+import MultiSelect from '../../../components/multiSelect'
+import PartialInput from '../../../components/partialInput'
+import SearchInput from '../../../components/partialInput'
 import { ChurchContext } from '../../../context/ChurchContext'
 
 export default function FilterSidebar ({show, onHide}) {
-  const { church, setChurch } = useContext(ChurchContext)
+  const { setChurch, getChurchTitles, getMinisteriesItems } = useContext(ChurchContext)
   const [filterByName, setFilterByName] = useState(false)
   const [filterByTitle, setFilterByTitle] = useState(false)
   const [filterByMinisteries, setFilterByMinisteries] = useState(false)
@@ -16,30 +18,7 @@ export default function FilterSidebar ({show, onHide}) {
   const [orderBy, setOrderBy] = useState('default')
   const [name, setName] = useState("")
   const [titles, setTitles] = useState([])
-  const [ministeries, setMinisteries] = useState([])
-
-  const getTitlesToFilter = () => {
-    let filterTitles = []
-
-    church.users.forEach((user) => {
-      if (!filterTitles.includes(user.title)) {
-          filterTitles.push(user.title);
-      }
-    });
-
-    return filterTitles
-  }
-  const getMinisteriesToFilter = () => {
-    let ministeries = []
-
-    church.ministeries.forEach((ministery) => {
-      if (!ministeries.includes(ministery.name)) {
-          ministeries.push(ministery.name);
-      }
-    });
-
-    return ministeries
-  }
+  const [ministeriesIds, setMinisteriesIds] = useState([])
 
   const submitFilter = () => {
     let filterBody = {
@@ -50,6 +29,10 @@ export default function FilterSidebar ({show, onHide}) {
     if (filterByTitle) filterBody.filter.titles = titles
     if (filterByBaptism) filterBody.filter.is_baptized = isBaptized
     if (filterBySystemAccess) filterBody.filter.access_system = filterBySystemAccess
+    if (filterByMinisteries) {
+      filterBody.filter.ministeries_filter_types = ministeriesFilterTypes
+      if (ministeriesFilterTypes.includes('choosed-ministeries')) filterBody.filter.ministeries_ids = ministeriesIds
+    }
     console.log(filterBody)
   }
 
@@ -77,7 +60,6 @@ export default function FilterSidebar ({show, onHide}) {
   const handleToggleMinisteries = () => {
     setFilterByMinisteries(!filterByMinisteries)
     if(!filterByMinisteries) {
-      setMinisteries([])
       setMinisteriesFilterTypes([])
     }
   }
@@ -90,10 +72,19 @@ export default function FilterSidebar ({show, onHide}) {
     }
   }
 
-  const insertTitle = title => setTitles([...titles, title])
-  const insertMinistery = ministery => setMinisteries([...ministeries, ministery])
-  const removeTitle = title => setTitles(titles.filter(oldTitle => oldTitle !== title))
-  const removeMinistery = ministery => setMinisteries(ministeries.filter(oldMinistery => oldMinistery !== ministery))
+  const onChangeTitles = titleLabel => {
+    if (titles.includes(titleLabel))
+      setTitles(titles.filter(oldTitle => oldTitle !== titleLabel))
+    else
+      setTitles([...titles, titleLabel])
+  }
+  const onChangeMinisteries = ministeryId => {
+    if (ministeriesIds.includes(ministeryId))
+      setMinisteriesIds(ministeriesIds.filter(ministeriesIds => ministeriesIds !== ministeryId))
+    else
+      setMinisteriesIds([...ministeriesIds, ministeryId])
+  }
+
 
 
   return (
@@ -113,11 +104,7 @@ export default function FilterSidebar ({show, onHide}) {
               {filterByName && (
                 <fieldset className='infoFieldset'>
                   <label htmlFor="nameInput">Inclui:</label>
-                  <SearchInput type="partial" partialInputProps={{
-                    value: name,
-                    setValue: (e) => setName(e.target.value)
-                  }}
-                  />
+                  <PartialInput value={name} onChange={(e) => setName(e.target.value)}/>
                 </fieldset>
               )}
             </div>
@@ -128,14 +115,7 @@ export default function FilterSidebar ({show, onHide}) {
               </fieldset>
               {filterByTitle && (
                 <fieldset className='infoFieldset'>
-                  <label htmlFor="nameInput">Selecione titulos para filtrar:</label>
-                  <SearchInput type="multi-selectable" multiSelectableProps={{
-                    values: titles,
-                    items: getTitlesToFilter(),
-                    clearValues: () => setTitles([]),
-                    insertValue: insertTitle,
-                    removeValue: removeTitle
-                  }}/>
+                  <MultiSelect defaultOptionPlaceholder="Selecione titulos" initialOptions={getChurchTitles()} clearValues={() => setTitles([])} onChange={onChangeTitles}/>
                 </fieldset>
               )}
             </div>
@@ -186,20 +166,13 @@ export default function FilterSidebar ({show, onHide}) {
                   </fieldset>
                   <fieldset className='infoFieldset'>
                     <fieldset className='checkboxFieldset'>
-                      <Checkbox id="chooseMinisteriesCheckbox" checked={ministeriesFilterTypes.includes("choose-ministeries")} handleToggle={() => handleToggleMinisteriesTypeFilter('choose-ministeries')}/>
+                      <Checkbox id="chooseMinisteriesCheckbox" checked={ministeriesFilterTypes.includes("choosed-ministeries")} handleToggle={() => handleToggleMinisteriesTypeFilter('choosed-ministeries')}/>
                       <label htmlFor="chooseMinisteriesCheckbox">Escolha os ministérios</label>
                     </fieldset>
                   </fieldset>
-                  {ministeriesFilterTypes.includes("choose-ministeries") && (
+                  {ministeriesFilterTypes.includes("choosed-ministeries") && (
                     <fieldset className='infoFieldset'>
-                      <label htmlFor="nameInput">Escolha os ministérios:</label>
-                      <SearchInput type="multi-selectable" multiSelectableProps={{
-                        values: ministeries,
-                        items: getMinisteriesToFilter(),
-                        clearValues: () => setMinisteries([]),
-                        insertValue: insertMinistery,
-                        removeValue: removeMinistery
-                      }}/>
+                      <MultiSelect defaultOptionPlaceholder="Selecione ministérios" initialOptions={getMinisteriesItems()} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
                     </fieldset>
                   )}
                 </>

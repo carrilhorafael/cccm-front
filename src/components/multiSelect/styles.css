@@ -4,6 +4,22 @@
   gap: 10px;
   width: 100%;
 }
+.multiSelect {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+.multiSelect input{
+  width: 100%;
+  padding-left: 24px;
+}
+.multiSelect i {
+  position: absolute;
+  z-index: 10;
+  left: 5px;
+  top: 13px;
+}
+
 .multiSelect select {
   padding-left: 24px;
 }
