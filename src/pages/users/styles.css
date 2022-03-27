@@ -1,0 +1,122 @@
+.cardHeader div {
+  display: flex;
+}
+.isLeader {
+  color: #0400D8 !important;
+  font-weight: bold;
+  margin-left: 16px;
+}
+.has-access {
+  color: #043C1A !important;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+.no-access {
+  color: #7C0404 !important;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+.accordionRow:last-of-type {
+  flex-direction: column;
+}
+.accordionRow:last-of-type div {
+  display: flex;
+  flex-direction: row;
+}
+.accordionRow:last-of-type p {
+  margin-right: 70px;
+}
+.usersPageHeader {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+}
+.filterBodyWrapper {
+  height: calc(100vh - 112px - 2rem);
+  padding-bottom: 8px;
+  padding-right: 8px;
+  overflow-y: auto;
+}
+.filterBodyWrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.filterBodyWrapper::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-clip: padding-box;
+  background-color: #666;
+}
+.filterBodyWrapper::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+.filterBodyWrapper::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.usersPageHeader .iconButton:first-of-type {
+  margin-right: 8px;
+}
+.offcanvas-title {
+  font-size: 24px !important;
+  font-weight: bolder !important;
+}
+.filterSubtitle {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+.filterBody .checkboxFieldset{
+  display: flex;
+  align-items: center;
+}
+.filterBody .checkboxFieldset label{
+  margin-left: 24px;
+  font-size: 18px;
+}
+.filterBody .infoFieldset {
+  display: flex;
+  flex-direction: column;
+  margin-left: 48px;
+  margin-top: 8px;
+}
+.filterBody .infoFieldset label{
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.filterType {
+  margin-bottom: 24px;
+}
+ .radioInput {
+  width: 24px;
+  height: 24px;
+}
+.radioFieldset{
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+}
+.filterType .radioFieldset{
+  display: flex;
+  margin-left: 48px;
+  margin-top: 8px;
+  align-items: center;
+}
+.radioFieldset label {
+  margin-left: 16px;
+  font-size: 18px;
+}
+.offcanvas-body {
+  position: relative;
+}
+.offcanvas-body .buttonWrapper {
+  display: flex;
+  justify-content: center;
+  bottom: 16px;
+  width: calc(100% - 1rem);
+  position: absolute;
+}
+.offcanvas-body .buttonWrapper .btn-primary {
+  padding: 10px 64px;
+}

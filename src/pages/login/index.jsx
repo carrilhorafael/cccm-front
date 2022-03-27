@@ -1,11 +1,11 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import PasswordInput from '../../components/passwordInput'
+import PasswordInput from '../../common/passwordInput'
 import { AuthContext } from '../../context/AuthContext'
 import './styles.css'
 
 export default function LoginPage() {
-  const {handleLogin} = useContext(AuthContext)
+  const { handleLogin } = useContext(AuthContext)
   const email = useRef()
   const [password, setPassword] = useState('')
 

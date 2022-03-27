@@ -3,15 +3,15 @@ import { AuthProvider } from './context/AuthContext';
 import CustomRoutes from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css"
-import { ChurchProvider } from './context/ChurchContext';
+import { ChurchesProvider } from './context/ChurchesContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <ChurchProvider>
+    <ChurchesProvider>
+      <AuthProvider>
         <CustomRoutes/>
-      </ChurchProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ChurchesProvider>
   );
 }
 

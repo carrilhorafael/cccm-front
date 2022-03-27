@@ -1,19 +1,13 @@
 import { Button } from 'react-bootstrap'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './styles.css'
-import { getChurches } from '../../services/Api.service'
 import ChurchCard from './components/churchCard'
+import { ChurchesContext } from '../../context/ChurchesContext'
 
 export default function ChurchesPage() {
-  const [churches, setChurches] = useState([])
+  const { getChurches, churches } = useContext(ChurchesContext)
 
-  useEffect(()=>{
-    getChurches()
-      .then(({data})=> {
-        setChurches(data)
-      })
-  }, [])
-
+  useEffect(() => getChurches(), [])
 
   return (
     <main className='churchesLayout gradientLayout'>
@@ -22,11 +16,7 @@ export default function ChurchesPage() {
         <Button variant="primary" > Adicionar nova sede </Button>
       </section>
       <section className='churchesContainer'>
-        {churches.map(church => (
-          <ChurchCard
-            church={church}
-          />
-        ))}
+        {churches.map(church => <ChurchCard key={church.id} church={church}/>)}
       </section>
     </main>
   )

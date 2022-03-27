@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #F3FCFF;
 }
 ol, ul {
 	list-style: none;
@@ -106,4 +107,11 @@ p {
 }
 .btn-danger:hover{
 	color: #fafafa;
+}
+.pageLayout{
+  max-width: calc(100vw - 140px);
+  margin: 32px auto;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 30px;
 }

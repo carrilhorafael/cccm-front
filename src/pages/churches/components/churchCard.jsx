@@ -1,20 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import { ChurchesContext } from '../../../context/ChurchesContext'
 
 export default function ChurchCard ({church}) {
+  const { setChurch } = useContext(ChurchesContext)
   const history = useHistory()
   const getLeadersNames = () => {
-    return church.users.filter(user => user.is_leader).map(leader => leader.name).join(", ")
+    return "Ronaldo, Jorge"
+  }
+
+  const goToPage = () => {
+    setChurch(church)
+    history.push(`church/general?church_id=${church.id}`)
   }
 
   return (
     <div className="churchCard">
       <h2>{church.name}</h2>
-      <h3>{getLeadersNames()}</h3>
-      <p>{church.users.length} membros</p>
-      <p>{church.ministeries.length} ministérios</p>
-      <Button variant='primary' onClick={() => history.push(`/church?id=${church.id}`)}> Ver mais </Button>
+      {/* <h3>{getLeadersNames()}</h3> */}
+      <p>{church.users_count} membros</p>
+      <p>{church.ministeries_count} ministérios</p>
+      <Button variant='primary' onClick={goToPage}> Ver mais </Button>
     </div>
   )
 
