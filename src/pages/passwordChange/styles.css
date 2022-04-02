@@ -1,0 +1,21 @@
+.formChangePassword {
+  background-color: #fafafa;
+  width: 100%;
+  padding: 40px 32px;
+  border-radius: 30px;
+}
+.formChangePassword h2 {
+  font-weight: bold;
+  font-size: 24px;
+  padding-bottom: 40px;
+}
+.formChangePassword fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.formChangePassword .buttonWrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

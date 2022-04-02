@@ -14,7 +14,7 @@ import { useHistory } from 'react-router-dom'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
-  const { church, users, getChurch, setChurch, loadResources } = useContext(ChurchesContext)
+  const { church, users, getChurch, setChurch, loadResources, getMemberCard } = useContext(ChurchesContext)
   const { user, userChurch } = useContext(AuthContext)
 
   const [showGrantAccessModal, setShowGrantAccessModal] = useState(false)
@@ -55,7 +55,7 @@ export default function ChurchUsersPage () {
         title: "Gerar a carteirinha",
         hasIcon: true,
         onClick: () => {
-          alert("Funcionalidade em desenvolvimento ainda, aguarde mais um pouco")
+          getMemberCard(resource.id)
         }
       },
       {

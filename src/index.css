@@ -109,7 +109,7 @@ p {
 	color: #fafafa;
 }
 .pageLayout{
-  max-width: calc(100vw - 140px);
+  width: calc(100vw - 140px);
   margin: 32px auto;
   background-color: #fafafa;
   padding: 20px;

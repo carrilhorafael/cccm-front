@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start !important;
+  align-items: center;
 }
 .churchesHeader {
   width: 100%;
@@ -16,35 +17,47 @@
   text-transform: capitalize;
 }
 .churchesContainer {
-  display: flex;
+  display: grid;
   width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
 }
 .churchCard {
-  min-width: 350px;
   border-radius: 20px;
-  padding: 70px 16px 70px 16px;
+  padding: 30px 16px 16px 16px;
   display: flex;
   flex-direction: column;
-  background-color: #596B6F;
+  position: relative;
+  border: #0400D8 2px solid;
 }
 .churchCard h2 {
   font-size: 36px;
-  color: #fafafa;
+  color: #333;
   font-weight: bold;
   margin-bottom: 24px;
 }
 .churchCard h3 {
   font-size: 24px;
-  color: #fafafa;
+  color: #666;
   font-weight: bold;
   margin-bottom: 24px;
 }
 .churchCard p {
   font-size: 16px;
-  color: #fafafa;
+  color: #666;
   margin-bottom: 24px;
 }
 .churchCard .btn-primary {
   padding: 5px 10px;
   align-self: flex-end;
+}
+.churchCard .buttonsWrapper{
+  position: absolute;
+  top: 32px;
+  right: 16px;
+  display: none;
+  column-gap: 8px;
+}
+.churchCard:hover .buttonsWrapper{
+  display: flex;
 }

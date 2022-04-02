@@ -8,6 +8,7 @@ import ChurchGeneralPage from './pages/general'
 import ChurchUsersPage from './pages/users'
 import ChurchFormUserPage from './pages/formUser'
 import ChurchMinisteriesPage from './pages/ministeries'
+import PasswordChangePage from './pages/passwordChange'
 
 // function CustomRoute({ pastorPresidentOnly, pageManager,  ...rest }) {
 //   const {user, church, authenticated} = useContext(AuthContext)
@@ -28,8 +29,9 @@ export default function Routes () {
         <Header/>
         {!authenticated ?
           <Switch>
-            <Route exact path="/"><Redirect to="/login" /></Route>
             <Route exact path="/login" component={LoginPage}/>
+            <Route path="/account" component={PasswordChangePage}/>
+            <Route path="*"><Redirect to="/login" /></Route>
           </Switch>
           :
           <Switch>

@@ -16,7 +16,7 @@ export default function MinisteryModal({resource, show, onHide}) {
       }
     }
 
-    if (resource) await updateMinistery(ministeryParams)
+    if (resource) await updateMinistery(resource.id, ministeryParams)
     else await createMinistery(ministeryParams)
     onHide()
   }

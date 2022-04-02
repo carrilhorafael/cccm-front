@@ -58,6 +58,15 @@ export function ChurchesProvider ({children}) {
     })
   }
 
+  const destroyChurch = async (churchId) => {
+    api.delete(`churches/${churchId}`)
+    .then(() => setChurches(churches.filter(church => church.id !== churchId)))
+  }
+
+  const getMemberCard = (userId) => {
+    window.open(`${api.defaults.baseURL}/users/${userId}/member_card`)
+  }
+
   const createUser = async (userParams) => {
     api.post(`churches/${church.id}/users`, userParams)
     .then(({data}) => {
@@ -80,6 +89,11 @@ export function ChurchesProvider ({children}) {
     .then(({data}) => {
       setMinisteries([...ministeries, data])
     })
+  }
+
+  const createChurch = async (churchParams) => {
+    api.post("churches", churchParams)
+    .then(({data}) => setChurches([...churches, data]))
   }
 
   const updateUser = async (userId, userParams) => {
@@ -110,6 +124,21 @@ export function ChurchesProvider ({children}) {
         ...newMinisteries.slice(resourceIndex + 1)
       ]
       setMinisteries(newMinisteries)
+    })
+  }
+
+  const updateChurch = async (churchId, churchParams) => {
+    api.put(`churches/${churchId}`, churchParams)
+    .then(({data}) => {
+      let newChurches = churches
+      const position = newChurches.findIndex(church => church.id === data.id)
+
+      newChurches = [
+        ...newChurches.slice(0, position),
+        data,
+        ...newChurches.slice(position + 1)
+      ]
+      setChurches(newChurches)
     })
   }
 
@@ -155,14 +184,18 @@ export function ChurchesProvider ({children}) {
       getMinisteries,
       loadResources,
       getChurches,
+      getMemberCard,
       updateUser,
       updateMinistery,
+      updateChurch,
       revokeUserAccess,
       grantUserAccess,
       createUser,
       createMinistery,
+      createChurch,
       destroyUser,
       destroyMinistery,
+      destroyChurch,
       getChurchTitles,
       getMinisteriesItems
     }}>

@@ -53,10 +53,40 @@ export function AuthProvider ({children}) {
     })
   }
 
-  const handleLogout = () => {}
+  const handleLogout = () => {
+    localStorage.removeItem('authtoken')
+    setUser({})
+    setUserChurch({})
+    setFilter({})
+    setChurch()
+    setAuthenticated(false)
+  }
+
+  const handleChangePassword = (data) => {
+    api.post('auth/reset', data)
+    .then(({ data }) => {
+      setUser(data.user)
+      setFilter(data.filter)
+      if (!data.user.president_pastor) setChurch(data.church)
+      api.defaults.headers.Authorization = data.token
+      localStorage.setItem("authtoken", data.token)
+      setAuthenticated(true)
+    })
+  }
 
   return (
-  <AuthContext.Provider value={{user, userChurch, filter, authenticated, setFilter, handleLogin, updateFilter, handleLogout}}>
+    <AuthContext.Provider
+      value={{
+        user,
+        userChurch,
+        filter,
+        authenticated,
+        setFilter,
+        handleLogin,
+        handleChangePassword,
+        updateFilter,
+        handleLogout
+      }}>
       {children}
     </AuthContext.Provider>
   )
