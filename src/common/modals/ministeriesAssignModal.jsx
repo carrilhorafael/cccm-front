@@ -19,7 +19,7 @@ export default function MinisteriesAssignModal ({show, user, onHide}) {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal size='lg' show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Alocar membro em ministério</Modal.Title>
       </Modal.Header>

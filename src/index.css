@@ -110,7 +110,7 @@ p {
 }
 .pageLayout{
   width: calc(100vw - 140px);
-  margin: 32px auto;
+  margin: 10px auto;
   background-color: #fafafa;
   padding: 20px;
   border-radius: 30px;

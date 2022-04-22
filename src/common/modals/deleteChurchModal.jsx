@@ -13,7 +13,7 @@ export default function DeleteChurchModal({resource, show, onHide}) {
   }
 
   return (
-    <Modal show={show} onHide={() => {
+    <Modal size='lg' show={show} onHide={() => {
       onHide()
       setName("")
     }}>

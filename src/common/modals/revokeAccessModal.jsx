@@ -6,7 +6,7 @@ export default function RevokeAccessModal({user, show, onHide}) {
   const { revokeUserAccess } = useContext(ChurchesContext)
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal size='lg' show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Revogar acesso</Modal.Title>
       </Modal.Header>

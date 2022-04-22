@@ -11,7 +11,7 @@ export default function DeleteUserModal({user, show, onHide}) {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal size='lg' show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Excluir usuário</Modal.Title>
       </Modal.Header>

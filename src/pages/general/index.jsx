@@ -1,12 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
+import IconButton from '../../common/iconButton'
+import Loading from '../../common/loading'
+import ProselyteModal from '../../common/modals/proselytesModal'
 import { AuthContext } from '../../context/AuthContext'
 import { ChurchesContext } from '../../context/ChurchesContext'
+import BirthdatePerMonth from './components/birthdatePerMonth'
+import ProselytesLastYear from './components/proselytesLastYear'
 import './styles.css'
 
 export default function ChurchGeneralPage () {
-  const { church, setChurch, getChurch, loadResources } = useContext(ChurchesContext)
+  const { loadedResources, church, setChurch, getChurch, loadResources } = useContext(ChurchesContext)
   const { user, userChurch } = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(false)
+  const [chartType, setChartType] = useState('bar')
 
   useEffect(() => {
     setIsLoading(true)
@@ -19,15 +25,36 @@ export default function ChurchGeneralPage () {
       }
     }
     loadResources(churchId)
-    setIsLoading(false)
+
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500);
   }, [])
 
   return (
     <main className='pageLayout'>
       {isLoading ?
-        <p>Carregando...</p>
+        <Loading message="Carregando informações"/>
         :
-        <p>Essa é a página geral</p>
+        <div className='mainGeneralLayout'>
+          <BirthdatePerMonth />
+          <div className='chartMainLayout'>
+            <h3>Convertidos por mês (ultimo semestre)</h3>
+            <div className='chartMain'>
+              <ProselytesLastYear type={chartType}/>
+              <div className='actionsProselyteGraph'>
+                <IconButton
+                  icon={chartType === 'line' ? 'fa-solid fa-chart-simple' : 'fa-solid fa-chart-line'}
+                  onClick={() => setChartType(chartType === 'line' ? 'bars' : 'line')}
+                />
+                <IconButton
+                  icon="fa-solid fa-square-arrow-up-right"
+                  onClick={() => console.log('teste')}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       }
     </main>
   )

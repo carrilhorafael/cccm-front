@@ -14,7 +14,7 @@ export default function GrantAccessModal({user, show, onHide}) {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal size='lg' show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Conceder acesso</Modal.Title>
       </Modal.Header>

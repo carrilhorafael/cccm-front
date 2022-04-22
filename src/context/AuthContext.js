@@ -1,4 +1,5 @@
 import React, {useState, useEffect, createContext, useContext} from 'react'
+import Loading from '../common/loading'
 import { api } from '../services/Api.service'
 import { ChurchesContext } from './ChurchesContext'
 
@@ -10,8 +11,10 @@ export function AuthProvider ({children}) {
   const [user, setUser] = useState({})
   const [filter, setFilter] = useState({})
   const [userChurch, setUserChurch] = useState({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     let token = localStorage.getItem("authtoken")
     if (token){
       api.defaults.headers.Authorization = token
@@ -24,6 +27,9 @@ export function AuthProvider ({children}) {
         setAuthenticated(true)
       })
     }
+    setTimeout(() => {
+      setLoading(false)
+    }, 800);
   }, [])
 
   const handleLogin = (email, password) => {
@@ -87,6 +93,7 @@ export function AuthProvider ({children}) {
         updateFilter,
         handleLogout
       }}>
+      {loading && <Loading/> }
       {children}
     </AuthContext.Provider>
   )

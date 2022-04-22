@@ -8,6 +8,9 @@ export function ChurchesProvider ({children}) {
   const [church, setChurch] = useState(null)
   const [users, setUsers] = useState([])
   const [ministeries, setMinisteries] = useState([])
+  const [resume, setResume] = useState([])
+  const [proselytes, setProselytes] = useState([])
+  const [loadedResources, setLoadedResources] = useState(false)
 
   const getMinisteriesItems = () => {
     return ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
@@ -20,6 +23,8 @@ export function ChurchesProvider ({children}) {
   const loadResources = async (churchId) => {
     await getUsers(churchId)
     await getMinisteries(churchId)
+    await getResume(churchId)
+    setLoadedResources(true)
   }
 
   const getChurch = async (churchId) => {
@@ -32,6 +37,11 @@ export function ChurchesProvider ({children}) {
     .then(({data}) => setChurches(data))
   }
 
+  const getResume = (churchId) => {
+    api.get(`churches/${churchId}/resume`)
+    .then(({data}) => setResume(data))
+  }
+
   const getUsers = (churchId) => {
     api.get(`churches/${churchId}/users`)
     .then(({data}) => setUsers(data))
@@ -40,6 +50,11 @@ export function ChurchesProvider ({children}) {
   const getMinisteries = (churchId) => {
     api.get(`churches/${churchId}/ministeries`)
     .then(({data}) => setMinisteries(data))
+  }
+
+  const getProselytes = (churchId) => {
+    api.get(`churches/${churchId}/proselytes`)
+    .then(({data}) => setProselytes(data))
   }
 
   const destroyMinistery = async (ministeryId) => {
@@ -178,6 +193,9 @@ export function ChurchesProvider ({children}) {
       users,
       ministeries,
       churches,
+      resume,
+      proselytes,
+      loadedResources,
       setChurch,
       getChurch,
       getUsers,
@@ -197,6 +215,7 @@ export function ChurchesProvider ({children}) {
       destroyMinistery,
       destroyChurch,
       getChurchTitles,
+      getProselytes,
       getMinisteriesItems
     }}>
 

@@ -22,7 +22,7 @@ export default function MinisteryModal({resource, show, onHide}) {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal size='lg' show={show} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Criar ministério</Modal.Title>
       </Modal.Header>
