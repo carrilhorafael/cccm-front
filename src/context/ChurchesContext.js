@@ -5,20 +5,7 @@ export const ChurchesContext = createContext()
 
 export function ChurchesProvider ({children}) {
   const [churches, setChurches] = useState([])
-  const [church, setChurch] = useState(null)
-  const [users, setUsers] = useState([])
-  const [ministeries, setMinisteries] = useState([])
-  const [resume, setResume] = useState([])
-  const [proselytes, setProselytes] = useState([])
   const [loadedResources, setLoadedResources] = useState(false)
-
-  const getMinisteriesItems = () => {
-    return ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
-  }
-
-  const getChurchTitles = () => {
-    return church?.titles.map(title => ({ label: title, value: title }))
-  }
 
   const loadResources = async (churchId) => {
     await getUsers(churchId)

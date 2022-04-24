@@ -6,7 +6,7 @@ import './styles.css'
 import { useHistory } from 'react-router-dom'
 
 export default function ChurchFormUserPage () {
-  const { church, users, createUser } = useContext(ChurchesContext)
+  const { church, users, createUser, updateUser } = useContext(ChurchesContext)
   const history = useHistory()
   const name = useRef()
   const title = useRef()
@@ -50,7 +50,11 @@ export default function ChurchFormUserPage () {
         is_leader: isLeader
       }
     }
-    await createUser(userParams)
+    if (resource) {
+      await updateUser(resource.id, userParams)
+    } else {
+      await createUser(userParams)
+    }
     history.push(`/church/users?church_id=${church.id}`)
   }
 
@@ -64,7 +68,13 @@ export default function ChurchFormUserPage () {
           </fieldset>
           <fieldset>
             <label>Titulo</label>
-            <input type='text' ref={title} defaultValue={resource && resource.title}/>
+            <select ref={title} defaultValue={resource && resource.title}>
+              <option disabled>Escolha o titulo</option>
+              <option value="Membro(a)">Membro(a)</option>
+              <option value="Obreiro(a)">Obreiro(a)</option>
+              <option value="Diácono(isa)">Diácono(isa)</option>
+              <option value="Pastor(a)">Pastor(a)</option>
+            </select>
           </fieldset>
           <fieldset>
             <label>Telefone</label>

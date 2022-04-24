@@ -14,11 +14,10 @@ export function AuthProvider ({children}) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
-    let token = localStorage.getItem("authtoken")
-    if (token){
+    async function tryAutenticate(token) {
+      setLoading(true)
       api.defaults.headers.Authorization = token
-      api.get("validate_user")
+      await api.get("validate_user")
       .then(({data}) => {
         setUser(data.user)
         setFilter(data.filter)
@@ -26,10 +25,10 @@ export function AuthProvider ({children}) {
         if (!data.user.president_pastor) setChurch(data.church)
         setAuthenticated(true)
       })
-    }
-    setTimeout(() => {
       setLoading(false)
-    }, 800);
+    }
+    let token = localStorage.getItem("authtoken")
+    tryAutenticate(token)
   }, [])
 
   const handleLogin = (email, password) => {
