@@ -1,14 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Offcanvas } from 'react-bootstrap'
 import Checkbox from '../../../common/checkbox'
 import MultiSelect from '../../../common/multiSelect'
 import PartialInput from '../../../common/partialInput'
 import { AuthContext } from '../../../context/AuthContext'
-import { ChurchesContext } from '../../../context/ChurchesContext'
+import { ChurchContext } from '../../../context/ChurchContext'
 
 export default function FilterSidebar ({show, onHide}) {
-  const { setChurch, getChurchTitles, getMinisteriesItems } = useContext(ChurchesContext)
+  const { church, ministeries } = useContext(ChurchContext)
   const { filter, updateFilter } = useContext(AuthContext)
+
+  const churchTitles = church.titles.map(title => ({ label: title, value: title }))
+  const churchMinisteries = ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
+
   const [filterByName, setFilterByName] = useState(filter.restriction.hasOwnProperty('name'))
   const [filterByTitle, setFilterByTitle] = useState(filter.restriction.hasOwnProperty('titles'))
   const [filterByMinisteries, setFilterByMinisteries] = useState(filter.restriction.hasOwnProperty('ministeries'))
@@ -21,7 +25,7 @@ export default function FilterSidebar ({show, onHide}) {
   const [isBaptized, setIsBaptized] = useState(filter.restriction.is_baptized || null)
   const [ministeriesIds, setMinisteriesIds] = useState(filter.restriction.ministeries?.choosed_ministeries_ids || [])
 
-  useEffect(() => {handleHide()}, [filter])
+  useEffect(() => handleHide(), [filter])
 
   const submitFilter = async () => {
     let filterBody = {
@@ -136,7 +140,7 @@ export default function FilterSidebar ({show, onHide}) {
                 </fieldset>
                 {filterByTitle && (
                   <fieldset className='infoFieldset'>
-                    <MultiSelect defaultOptionPlaceholder="Selecione titulos" initialValues={titles} initialOptions={getChurchTitles()} clearValues={() => setTitles([])} onChange={onChangeTitles}/>
+                    <MultiSelect defaultOptionPlaceholder="Selecione titulos" initialValues={titles} initialOptions={churchTitles} clearValues={() => setTitles([])} onChange={onChangeTitles}/>
                   </fieldset>
                 )}
               </div>
@@ -195,7 +199,7 @@ export default function FilterSidebar ({show, onHide}) {
                     </fieldset>
                     {ministeriesFilterTypes.includes("choosen-ministeries") && (
                       <fieldset className='infoFieldset'>
-                        <MultiSelect defaultOptionPlaceholder="Selecione ministérios" initialValues={ministeriesIds} initialOptions={getMinisteriesItems()} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
+                        <MultiSelect defaultOptionPlaceholder="Selecione ministérios" initialValues={ministeriesIds} initialOptions={churchMinisteries} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
                       </fieldset>
                     )}
                   </>

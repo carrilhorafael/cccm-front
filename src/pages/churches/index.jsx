@@ -1,28 +1,25 @@
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import React, { useContext, useEffect, useState } from 'react'
 import './styles.css'
 import ChurchCard from './components/churchCard'
-import { ChurchesContext } from '../../context/ChurchesContext'
 import { useHistory } from 'react-router-dom'
 import ChurchModal from '../../common/modals/churchModal'
 import DeleteChurchModal from '../../common/modals/deleteChurchModal'
+import { getChurches } from '../../services/Api.service'
 
-export default function ChurchesPage() {
+export default function ChurchesPage({ setChurchProvided }) {
   const history = useHistory()
-  const { church, getChurches, churches } = useContext(ChurchesContext)
+  const [churches, setChurches] = useState([])
   const [showChurchModal, setShowChurchModal] = useState(false)
   const [showDeleteChurchModal, setShowDeleteChurchModal] = useState(false)
   const [resource, setResource] = useState(null)
 
   useEffect(() => {
     getChurches()
-    if(church){
-      history.push(`/church/general?church_id=${church.id}`)
-    }
+    .then(({data}) => setChurches(data))
   }, [])
 
   const onEdit = (church) => {
-    console.log(church)
     setResource(church)
     setShowChurchModal(true)
   }
@@ -30,6 +27,11 @@ export default function ChurchesPage() {
   const onDelete = (church) => {
     setResource(church)
     setShowDeleteChurchModal(true)
+  }
+
+  const goToPage = (church) => {
+    setChurchProvided(church)
+    history.push(`church/general`)
   }
 
   return (
@@ -48,7 +50,7 @@ export default function ChurchesPage() {
           <Button variant="primary" onClick={() => setShowChurchModal(true)}> Adicionar nova sede </Button>
         </section>
         <section className='churchesContainer'>
-          {churches.map(church => <ChurchCard key={church.id} onEdit={() => onEdit(church)} onDelete={() => onDelete(church)} church={church}/>)}
+          {churches.map(church => <ChurchCard key={church.id} onNavigate={() => goToPage(church)} onEdit={() => onEdit(church)} onDelete={() => onDelete(church)} church={church}/>)}
         </section>
       </div>
     </main>

@@ -1,30 +1,15 @@
 import { Button } from 'react-bootstrap'
-import React, { useContext, useEffect, useState } from 'react'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import React, { useContext, useState } from 'react'
+import { ChurchContext } from '../../context/ChurchContext'
 import IconButton from '../../common/iconButton'
 import MinisteryModal from '../../common/modals/ministeryModal'
 import './styles.css'
-import { AuthContext } from '../../context/AuthContext'
 
 export default function ChurchMinisteriesPage () {
-  const { church, setChurch, getChurch, loadResources, ministeries, destroyMinistery } = useContext(ChurchesContext)
-  const { user, userChurch } = useContext(AuthContext)
+  const { ministeries, destroyMinistery } = useContext(ChurchContext)
 
   const [showMinisteryModal, setShowMinisteryModal] = useState(false)
   const [resource, setResource] = useState(null)
-
-
-  useEffect(() => {
-    if(!church){
-      const churchId = parseInt(window.location.search.split("?church_id=")[1])
-      if (user.president_pastor && userChurch.id !== churchId){
-        getChurch(churchId)
-      } else {
-        setChurch(userChurch)
-      }
-      loadResources(churchId)
-    }
-  }, [])
 
   return (
     <main className='pageLayout'>

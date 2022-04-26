@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ResourcesAccordion from '../../common/accordionTable'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import { AuthContext } from '../../context/AuthContext'
 import { CardBody, CardHeader } from './components/accordionItems'
 import IconButton from '../../common/iconButton'
@@ -11,33 +11,19 @@ import FilterSidebar from './components/filterSidebar'
 import './styles.css'
 import MinisteriesAssignModal from '../../common/modals/ministeriesAssignModal'
 import { useHistory } from 'react-router-dom'
+import { getMemberCard } from '../../services/Api.service'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
-  const { church, users, getChurch, setChurch, loadResources, getMemberCard } = useContext(ChurchesContext)
-  const { user, userChurch } = useContext(AuthContext)
+  const { users } = useContext(ChurchContext)
+  const { user } = useContext(AuthContext)
 
   const [showGrantAccessModal, setShowGrantAccessModal] = useState(false)
   const [showRevokeAccessModal, setShowRevokeAccessModal] = useState(false)
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false)
   const [showMinisteriesAssignModal, setShowMinisteriesAssignModal] = useState(false)
   const [showFilterSidebar, setShowFilterSidebar] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [resource, setResource] = useState({})
-
-  useEffect(() => {
-    setIsLoading(true)
-    const churchId = parseInt(window.location.search.split("?church_id=")[1])
-    if(!church){
-      if (user.president_pastor && userChurch.id !== churchId){
-        getChurch(churchId)
-      } else {
-        setChurch(userChurch)
-      }
-    }
-    loadResources(churchId)
-    setIsLoading(false)
-  }, [])
 
   const getMenuConfigs = (resource) => {
     return [
@@ -47,7 +33,10 @@ export default function ChurchUsersPage () {
         hidden: !user.president_pastor && resource.president_pastor,
         hasIcon: true,
         onClick: () => {
-          history.push(`/church/user?user_id=${resource.id}`)
+          history.push({
+            pathname: `/church/user`,
+            state: resource
+          })
         }
       },
       {
@@ -98,9 +87,6 @@ export default function ChurchUsersPage () {
 
   return (
     <main className='pageLayout'>
-      {isLoading ?
-      <p>Carregando...</p>
-      :
       <>
         <MinisteriesAssignModal
           user={resource}
@@ -136,7 +122,6 @@ export default function ChurchUsersPage () {
           hasMenu
         />
       </>
-      }
     </main>
   )
 }

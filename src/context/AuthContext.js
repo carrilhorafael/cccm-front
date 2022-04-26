@@ -1,34 +1,31 @@
-import React, {useState, useEffect, createContext, useContext} from 'react'
+import React, {useState, useEffect, createContext} from 'react'
 import Loading from '../common/loading'
-import { api } from '../services/Api.service'
-import { ChurchesContext } from './ChurchesContext'
+import { api, postLogin, getValidateToken, postResetPassword } from '../services/Api.service'
 
 export const AuthContext = createContext()
 
 export function AuthProvider ({children}) {
   const [authenticated, setAuthenticated] = useState(false)
-  const { church, setChurch, getUsers } = useContext(ChurchesContext)
   const [user, setUser] = useState({})
   const [filter, setFilter] = useState({})
   const [userChurch, setUserChurch] = useState({})
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    async function tryAutenticate(token) {
-      setLoading(true)
-      api.defaults.headers.Authorization = token
-      await api.get("validate_user")
-      .then(({data}) => {
-        setUser(data.user)
-        setFilter(data.filter)
-        setUserChurch(data.church)
-        if (!data.user.president_pastor) setChurch(data.church)
-        setAuthenticated(true)
-      })
-      setLoading(false)
-    }
+    setLoading(true)
+
     let token = localStorage.getItem("authtoken")
-    tryAutenticate(token)
+    getValidateToken(token)
+    .then(({data}) => {
+      setUser(data.user)
+      setFilter(data.filter)
+      setLoading(false)
+      setAuthenticated(true)
+      setUserChurch(data.church)
+    })
+    .catch(()=>{
+      setLoading(false)
+    })
   }, [])
 
   const handleLogin = (email, password) => {
@@ -39,11 +36,10 @@ export function AuthProvider ({children}) {
       }
     }
 
-    api.post("auth/login", loginData)
+    postLogin(loginData)
     .then(({data}) => {
       setUser(data.user)
       setFilter(data.filter)
-      if (!data.user.president_pastor) setChurch(data.church)
       api.defaults.headers.Authorization = data.token
       localStorage.setItem("authtoken", data.token)
       setAuthenticated(true)
@@ -52,10 +48,7 @@ export function AuthProvider ({children}) {
 
   const updateFilter = (filterParams) => {
     api.put(`filters/${filter.id}`, filterParams)
-    .then(({data}) => {
-      getUsers(church.id)
-      setFilter(data)
-    })
+    .then(({data}) => setFilter(data))
   }
 
   const handleLogout = () => {
@@ -63,16 +56,15 @@ export function AuthProvider ({children}) {
     setUser({})
     setUserChurch({})
     setFilter({})
-    setChurch()
     setAuthenticated(false)
   }
 
   const handleChangePassword = (data) => {
-    api.post('auth/reset', data)
+    postResetPassword(data)
     .then(({ data }) => {
       setUser(data.user)
+      setUserChurch(data.church)
       setFilter(data.filter)
-      if (!data.user.president_pastor) setChurch(data.church)
       api.defaults.headers.Authorization = data.token
       localStorage.setItem("authtoken", data.token)
       setAuthenticated(true)
@@ -86,14 +78,15 @@ export function AuthProvider ({children}) {
         userChurch,
         filter,
         authenticated,
-        setFilter,
         handleLogin,
         handleChangePassword,
         updateFilter,
         handleLogout
       }}>
-      {loading && <Loading/> }
-      {children}
+      {loading?
+      <Loading/>
+      :
+      children}
     </AuthContext.Provider>
   )
 

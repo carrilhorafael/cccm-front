@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 
 export default function RevokeAccessModal({user, show, onHide}) {
-  const { revokeUserAccess } = useContext(ChurchesContext)
+  const { updateUser } = useContext(ChurchContext)
+
+  const handleSubmit = () => updateUser(user.id, { user: { should_have_access: false } })
 
   return (
     <Modal size='lg' show={show} onHide={onHide}>
@@ -16,7 +18,7 @@ export default function RevokeAccessModal({user, show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="danger" onClick={() => revokeUserAccess(user.id)}>Confirmar</Button>
+        <Button variant="danger" onClick={handleSubmit}>Confirmar</Button>
       </Modal.Footer>
     </Modal>
   )

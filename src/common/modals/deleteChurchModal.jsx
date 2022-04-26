@@ -1,13 +1,12 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { deleteChurch } from '../../services/Api.service'
 
 export default function DeleteChurchModal({resource, show, onHide}) {
-  const { destroyChurch } = useContext(ChurchesContext)
   const [name, setName] = useState("")
 
   const onConfirm = async () => {
-    await destroyChurch(resource.id)
+    await deleteChurch(resource.id)
     setName("")
     onHide()
   }

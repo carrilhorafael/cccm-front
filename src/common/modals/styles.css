@@ -1,6 +1,6 @@
 .modal-dialog {
   /* max-width: 800px !important; */
-  margin-top: 100px !important;
+  margin-top: 70px !important;
 }
 .modal-title{
   font-size: 24px;
@@ -69,4 +69,11 @@
   margin: 0;
   margin-left: 8px
 }
-
+.modal-body .accordionRow {
+  display: flex;
+  flex-direction: row !important;
+}
+.modal-body .accordionRow p {
+  width: fit-content;
+  margin: 0 !important;
+}

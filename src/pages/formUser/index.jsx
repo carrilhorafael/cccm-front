@@ -1,12 +1,13 @@
 import { Button } from 'react-bootstrap'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Checkbox from '../../common/checkbox'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import './styles.css'
-import { useHistory } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 export default function ChurchFormUserPage () {
-  const { church, users, createUser, updateUser } = useContext(ChurchesContext)
+  const { createUser, updateUser } = useContext(ChurchContext)
+  const location = useLocation()
   const history = useHistory()
   const name = useRef()
   const title = useRef()
@@ -16,7 +17,7 @@ export default function ChurchFormUserPage () {
   const member_since = useRef()
   const marital_status = useRef()
   const gender = useRef()
-  const location = useRef()
+  const address = useRef()
   const notes = useRef()
   const [shouldHaveAccess, setShouldHaveAccess] = useState(false)
   const [isBaptized, setIsBaptized] = useState(false)
@@ -24,11 +25,7 @@ export default function ChurchFormUserPage () {
   const [resource, setResource] = useState(null)
 
   useEffect(() => {
-    const search = window.location.search
-    if (search){
-      const userId = parseInt(search.split("?user_id=")[1])
-      setResource(users.find(user => user.id === userId))
-    }
+    setResource(location.state)
   }, [])
 
 
@@ -43,19 +40,17 @@ export default function ChurchFormUserPage () {
         member_since: member_since.current.value,
         marital_status: marital_status.current.value,
         gender: gender.current.value,
-        location: location.current.value,
+        location: address.current.value,
         is_baptized: isBaptized,
         notes: notes.current.value,
         should_have_access: shouldHaveAccess,
         is_leader: isLeader
       }
     }
-    if (resource) {
-      await updateUser(resource.id, userParams)
-    } else {
-      await createUser(userParams)
-    }
-    history.push(`/church/users?church_id=${church.id}`)
+    if (resource) await updateUser(resource.id, userParams)
+    else await createUser(userParams)
+
+    history.push(`/church/users`)
   }
 
   return (
@@ -114,7 +109,7 @@ export default function ChurchFormUserPage () {
         </div>
         <fieldset className='flexColumnDisplay'>
           <label>Endereço completo:</label>
-          <textarea className='addressTextarea' ref={location} defaultValue={resource && resource.location}/>
+          <textarea className='addressTextarea' ref={address} defaultValue={resource && resource.location}/>
         </fieldset>
         <fieldset className='flexColumnDisplay'>
           <label>Observações sobre membro:</label>

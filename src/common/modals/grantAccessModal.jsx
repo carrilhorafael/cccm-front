@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import Checkbox from '../checkbox'
 import './styles.css'
 
 export default function GrantAccessModal({user, show, onHide}) {
-  const { grantUserAccess } = useContext(ChurchesContext)
+  const { updateUser } = useContext(ChurchContext)
   const [isLeader, setIsLeader] = useState(false)
 
-  const grantAccess = () => {
-    const accessParams = { is_leader: isLeader }
-    grantUserAccess(user.id, accessParams)
+  const grantAccess = async () => {
+    const accessParams = { user: { should_have_access: true, is_leader: isLeader } }
+    await updateUser(user.id, accessParams)
+    onHide()
   }
 
   return (

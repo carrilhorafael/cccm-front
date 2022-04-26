@@ -1,10 +1,10 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import './styles.css'
 
 export default function MinisteryModal({resource, show, onHide}) {
-  const { createMinistery, updateMinistery } = useContext(ChurchesContext)
+  const { createMinistery, updateMinistery } = useContext(ChurchContext)
   const name = useRef()
   const description = useRef()
 
@@ -18,6 +18,7 @@ export default function MinisteryModal({resource, show, onHide}) {
 
     if (resource) await updateMinistery(resource.id, ministeryParams)
     else await createMinistery(ministeryParams)
+
     onHide()
   }
 

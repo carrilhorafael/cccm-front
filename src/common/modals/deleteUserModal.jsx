@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 
 export default function DeleteUserModal({user, show, onHide}) {
-  const { destroyUser } = useContext(ChurchesContext)
+  const { destroyUser } = useContext(ChurchContext)
 
   const onConfirm = async () => {
     await destroyUser(user.id)

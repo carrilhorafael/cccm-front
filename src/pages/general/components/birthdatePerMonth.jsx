@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
 import getFormattedDateWithoutYear from '../../../actions/getFormattedDateWithoutYear'
-import { ChurchesContext } from '../../../context/ChurchesContext'
+import { ChurchContext } from '../../../context/ChurchContext'
 
 export default function BirthdatePerMonth() {
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
   const today = new Date()
   const [selectedMonth, setSelectedMonth] = useState(parseInt(today.getMonth() + 1))
-  const { resume } = useContext(ChurchesContext)
-  console.log(resume.users_grouped_by_birthdate_month)
+  const { resume } = useContext(ChurchContext)
 
   const getIcon = (birthdateStr) => {
     const birthdate = new Date(today.getFullYear(), parseInt(birthdateStr.split('-')[1]) - 1, birthdateStr.split('-')[2])

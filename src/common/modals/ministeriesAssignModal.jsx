@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
+import { ChurchContext } from '../../context/ChurchContext'
 import MultiSelect from '../multiSelect'
 
 
 export default function MinisteriesAssignModal ({show, user, onHide}) {
-  const { getMinisteriesItems } = useContext(ChurchesContext)
+  const { ministeries } = useContext(ChurchContext)
+  const ministeriesItems = ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
+
   const [ministeriesIds, setMinisteriesIds] = useState([])
   const onChangeMinisteries = ministeryId => {
     if (ministeriesIds.includes(ministeryId))
@@ -29,7 +31,7 @@ export default function MinisteriesAssignModal ({show, user, onHide}) {
           Adicione o membro {user.name} em seus ministérios:
         </p>
         <div className='multiSelectWrapper'>
-          <MultiSelect defaultOptionPlaceholder="Selecione os ministérios do usuário" initialOptions={getMinisteriesItems()} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
+          <MultiSelect defaultOptionPlaceholder="Selecione os ministérios do usuário" initialOptions={ministeriesItems} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
         </div>
 
       </Modal.Body>

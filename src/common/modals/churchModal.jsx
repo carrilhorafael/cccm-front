@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { ChurchesContext } from '../../context/ChurchesContext'
-import Checkbox from '../checkbox'
+import { postChurch, putChurch } from '../../services/Api.service'
 import './styles.css'
 
 export default function ChurchModal({resource, show, onHide}) {
-  const { createChurch, updateChurch } = useContext(ChurchesContext)
+
   const name = useRef()
   const location = useRef()
 
@@ -17,9 +16,8 @@ export default function ChurchModal({resource, show, onHide}) {
       }
     }
 
-    console.log(resource)
-    if (resource) await updateChurch(resource.id, churchParams)
-    else await createChurch(churchParams)
+    if (resource) await putChurch(resource.id, churchParams)
+    else await postChurch(churchParams)
     onHide()
   }
 

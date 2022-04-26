@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import Header from './common/header'
 import { AuthContext } from './context/AuthContext'
@@ -9,6 +9,7 @@ import ChurchUsersPage from './pages/users'
 import ChurchFormUserPage from './pages/formUser'
 import ChurchMinisteriesPage from './pages/ministeries'
 import PasswordChangePage from './pages/passwordChange'
+import { ChurchProvider } from './context/ChurchContext'
 
 // function CustomRoute({ pastorPresidentOnly, pageManager,  ...rest }) {
 //   const {user, church, authenticated} = useContext(AuthContext)
@@ -23,30 +24,34 @@ import PasswordChangePage from './pages/passwordChange'
 
 
 export default function Routes () {
-  const { user, authenticated } = useContext(AuthContext)
+  const { user, authenticated, userChurch } = useContext(AuthContext)
+  const [churchProvided, setChurchProvided] = useState({})
+
+  const resetChurchProvided = () => setChurchProvided({})
+
   return (
     <Router>
-        <Header/>
+      <ChurchProvider churchProvided={churchProvided}>
+        <Header churchProvided={churchProvided} resetChurchProvided={resetChurchProvided}/>
         {!authenticated ?
           <Switch>
-            <Route exact path="/login" component={LoginPage}/>
+            <Route path="/login" component={LoginPage}/>
             <Route path="/account" component={PasswordChangePage}/>
             <Route path="*"><Redirect to="/login" /></Route>
           </Switch>
           :
           <Switch>
-            <Route path="/churches" component={ChurchesPage}/>
+            <Route path="/churches"> <ChurchesPage setChurchProvided={(church) => setChurchProvided(church)}/></Route>
             <Route path="/church/general" component={ChurchGeneralPage}/>
             <Route path="/church/users" component={ChurchUsersPage}/>
             <Route path="/church/user" component={ChurchFormUserPage}/>
             <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
+            {/* <Route path="/church/proselytes" component={ChurchProselytesPage}/> */}
             {user.president_pastor && <Route path="*"/> && <Redirect to="/churches"/>}
-            {<Route path="*"/> && <Redirect to="/church/general"/>}
-
-            {/* <Route path="/users" component={ChurchPage}/>
-            <Route path="*">{ user.president_pastor ? <Redirect to="/churches"/> : <Redirect to={`/church?id=${user.church_id}`} /> }</Route> */}
+            <Route path="*"> <Redirect to="/church/general"/> </Route>
           </Switch>
         }
+      </ChurchProvider>
     </Router>
 )
 
