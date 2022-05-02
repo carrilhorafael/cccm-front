@@ -58,8 +58,8 @@ export function postChurch(churchParams) {
   return api.post("churches", churchParams)
 }
 
-export function putChurch(churchParams) {
-  return api.post("churches", churchParams)
+export function putChurch(churchId, churchParams) {
+  return api.put(`churches/${churchId}`, churchParams)
 }
 
 export function deleteChurch(churchId) {

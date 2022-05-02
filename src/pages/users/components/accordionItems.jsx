@@ -7,7 +7,7 @@ export function CardHeader ({ resource }) {
     <>
       <div>
         <p className='name'>{resource.name}</p>
-        {resource.is_leader && <p className='isLeader'>Administrador</p>}
+        {resource.has_access && resource.is_leader && <p className='isLeader'>Administrador</p>}
       </div>
       <p>Membro desde {getFormattedDate(resource.member_since)}</p>
     </>

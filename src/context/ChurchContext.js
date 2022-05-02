@@ -1,10 +1,12 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Loading from '../common/loading'
 import { deleteMinistery, deleteProselyte, deleteUser, getChurchMinisteries, getChurchProselytes, getChurchResume, getChurchUsers, postChurchMinistery, postChurchProselyte, postChurchUser, putMinistery, putProselyte, putUser } from '../services/Api.service'
+import { AuthContext } from './AuthContext'
 
 export const ChurchContext = createContext()
 
 export function ChurchProvider ({churchProvided, children}) {
+  const { filter } = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(false)
   const [church, setChurch] = useState(churchProvided)
   const [users, setUsers] = useState([])
@@ -30,6 +32,10 @@ export function ChurchProvider ({churchProvided, children}) {
     }
     if (church && JSON.stringify(church) !== "{}") reloadChurch()
   }, [church])
+
+  useEffect(() => {
+    getChurchUsers(church.id).then(({data}) => setUsers(data))
+  }, [filter])
 
   async function loadResources() {
     await getChurchUsers(church.id).then(({data}) => setUsers(data))
@@ -61,7 +67,16 @@ export function ChurchProvider ({churchProvided, children}) {
 
   async function createProselyte(proselyteParams) {
     postChurchProselyte(church.id, proselyteParams)
-    .then(({data}) => setProselytes([data, ...proselytes]))
+    .then(({data}) => {
+      setProselytes([data, ...proselytes])
+      let object_keys = Object.keys(resume.proselytes_in_last_semester)
+      const object_key = object_keys[object_keys.length - 1]
+
+      let newResume = resume
+      newResume.proselytes_in_last_semester[object_key].push(data)
+      console.log(newResume)
+      setResume(newResume)
+    })
   }
 
   async function updateMinistery(ministeryId, ministeryParams) {
@@ -112,19 +127,19 @@ export function ChurchProvider ({churchProvided, children}) {
     })
   }
 
-  async function destroyMinistery(resource){
-    deleteMinistery(resource.id)
-    .then(({data}) => setMinisteries(ministeries.filter(ministery => ministery.id !== data.id)))
+  async function destroyMinistery(ministeryId){
+    deleteMinistery(ministeryId)
+    .then(() => setMinisteries(ministeries.filter(ministery => ministery.id !== ministeryId)))
   }
 
-  async function destroyUser(resource){
-    deleteUser(resource.id)
-    .then(({data}) => setUsers(users.filter(user => user.id !== data.id)))
+  async function destroyUser(userId){
+    deleteUser(userId)
+    .then(() => setUsers(users.filter(user => user.id !== userId)))
   }
 
-  async function destroyProselyte(resource){
-    deleteProselyte(resource.id)
-    .then(({data}) => setProselytes(proselytes.filter(proselyte => proselyte.id !== data.id)))
+  async function destroyProselyte(proselyteId){
+    deleteProselyte(proselyteId)
+    .then(() => setProselytes(proselytes.filter(proselyte => proselyte.id !== proselyteId)))
   }
 
   return (

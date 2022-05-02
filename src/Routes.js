@@ -27,6 +27,10 @@ export default function Routes () {
   const { user, authenticated, userChurch } = useContext(AuthContext)
   const [churchProvided, setChurchProvided] = useState({})
 
+  useEffect(()=>{
+    if (!user.president_pastor) setChurchProvided(userChurch)
+  })
+
   const resetChurchProvided = () => setChurchProvided({})
 
   return (

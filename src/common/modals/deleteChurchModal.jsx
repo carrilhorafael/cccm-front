@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
-import { deleteChurch } from '../../services/Api.service'
 
-export default function DeleteChurchModal({resource, show, onHide}) {
+export default function DeleteChurchModal({resource, show, onDelete, onHide}) {
   const [name, setName] = useState("")
 
   const onConfirm = async () => {
-    await deleteChurch(resource.id)
+    await onDelete()
     setName("")
     onHide()
   }
