@@ -41,7 +41,7 @@
   padding: 4px 8px;
   border-bottom: 2px solid #0400aa;
 }
-h3 {
+.mainGeneralLayout h3 {
   font-size: 18px;
   font-weight: bolder;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ChurchContext } from '../../context/ChurchContext'
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2'
@@ -13,13 +13,13 @@ export default function ProselytesLastSemester ({ type }) {
   const { resume } = useContext(ChurchContext)
 
   const [resource, setResource] = useState(null)
+  const [data, setData] = useState([])
   const [showProselyteFormModal, setShowProselyteFormModal] = useState(false)
   const [showProselytesModal, setShowProselytesModal] = useState(false)
 
-
-  const getValue = () => {
-    return Object.values(resume.proselytes_in_last_semester).map((array) => array.length)
-  }
+  useEffect(() => {
+    setData(Object.values(resume.proselytes_in_last_semester).map((array) => array.length))
+  }, [resume])
 
   const openEditModal = (newResource) => {
     setResource(newResource)
@@ -50,7 +50,7 @@ export default function ProselytesLastSemester ({ type }) {
             datasets: [
               {
                 label: 'Convertidos no mês',
-                data: getValue(),
+                data: data,
                 borderColor: '#0400aa',
                 backgroundColor: '#8683EA20',
                 fill: true,
@@ -65,7 +65,7 @@ export default function ProselytesLastSemester ({ type }) {
             labels: Object.keys(resume.proselytes_in_last_semester),
             datasets: [{
               label: 'Convertidos no mês',
-              data: getValue(),
+              data: data,
               borderColor: [
                 '#C6EE86',
                 '#C9F1E8',

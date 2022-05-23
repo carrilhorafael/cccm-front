@@ -47,7 +47,7 @@ export function postChurchUser(churchId, userParams) {
 }
 
 export function postChurchMinistery(churchId, ministeryParams) {
-  return api.post(`churches/${churchId}/users`, ministeryParams)
+  return api.post(`churches/${churchId}/ministeries`, ministeryParams)
 }
 
 export function postChurchProselyte(churchId, proselyteParams) {
