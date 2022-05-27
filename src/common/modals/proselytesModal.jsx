@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import getFormattedDate from '../../actions/getFormattedDate'
 import { ChurchContext } from '../../context/ChurchContext'
-import ResourcesAccordion from '../accordionTable'
+import ResourcesAccordion from '../AccordionTable'
 
 function CardBody({resource}){
   return (
@@ -46,14 +46,12 @@ export default function ProselytesModal ({ show, onHide, openEditModal }) {
       </Modal.Header>
 
       <Modal.Body>
-        <ResourcesAccordion
+        {/* <ResourcesAccordion
           resources={proselytes}
           resourceName="Convertidos"
-          CardBody={CardBody}
-          CardHeader={CardHeader}
           getMenuConfigs={getMenuConfigs}
           hasMenu
-        />
+        /> */}
       </Modal.Body>
     </Modal>
   )

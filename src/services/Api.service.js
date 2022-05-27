@@ -50,8 +50,17 @@ export function postChurchMinistery(churchId, ministeryParams) {
   return api.post(`churches/${churchId}/ministeries`, ministeryParams)
 }
 
-export function postChurchProselyte(churchId, proselyteParams) {
-  return api.post(`churches/${churchId}/proselytes`, proselyteParams)
+export function postCultProselyte(cultId, proselyteParams) {
+  return api.post(`cults/${cultId}/proselytes`, proselyteParams)
+}
+
+export function postChurchCult(churchId, cultDate) {
+  return api.post(`churches/${churchId}/cults`, {
+    cult: {
+      date_of: cultDate,
+      responsible_name: "Pr Julio"
+    }
+  })
 }
 
 export function postChurch(churchParams) {

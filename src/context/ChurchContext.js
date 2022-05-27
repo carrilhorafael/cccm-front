@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import Loading from '../common/loading'
-import { deleteMinistery, deleteProselyte, deleteUser, getChurchMinisteries, getChurchProselytes, getChurchResume, getChurchUsers, postChurchMinistery, postChurchProselyte, postChurchUser, putMinistery, putProselyte, putUser } from '../services/Api.service'
+import { deleteMinistery, deleteProselyte, deleteUser, getChurchMinisteries, getChurchProselytes, getChurchResume, getChurchUsers, postChurchCult, postChurchMinistery, postCultProselyte, postChurchUser, putMinistery, putProselyte, putUser } from '../services/Api.service'
 import { AuthContext } from './AuthContext'
 
 export const ChurchContext = createContext()
@@ -65,17 +65,21 @@ export function ChurchProvider ({churchProvided, children}) {
     .then(({data}) => setMinisteries([...ministeries, data]))
   }
 
-  async function createProselyte(proselyteParams) {
-    postChurchProselyte(church.id, proselyteParams)
+  async function createProselyte(cultDate, proselyteParams) {
+    postChurchCult(church.id, cultDate)
     .then(({data}) => {
-      setProselytes([data, ...proselytes])
-      let object_keys = Object.keys(resume.proselytes_in_last_semester)
-      const object_key = object_keys[object_keys.length - 1]
 
-      let newResume = resume
-      newResume.proselytes_in_last_semester[object_key].push(data)
-      console.log(newResume)
-      setResume(newResume)
+      postCultProselyte(data.id, proselyteParams)
+      .then(({data}) => {
+        setProselytes([data, ...proselytes])
+        let object_keys = Object.keys(resume.proselytes_in_last_semester)
+        const object_key = object_keys[object_keys.length - 1]
+
+        let newResume = resume
+        newResume.proselytes_in_last_semester[object_key].push(data)
+        console.log(newResume)
+        setResume(newResume)
+      })
     })
   }
 

@@ -1,17 +1,30 @@
 import React, { useContext, useState } from 'react'
-import ResourcesAccordion from '../../common/accordionTable'
+import ResourcesAccordion from '../../common/AccordionTable'
 import { ChurchContext } from '../../context/ChurchContext'
 import { AuthContext } from '../../context/AuthContext'
-import { CardBody, CardHeader } from './components/accordionItems'
 import IconButton from '../../common/iconButton'
 import GrantAccessModal from '../../common/modals/grantAccessModal'
 import RevokeAccessModal from '../../common/modals/revokeAccessModal'
 import DeleteUserModal from '../../common/modals/deleteUserModal'
 import FilterSidebar from './components/filterSidebar'
-import './styles.css'
 import MinisteriesAssignModal from '../../common/modals/ministeriesAssignModal'
 import { useHistory } from 'react-router-dom'
 import { getMemberCard } from '../../services/Api.service'
+import {
+  AccessTitle,
+  AccessWrapper,
+  AccordionRow,
+  Icon,
+  ItemHeader,
+  ItemTitle,
+  NoAccessTitle,
+  PageTitle,
+  UsersPageHeader
+} from './styles'
+import getFormattedDate from '../../actions/getFormattedDate'
+import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
+import MainMenu from '../../common/mainMenu'
+import './styles.css'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
@@ -85,6 +98,70 @@ export default function ChurchUsersPage () {
     ]
   }
 
+  const CardHeader = ({resource}) => {
+    return (
+      <ItemHeader>
+        <div>
+          <ItemTitle>{resource.name}</ItemTitle>
+          {resource.has_access && resource.is_leader && <Icon className="fa-solid fa-star"></Icon>}
+        </div>
+      </ItemHeader>
+    )
+  }
+
+  const CardBody = ({resource}) => {
+    const ministeriesTxt = resource.ministeries.map(m => m.name).join(', ')
+    return (
+    <>
+      <AccordionRow displayGrid>
+        <p><b>{resource.title}</b></p>
+        <p>Gênero: <b>{resource.gender}</b></p>
+        <p>Estado civil: <b>{resource.marital_status}</b></p>
+        <p><b>{resource.is_baptized ? "Batizado(a)" : "Não batizado(a)"}</b></p>
+      </AccordionRow>
+
+      <AccordionRow displayGrid>
+        <p>Email: <b>{resource.email}</b></p>
+        <p>Telefone: <b>{resource.phone}</b></p>
+        <p>Membro desde: <b>{getFormattedDate(resource.member_since)}</b></p>
+        <p>Nascimento: <b>{getFormattedDate(resource.birthdate)} ({resource.age} anos)</b></p>
+      </AccordionRow>
+
+      {resource.ministeries.length !== 0 && (
+        <AccordionRow>
+          <p>Participa dos ministérios: <b>{ministeriesTxt}</b></p>
+        </AccordionRow>
+      )}
+
+      <AccordionRow>
+        <p>Endereço: <b>{resource.location}</b></p>
+      </AccordionRow>
+
+
+      {!!resource.notes && (
+        <AccordionRow>
+          <p>Observações: <b>{resource.notes}</b></p>
+        </AccordionRow>
+      )}
+
+      <AccordionRow>
+        {resource.has_access ?
+          <AccessWrapper>
+            <AccessTitle>Tem acesso ao sistema</AccessTitle>
+            <div>
+              <p>Acesso{resource.is_leader ? " de administrador": ""} garatido por {resource.access_garantied_by} em {getFormattedTimestamp(resource.access_garantied_at)}</p>
+              {resource.last_time_logged_at && (<p>Ultimo acesso em {getFormattedTimestamp(resource.last_time_logged_at)}</p>) }
+            </div>
+          </AccessWrapper>
+          :
+          <NoAccessTitle>Não tem acesso ao sistema</NoAccessTitle>
+        }
+      </AccordionRow>
+    </>
+    )
+  }
+
+
   return (
     <main className='pageLayout'>
       <>
@@ -109,15 +186,19 @@ export default function ChurchUsersPage () {
           onHide={() => setShowRevokeAccessModal(false)}
           />
         <FilterSidebar show={showFilterSidebar} onHide={() => setShowFilterSidebar(false)}/>
-        <section className='usersPageHeader'>
-          <IconButton icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
-          <IconButton icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
-        </section>
+        <UsersPageHeader>
+          <span/>
+          {/* <PageTitle>Membros da igreja</PageTitle> */}
+          <div>
+            <IconButton icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
+            <IconButton icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
+          </div>
+        </UsersPageHeader>
         <ResourcesAccordion
           resources={users}
           resourceName="Membros"
-          CardBody={CardBody}
           CardHeader={CardHeader}
+          CardBody={CardBody}
           getMenuConfigs={getMenuConfigs}
           hasMenu
         />

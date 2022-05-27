@@ -106,7 +106,7 @@ export default function ProselytesLastSemester ({ type }) {
           />
           <IconButton
             icon="fa-solid fa-square-arrow-up-right"
-            onClick={() => setShowProselytesModal(!showProselytesModal)}
+            onClick={() => alert('Página em desenvolvimento')}
           />
           <IconButton icon="fa-solid fa-user-plus" onClick={() => setShowProselyteFormModal(true)}/>
         </div>

@@ -14,11 +14,10 @@ export default function ProselyteFormModal ({ resource, show, onHide }) {
       proselyte: {
         name: name.current.value,
         phone: phone.current.value,
-        proselytized_at: proselytized_at.current.value
       }
     }
     if (resource) await updateProselyte(resource.id, proselyteData)
-    else await createProselyte(proselyteData)
+    else await createProselyte(proselytized_at.current.value, proselyteData)
 
     onHide()
   }
