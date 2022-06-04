@@ -1,33 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import './styles.css'
 import ChurchCard from './components/churchCard'
 import { useHistory } from 'react-router-dom'
-import ChurchModal from '../../common/modals/churchModal'
-import DeleteChurchModal from '../../common/modals/deleteChurchModal'
+import ChurchModal from '../../modules/ChurchModal'
+import DeleteChurchModal from '../../modules/DeleteChurchModal'
 import { deleteChurch, getChurches, postChurch, putChurch } from '../../services/Api.service'
+import { ChurchesContainer, ChurchesHeader, ChurchesLayout, PageLayout, PageTitle } from './styles'
+import { useChurchContext } from '../../context/ChurchContext'
+import { useOverlayContext } from '../../context/OverlayContext'
 
 export default function ChurchesPage({ setChurchProvided }) {
   const history = useHistory()
+  const {setChurch} = useChurchContext()
+  const { showModal } = useOverlayContext()
   const [churches, setChurches] = useState([])
-  const [showChurchModal, setShowChurchModal] = useState(false)
-  const [showDeleteChurchModal, setShowDeleteChurchModal] = useState(false)
   const [resource, setResource] = useState(null)
 
   useEffect(() => {
     getChurches()
     .then(({data}) => setChurches(data))
   }, [])
-
-  const onEdit = (church) => {
-    setResource(church)
-    setShowChurchModal(true)
-  }
-
-  const onDelete = (church) => {
-    setResource(church)
-    setShowDeleteChurchModal(true)
-  }
 
   const handleUpdate = (churchParams) => {
     putChurch(resource.id, churchParams)
@@ -50,45 +42,35 @@ export default function ChurchesPage({ setChurchProvided }) {
   const handleDelete = () => {
     deleteChurch(resource.id)
     .then(() => {
-      setChurches(churches.filter(church => resource.id != church.id))
+      setChurches(churches.filter(church => resource.id !== church.id))
     })
   }
 
   const goToPage = (church) => {
-    setChurchProvided(church)
+    setChurch(church)
     history.push(`church/general`)
   }
 
   return (
-    <main className='churchesLayout gradientLayout'>
-      <ChurchModal
-        resource={resource}
-        show={showChurchModal}
-        onCreate={handleCreate}
-        onUpdate={handleUpdate}
-        onHide={() => {
-          setResource(null)
-          setShowChurchModal(false)
-        }}
-      />
-      <DeleteChurchModal
-        resource={resource}
-        show={showDeleteChurchModal}
-        onDelete={handleDelete}
-        onHide={() => {
-          setResource(null)
-          setShowDeleteChurchModal(false)
-        }}
-      />
-      <div className='pageLayout'>
-        <section className='churchesHeader'>
-          <h2>VISÃO GERAL DAS SEDES</h2>
-          <Button variant="primary" onClick={() => setShowChurchModal(true)}> Adicionar nova sede </Button>
-        </section>
-        <section className='churchesContainer'>
-          {churches.map(church => <ChurchCard key={church.id} onNavigate={() => goToPage(church)} onEdit={() => onEdit(church)} onDelete={() => onDelete(church)} church={church}/>)}
-        </section>
-      </div>
-    </main>
+    <ChurchesLayout>
+      <PageLayout>
+        <ChurchesHeader>
+          <PageTitle>VISÃO GERAL DAS SEDES</PageTitle>
+          <Button variant="primary" onClick={() => showModal(ChurchModal, { onCreate: handleCreate } )}> Adicionar nova sede </Button>
+        </ChurchesHeader>
+        <ChurchesContainer>
+          {churches.map(church =>
+            <ChurchCard
+              key={church.id}
+              church={church}
+              onNavigate={() => goToPage(church)}
+              onEdit={() => showModal(ChurchModal, { resource: church, onUpdate: handleUpdate })}
+              onDelete={() => showModal(DeleteChurchModal, { resource: church, onDelete: handleDelete })}
+            />
+            )
+          }
+        </ChurchesContainer>
+      </PageLayout>
+    </ChurchesLayout>
   )
 }

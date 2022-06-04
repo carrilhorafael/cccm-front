@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import getFormattedDateWithoutYear from '../../../actions/getFormattedDateWithoutYear'
+import Select from '../../../atomics/Select'
 import { ChurchContext } from '../../../context/ChurchContext'
+import { BirthdateMember, BirthdateSection, DateWrapper, Header, Name, UsersWrapper } from '../styles'
 
 export default function BirthdatePerMonth() {
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -22,26 +24,26 @@ export default function BirthdatePerMonth() {
   }
 
   return (
-    <div className='birthdateSection'>
-      <div className='headerBirthdate'>
+    <BirthdateSection>
+      <Header>
         <h3>Aniversariantes</h3>
-        <select value={selectedMonth} onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
+        <Select value={selectedMonth} onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
           {months.map((month, idx) => (
             <option value={idx + 1}>{month}</option>
             ))}
-        </select>
-      </div>
-      <div className='usersWrapper'>
+        </Select>
+      </Header>
+      <UsersWrapper>
         {resume.users_grouped_by_birthdate_month && resume.users_grouped_by_birthdate_month[selectedMonth].map((user) => (
-          <div className='birthdateMember'>
-            <p className='userName'>{user.name}</p>
-            <div>
+          <BirthdateMember>
+            <Name>{user.name}</Name>
+            <DateWrapper>
               <p>{getFormattedDateWithoutYear(user.birthdate)}</p>
               {getIcon(user.birthdate)}
-            </div>
-          </div>
+            </DateWrapper>
+          </BirthdateMember>
         ))}
-      </div>
-    </div>
+      </UsersWrapper>
+    </BirthdateSection>
   )
 }

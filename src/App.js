@@ -3,15 +3,19 @@ import CustomRoutes from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css"
 import { AuthProvider } from './context/AuthContext';
-import { ToastProvider } from './context/ToastContext';
+import { OverlayProvider } from './context/OverlayContext';
+import { ChurchProvider } from './context/ChurchContext';
+
 
 function App() {
   return (
-    <ToastProvider>
+    <ChurchProvider>
       <AuthProvider>
-        <CustomRoutes/>
+        <OverlayProvider>
+            <CustomRoutes/>
+        </OverlayProvider>
       </AuthProvider>
-    </ToastProvider>
+    </ChurchProvider>
   );
 }
 

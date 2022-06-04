@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-import Header from './common/header'
+import Header from './modules/Header'
 import { AuthContext } from './context/AuthContext'
 import ChurchesPage from './pages/churches'
 import LoginPage from './pages/login'
@@ -24,38 +24,29 @@ import { ChurchProvider } from './context/ChurchContext'
 
 
 export default function Routes () {
-  const { user, authenticated, userChurch } = useContext(AuthContext)
-  const [churchProvided, setChurchProvided] = useState({})
-
-  useEffect(()=>{
-    if (!user.president_pastor) setChurchProvided(userChurch)
-  })
-
-  const resetChurchProvided = () => setChurchProvided({})
+  const { user, authenticated } = useContext(AuthContext)
 
   return (
     <Router>
-      <ChurchProvider churchProvided={churchProvided}>
-        <Header churchProvided={churchProvided} resetChurchProvided={resetChurchProvided}/>
-        {!authenticated ?
-          <Switch>
-            <Route path="/login" component={LoginPage}/>
-            <Route path="/account" component={PasswordChangePage}/>
-            <Route path="*"><Redirect to="/login" /></Route>
-          </Switch>
-          :
-          <Switch>
-            <Route path="/churches"> <ChurchesPage setChurchProvided={(church) => setChurchProvided(church)}/></Route>
-            <Route path="/church/general" component={ChurchGeneralPage}/>
-            <Route path="/church/users" component={ChurchUsersPage}/>
-            <Route path="/church/user" component={ChurchFormUserPage}/>
-            <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
-            {/* <Route path="/church/proselytes" component={ChurchProselytesPage}/> */}
-            {user.president_pastor && <Route path="*"/> && <Redirect to="/churches"/>}
-            <Route path="*"> <Redirect to="/church/general"/> </Route>
-          </Switch>
-        }
-      </ChurchProvider>
+      <Header/>
+      {!authenticated ?
+        <Switch>
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/account" component={PasswordChangePage}/>
+          <Route path="*"><Redirect to="/login" /></Route>
+        </Switch>
+        :
+        <Switch>
+          <Route path="/churches" component={ChurchesPage}></Route>
+          <Route path="/church/general" component={ChurchGeneralPage}/>
+          <Route path="/church/users" component={ChurchUsersPage}/>
+          <Route path="/church/user" component={ChurchFormUserPage}/>
+          <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
+          {/* <Route path="/church/proselytes" component={ChurchProselytesPage}/> */}
+          {/* {user.president_pastor && <Route path="*"/> && <Redirect to="/churches"/>} */}
+          <Route path="*"> <Redirect to="/church/general"/> </Route>
+        </Switch>
+      }
     </Router>
 )
 

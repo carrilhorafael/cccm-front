@@ -51,15 +51,7 @@ table {
 :root{
 	font-family: "Quicksand", sans-serif !important;
 }
-header{
-	background-color: #D6F2FB;
-}
-header h1{
-	font-size: 42px;
-	color: #333;
-	text-align: center;
-	font-weight: 700;
-}
+
 input, textarea, select {
   border-radius: 5px;
   border: #0400D8 2px solid;
@@ -73,45 +65,4 @@ input:hover, textarea:hover, select:hover {
 p {
 	padding: 0px;
 }
-.gradientLayout{
-	background: linear-gradient(115deg, #FAFAFA80, #73ADBF80, #FAFAFA80);
-	width: 100%;
-	height: calc(100vh - 42px);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.container{
-	width: 100%;
-	max-width: 1024px;
-	margin: auto;
-}
-.btn-primary{
-	background-color: #D6F2FB;
-	color: #333;
-	padding: 10px 40px;
-	border: none;
-	border-radius: 10px;
-	font-weight: bold;
-}
-.btn-primary:hover{
-	background-color: #8683EA;
-	color: #333;
-}
-.btn-danger{
-	color: #fafafa;
-	padding: 10px 40px;
-	border: none;
-	border-radius: 10px;
-	font-weight: bold;
-}
-.btn-danger:hover{
-	color: #fafafa;
-}
-.pageLayout{
-  width: calc(100vw - 140px);
-  margin: 10px auto;
-  background-color: #fafafa;
-  padding: 20px;
-  border-radius: 30px;
-}
+

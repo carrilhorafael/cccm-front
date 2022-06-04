@@ -1,10 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Offcanvas } from 'react-bootstrap'
-import Checkbox from '../../../common/checkbox'
-import MultiSelect from '../../../common/multiSelect'
-import PartialInput from '../../../common/partialInput'
+import { Button } from 'react-bootstrap'
+import Checkbox from '../../../atomics/Checkbox'
+import { Footer } from '../../../atomics/Modal/styles'
+import MultiSelect from '../../../atomics/MultiSelect'
+import Sidebar from '../../../atomics/Sidebar'
+import TextInput from '../../../atomics/TextInput'
 import { AuthContext } from '../../../context/AuthContext'
 import { ChurchContext } from '../../../context/ChurchContext'
+import {
+  CheckboxFieldset,
+  FilterBody,
+  FilterSubtitle,
+  FilterType,
+  InfoFieldset,
+  OrderBody,
+  RadioFieldset
+} from '../styles'
 
 export default function FilterSidebar ({show, onHide}) {
   const { church, ministeries } = useContext(ChurchContext)
@@ -112,181 +123,192 @@ export default function FilterSidebar ({show, onHide}) {
   }
 
   return (
-    <Offcanvas show={show} onHide={handleHide} placement="end" name="filter">
-      <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Filtros</Offcanvas.Title>
-      </Offcanvas.Header>
-      <Offcanvas.Body>
-        <>
-          <div className='filterBodyWrapper'>
-            <div className='filterBody'>
-              <p className='filterSubtitle'>Filtrar tabela por:</p>
-              <div className='filterType'>
-                <fieldset className='checkboxFieldset'>
-                  <Checkbox checked={filterByName} id="filterByName" handleToggle={handleToggleName}/>
-                  <label htmlFor="filterByName">Nome</label>
-                </fieldset>
-                {filterByName && (
-                  <fieldset className='infoFieldset'>
-                    <label htmlFor="nameInput">Inclui:</label>
-                    <PartialInput value={name} onChange={(e) => setName(e.target.value)}/>
-                  </fieldset>
-                )}
-              </div>
-              <div className='filterType'>
-                <fieldset className='checkboxFieldset'>
-                  <Checkbox checked={filterByTitle} id="filterByTitle" handleToggle={handleToggleTitle}/>
-                  <label htmlFor="filterByTitle">Titulo</label>
-                </fieldset>
-                {filterByTitle && (
-                  <fieldset className='infoFieldset'>
-                    <MultiSelect defaultOptionPlaceholder="Selecione titulos" initialValues={titles} initialOptions={churchTitles} clearValues={() => setTitles([])} onChange={onChangeTitles}/>
-                  </fieldset>
-                )}
-              </div>
-              <div className='filterType'>
-                <fieldset className='checkboxFieldset'>
-                  <Checkbox checked={filterByBaptism} id="filterByBaptism" handleToggle={handleToggleBaptism}/>
-                  <label htmlFor="filterByBaptism">Batismo</label>
-                </fieldset>
-                {filterByBaptism && (
-                  <div>
-                    <fieldset className='radioFieldset'>
-                      <input
-                        type="radio"
-                        value={true}
-                        className="radioInput"
-                        name="baptismFilter"
-                        defaultChecked={isBaptized}
-                        id="filterByBaptized"
-                        onClick={() => setIsBaptized(true)}
-                        />
-                      <label htmlFor="filterByBaptized">É batizado</label>
-                    </fieldset>
-                    <fieldset className='radioFieldset'>
-                      <input
-                        type="radio"
-                        className="radioInput"
-                        value={false}
-                        name="baptismFilter"
-                        defaultChecked={isBaptized === false}
-                        id="filterByNotBaptized"
-                        onClick={() => setIsBaptized(false)}
-                        />
-                      <label htmlFor="filterByNotBaptized">Não é batizado</label>
-                    </fieldset>
-                  </div>
-                )}
-              </div>
-              <div className='filterType'>
-                <fieldset className='checkboxFieldset'>
-                  <Checkbox checked={filterByMinisteries} id="filterByMinisteries" handleToggle={handleToggleMinisteries}/>
-                  <label htmlFor="filterByMinisteries">Ministerios</label>
-                </fieldset>
-                {filterByMinisteries && (
-                  <>
-                    <fieldset className='infoFieldset'>
-                      <fieldset className='checkboxFieldset'>
-                        <Checkbox id="noMinisteryCheckbox" checked={ministeriesFilterTypes.includes("no-ministeries")} handleToggle={() => handleToggleMinisteriesTypeFilter('no-ministeries')}/>
-                        <label htmlFor="noMinisteryCheckbox">Sem ministério</label>
-                      </fieldset>
-                    </fieldset>
-                    <fieldset className='infoFieldset'>
-                      <fieldset className='checkboxFieldset'>
-                        <Checkbox id="chooseMinisteriesCheckbox" checked={ministeriesFilterTypes.includes("choosen-ministeries")} handleToggle={() => handleToggleMinisteriesTypeFilter('choosen-ministeries')}/>
-                        <label htmlFor="chooseMinisteriesCheckbox">Escolha os ministérios</label>
-                      </fieldset>
-                    </fieldset>
-                    {ministeriesFilterTypes.includes("choosen-ministeries") && (
-                      <fieldset className='infoFieldset'>
-                        <MultiSelect defaultOptionPlaceholder="Selecione ministérios" initialValues={ministeriesIds} initialOptions={churchMinisteries} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
-                      </fieldset>
-                    )}
-                  </>
-                )}
-              </div>
-              <div className='filterType'>
-                <fieldset className='checkboxFieldset'>
-                  <Checkbox checked={filterBySystemAccess} id="filterBySystemAccess" handleToggle={() => setFilterBySystemAccess(!filterBySystemAccess)}/>
-                  <label htmlFor="filterBySystemAccess">Tem acesso ao sistema</label>
-                </fieldset>
-              </div>
+    <Sidebar
+      show={show}
+      onHide={handleHide}
+      title="Filtros"
+      placement="right"
+      Footer={
+        <Footer>
+          <Button variant="primary" onClick={submitFilter}>Salvar</Button>
+        </Footer>
+      }
+    >
+      <FilterBody>
+        <FilterSubtitle>Filtrar tabela por:</FilterSubtitle>
+
+        <FilterType>
+          <CheckboxFieldset>
+            <Checkbox checked={filterByName} id="filterByName" onChange={handleToggleName}/>
+            <label htmlFor="filterByName">Nome</label>
+          </CheckboxFieldset>
+          {filterByName && (
+            <InfoFieldset>
+              <label htmlFor="nameInput">Inclui:</label>
+              <TextInput
+                startIcon='fa-solid fa-magnifying-glass'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                hasStartIcon
+              />
+            </InfoFieldset>
+          )}
+        </FilterType>
+
+        <FilterType>
+          <CheckboxFieldset>
+            <Checkbox checked={filterByTitle} id="filterByTitle" onChange={handleToggleTitle}/>
+            <label htmlFor="filterByTitle">Titulo</label>
+          </CheckboxFieldset>
+          {filterByTitle && (
+            <InfoFieldset>
+              <MultiSelect defaultOptionPlaceholder="Selecione titulos" initialValues={titles} initialOptions={churchTitles} clearValues={() => setTitles([])} onChange={onChangeTitles}/>
+            </InfoFieldset>
+          )}
+        </FilterType>
+
+        <FilterType>
+          <CheckboxFieldset>
+            <Checkbox checked={filterByBaptism} id="filterByBaptism" onChange={handleToggleBaptism}/>
+            <label htmlFor="filterByBaptism">Batismo</label>
+          </CheckboxFieldset>
+          {filterByBaptism && (
+            <div>
+              <RadioFieldset>
+                <input
+                  type="radio"
+                  value={true}
+
+                  name="baptismFilter"
+                  defaultChecked={isBaptized}
+                  id="filterByBaptized"
+                  onClick={() => setIsBaptized(true)}
+                  />
+                <label htmlFor="filterByBaptized">É batizado</label>
+              </RadioFieldset>
+              <RadioFieldset>
+                <input
+                  type="radio"
+
+                  value={false}
+                  name="baptismFilter"
+                  defaultChecked={isBaptized === false}
+                  id="filterByNotBaptized"
+                  onClick={() => setIsBaptized(false)}
+                  />
+                <label htmlFor="filterByNotBaptized">Não é batizado</label>
+              </RadioFieldset>
             </div>
-            <p className='filterSubtitle'>Ordenar tabela por:</p>
-            <div className='orderBody'>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderBySystemAccess"
-                  defaultChecked={filter.sortable === 'system_access'}
-                  onClick={() => setOrderBy("system_access")}
-                  />
-                <label htmlFor="orderBySystemAccess">Acesso ao sistema</label>
-              </fieldset>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderByName"
-                  defaultChecked={filter.sortable === 'name'}
-                  onClick={() => setOrderBy("name")}
-                  />
-                <label htmlFor="orderByName">Nome</label>
-              </fieldset>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderByBirthdate"
-                  defaultChecked={filter.sortable === 'birthdate'}
-                  onClick={() => setOrderBy("birthdate")}
-                  />
-                <label htmlFor="orderByBirthdate">Nascimento</label>
-              </fieldset>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderByTitle"
-                  defaultChecked={filter.sortable === 'title'}
-                  onClick={() => setOrderBy("title")}
-                  />
-                <label htmlFor="orderByTitle">Titulo</label>
-              </fieldset>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderByLastLoginAt"
-                  defaultChecked={filter.sortable === 'last_time_logged_at'}
-                  onClick={() => setOrderBy("last_time_logged_at")}
-                  />
-                <label htmlFor="orderByLastLoginAt">Ultimo acesso</label>
-              </fieldset>
-              <fieldset className='radioFieldset'>
-                <input
-                  type="radio"
-                  className="radioInput"
-                  name="orderRadio"
-                  id="orderByMemberSince"
-                  defaultChecked={filter.sortable === 'member_since'}
-                  onClick={() => setOrderBy("member_since")}
-                  />
-                <label htmlFor="orderByMemberSince">Membro desde</label>
-              </fieldset>
-            </div>
-          </div>
-          <div className='buttonWrapper'>
-            <Button variant="primary" onClick={submitFilter}>Salvar</Button>
-          </div>
-        </>
-      </Offcanvas.Body>
-    </Offcanvas>
+          )}
+        </FilterType>
+
+        <FilterType>
+          <CheckboxFieldset>
+            <Checkbox checked={filterByMinisteries} id="filterByMinisteries" onChange={handleToggleMinisteries}/>
+            <label htmlFor="filterByMinisteries">Ministerios</label>
+          </CheckboxFieldset>
+          {filterByMinisteries && (
+            <>
+              <InfoFieldset>
+                <CheckboxFieldset>
+                  <Checkbox id="noMinisteryCheckbox" checked={ministeriesFilterTypes.includes("no-ministeries")} onChange={() => handleToggleMinisteriesTypeFilter('no-ministeries')}/>
+                  <label htmlFor="noMinisteryCheckbox">Sem ministério</label>
+                </CheckboxFieldset>
+              </InfoFieldset>
+              <InfoFieldset>
+                <CheckboxFieldset>
+                  <Checkbox id="chooseMinisteriesCheckbox" checked={ministeriesFilterTypes.includes("choosen-ministeries")} onChange={() => handleToggleMinisteriesTypeFilter('choosen-ministeries')}/>
+                  <label htmlFor="chooseMinisteriesCheckbox">Escolha os ministérios</label>
+                </CheckboxFieldset>
+              </InfoFieldset>
+              {ministeriesFilterTypes.includes("choosen-ministeries") && (
+                <InfoFieldset>
+                  <MultiSelect defaultOptionPlaceholder="Selecione ministérios" initialValues={ministeriesIds} initialOptions={churchMinisteries} clearValues={() => setMinisteriesIds([])} onChange={onChangeMinisteries}/>
+                </InfoFieldset>
+              )}
+            </>
+          )}
+        </FilterType>
+
+        <FilterType>
+          <CheckboxFieldset>
+            <Checkbox checked={filterBySystemAccess} id="filterBySystemAccess" onChange={() => setFilterBySystemAccess(!filterBySystemAccess)}/>
+            <label htmlFor="filterBySystemAccess">Tem acesso ao sistema</label>
+          </CheckboxFieldset>
+        </FilterType>
+      </FilterBody>
+
+      <FilterBody>
+        <FilterSubtitle>Ordenar tabela por:</FilterSubtitle>
+
+        <OrderBody>
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderBySystemAccess"
+              defaultChecked={filter.sortable === 'system_access'}
+              onClick={() => setOrderBy("system_access")}
+              />
+            <label htmlFor="orderBySystemAccess">Acesso ao sistema</label>
+          </RadioFieldset>
+
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderByName"
+              defaultChecked={filter.sortable === 'name'}
+              onClick={() => setOrderBy("name")}
+              />
+            <label htmlFor="orderByName">Nome</label>
+          </RadioFieldset>
+
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderByBirthdate"
+              defaultChecked={filter.sortable === 'birthdate'}
+              onClick={() => setOrderBy("birthdate")}
+              />
+            <label htmlFor="orderByBirthdate">Nascimento</label>
+          </RadioFieldset>
+
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderByTitle"
+              defaultChecked={filter.sortable === 'title'}
+              onClick={() => setOrderBy("title")}
+              />
+            <label htmlFor="orderByTitle">Titulo</label>
+          </RadioFieldset>
+
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderByLastLoginAt"
+              defaultChecked={filter.sortable === 'last_time_logged_at'}
+              onClick={() => setOrderBy("last_time_logged_at")}
+              />
+            <label htmlFor="orderByLastLoginAt">Ultimo acesso</label>
+          </RadioFieldset>
+
+          <RadioFieldset>
+            <input
+              type="radio"
+              name="orderRadio"
+              id="orderByMemberSince"
+              defaultChecked={filter.sortable === 'member_since'}
+              onClick={() => setOrderBy("member_since")}
+              />
+            <label htmlFor="orderByMemberSince">Membro desde</label>
+          </RadioFieldset>
+        </OrderBody>
+      </FilterBody>
+    </Sidebar>
   )
 }

@@ -1,8 +1,8 @@
-import React, { useContext, useRef, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import PasswordInput from '../../common/passwordInput'
+import React, { useContext, useState } from 'react'
+import { Button, Container } from 'react-bootstrap'
+import PasswordInput from '../../atomics/PasswordInput'
 import { AuthContext } from '../../context/AuthContext'
-import './styles.css'
+import { ButtonsWrapper, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
 
 export default function PasswordChangePage() {
   const { handleChangePassword } = useContext(AuthContext)
@@ -22,24 +22,30 @@ export default function PasswordChangePage() {
   }
 
   return (
-    <main className='gradientLayout'>
-      <section className='container'>
-        <form className="formChangePassword" onSubmit = {onSubmit}>
-          <h2>Mude sua senha para acessar o sistema</h2>
-          <fieldset>
-            <label htmlFor="email">Senha</label>
-            <PasswordInput value={password} onChange={e => setPassword(e.target.value)} id="password"/>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="passwordConfirmation">Confirme sua senha</label>
-            <PasswordInput value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} id="passwordConfirmation"/>
-          </fieldset>
-          <div className='buttonWrapper'>
+    <GradientLayout>
+      <Container>
+        <ChangePasswordForm>
+          <Title>Mude sua senha para acessar o sistema</Title>
+          <Fieldset>
+            <PasswordInput
+              label="Nova senha:"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </Fieldset>
+          <Fieldset>
+            <PasswordInput
+              label="Confirme a senha:"
+              value={passwordConfirmation}
+              onChange={e => setPasswordConfirmation(e.target.value)}
+            />
+          </Fieldset>
+          <ButtonsWrapper>
             <Button variant="primary" onClick={onSubmit}>Trocar a senha</Button>
-          </div>
-        </form>
-      </section>
-    </main>
+          </ButtonsWrapper>
+        </ChangePasswordForm>
+      </Container>
+    </GradientLayout>
   )
 
 }

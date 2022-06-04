@@ -1,28 +1,31 @@
 import { Button } from 'react-bootstrap'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import Checkbox from '../../common/checkbox'
-import { ChurchContext } from '../../context/ChurchContext'
-import './styles.css'
+import Checkbox from '../../atomics/Checkbox'
+import { useChurchContext } from '../../context/ChurchContext'
 import { useLocation, useHistory } from 'react-router-dom'
+import TextInput from '../../atomics/TextInput'
+import Select from '../../atomics/Select'
+import { CheckboxWrapper, FormGrid, TextareaWrapper, UserForm } from './styles'
+import Textarea from '../../atomics/Textarea'
 
 export default function ChurchFormUserPage () {
-  const { createUser, updateUser } = useContext(ChurchContext)
+  const { createUser, updateUser } = useChurchContext()
   const location = useLocation()
   const history = useHistory()
-  const name = useRef()
-  const title = useRef()
-  const phone = useRef()
-  const email = useRef()
-  const birthdate = useRef()
-  const member_since = useRef()
-  const marital_status = useRef()
-  const gender = useRef()
-  const address = useRef()
-  const notes = useRef()
+  const [resource, setResource] = useState(null)
+  const [name, setName] = useState(resource && resource.name)
+  const [title, setTitle] = useState(resource && resource.title)
+  const [phone, setPhone] = useState(resource && resource.phone)
+  const [email, setEmail] = useState(resource && resource.email)
+  const [birthdate, setBirthdate] = useState(resource && resource.birthdate)
+  const [member_since, setMemberSince] = useState(resource && resource.member_since)
+  const [marital_status, setMaritalStatus] = useState(resource && resource.marital_status)
+  const [gender, setGender] = useState(resource && resource.gender)
+  const [address, setAddress] = useState(resource && resource.address)
+  const [notes, setNotes] = useState(resource && resource.notes)
   const [shouldHaveAccess, setShouldHaveAccess] = useState(false)
   const [isBaptized, setIsBaptized] = useState(false)
   const [isLeader, setIsLeader] = useState(false)
-  const [resource, setResource] = useState(null)
 
   useEffect(() => {
     setResource(location.state)
@@ -32,17 +35,17 @@ export default function ChurchFormUserPage () {
   const submitForm = async () => {
     const userParams = {
       user: {
-        name: name.current.value,
-        title: title.current.value,
-        phone: phone.current.value,
-        email: email.current.value,
-        birthdate: birthdate.current.value,
-        member_since: member_since.current.value,
-        marital_status: marital_status.current.value,
-        gender: gender.current.value,
-        location: address.current.value,
+        name: name,
+        title: title,
+        phone: phone,
+        email: email,
+        birthdate: birthdate,
+        member_since: member_since,
+        marital_status: marital_status,
+        gender: gender,
+        location: address,
         is_baptized: isBaptized,
-        notes: notes.current.value,
+        notes: notes,
         should_have_access: shouldHaveAccess,
         is_leader: isLeader
       }
@@ -54,93 +57,95 @@ export default function ChurchFormUserPage () {
   }
 
   return (
-    <main className='pageLayout'>
-      <form className='createUserForm'>
-        <div className='formGrid'>
-          <fieldset>
-            <label>Nome: </label>
-            <input type='text' ref={name} defaultValue={resource && resource.name}/>
-          </fieldset>
-          <fieldset>
-            <label>Titulo</label>
-            <select ref={title} defaultValue={resource && resource.title}>
-              <option disabled>Escolha o titulo</option>
-              <option value="Membro(a)">Membro(a)</option>
-              <option value="Obreiro(a)">Obreiro(a)</option>
-              <option value="Diácono(isa)">Diácono(isa)</option>
-              <option value="Pastor(a)">Pastor(a)</option>
-            </select>
-          </fieldset>
-          <fieldset>
-            <label>Telefone</label>
-            <input type={'tel'} pattern="([0-9]{2})9[0-9]{4}-[0-9]{4}" ref={phone} defaultValue={resource && resource.phone}/>
-          </fieldset>
-          <fieldset>
-            <label>Email</label>
-            <input type='text' ref={email} defaultValue={resource && resource.email}/>
-          </fieldset>
-          <fieldset>
-            <label>Data de nascimento</label>
-            <input type='date' ref={birthdate} defaultValue={resource && resource.birthdate}/>
-          </fieldset>
-          <fieldset>
-            <label>Membro desde</label>
-            <input type='date' ref={member_since} defaultValue={resource && resource.member_since}/>
-          </fieldset>
-          <fieldset>
-            <label>Estado civil</label>
-            <select ref={marital_status} defaultValue={resource && resource.marital_status}>
-              <option value={-1} disabled>Escolha o estado civil</option>
-              <option value={"Solteiro(a)"} selected={resource && resource.marital_status === "Solteiro(a)" }>Solteiro(a)</option>
-              <option value={"Casado(a)"} selected={resource && resource.marital_status === "Casado(a)" }>Casado(a)</option>
-              <option value={"Viúvo(a)"} selected={resource && resource.marital_status === "Viúvo(a)" }>Viúvo(a)</option>
-              <option value={"Divorciado(a)"} selected={resource && resource.marital_status === "Divorciado(a)" }>Divorciado(a)</option>
-              <option value={"Separado(a)"} selected={resource && resource.marital_status === "Separado(a)" }>Separado(a)</option>
-            </select>
-          </fieldset>
-          <fieldset>
-            <label>Gênero</label>
-            <select ref={gender} defaultValue={resource && resource.gender}>
-              <option value={-1} disabled>Escolha o genero</option>
-              <option value={"Masculino"} selected={resource && resource.gender === "Masculino"}>Masculino</option>
-              <option value={"Feminino"} selected={resource && resource.gender === "Feminino"}>Feminino</option>
-            </select>
-          </fieldset>
-        </div>
-        <fieldset className='flexColumnDisplay'>
-          <label>Endereço completo:</label>
-          <textarea className='addressTextarea' ref={address} defaultValue={resource && resource.location}/>
-        </fieldset>
-        <fieldset className='flexColumnDisplay'>
-          <label>Observações sobre membro:</label>
-          <textarea rows={2} className='notesTextarea' ref={notes} defaultValue={resource && resource.notes}/>
-        </fieldset>
-        <fieldset className='flexRowDisplay'>
-          <Checkbox checked={isBaptized} handleToggle={() => setIsBaptized(!isBaptized)} defaultValue={resource && resource.isBaptized}/>
-          <label>É batizado?</label>
-        </fieldset>
+    <UserForm>
+      <FormGrid>
+        <TextInput
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          label="Nome:"
+        />
+        <Select label="Titulo:" value={title} onChange={(e) => setTitle(e.target.value)}>
+          <option disabled>Escolha o titulo</option>
+          <option value="Membro(a)">Membro(a)</option>
+          <option value="Obreiro(a)">Obreiro(a)</option>
+          <option value="Diácono(isa)">Diácono(isa)</option>
+          <option value="Pastor(a)">Pastor(a)</option>
+        </Select>
+        <TextInput
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          label="Telefone:"
+        />
+        <TextInput
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          label="Email:"
+        />
+        <TextInput
+          type='date'
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
+          label="Aniversário:"
+        />
+        <TextInput
+          type='date'
+          value={member_since}
+          onChange={(e) => setMemberSince(e.target.value)}
+          label="Membro deste:"
+        />
+        <Select label="Estado civil:" value={marital_status} onChange={(e) => setMaritalStatus(e.target.value)}>
+          <option value={-1}>Escolha o estado civil</option>
+          <option value="Solteiro(a)">Solteiro(a)</option>
+          <option value="Casado(a)">Casado(a)</option>
+          <option value="Viúvo(a)">Viúvo(a)</option>
+          <option value="Divorciado(a)">Divorciado(a)</option>
+          <option value="Separado(a)">Separado(a)</option>
+        </Select>
+        <Select label="Gênero:" value={gender} onChange={(e) => setGender(e.target.value)}>
+          <option value={-1}>Escolha o genero</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+        </Select>
+      </FormGrid>
+      <TextareaWrapper>
+        <Textarea
+          value={address}
+          label="Endereço completo:"
+          onChange={(e) => setAddress(e.target.value)}
+        />
+      </TextareaWrapper>
+      <TextareaWrapper>
+        <Textarea
+          value={notes}
+          label="Observações sobre o membro:"
+          onChange={(e) => setNotes(e.target.value)}
+        />
+      </TextareaWrapper>
+      <CheckboxWrapper>
+        <Checkbox checked={isBaptized} onChange={() => setIsBaptized(!isBaptized)} defaultValue={resource && resource.isBaptized}/>
+        <label>É batizado?</label>
+      </CheckboxWrapper>
 
-        {!resource &&
-        <>
-          <fieldset className='flexRowDisplay'>
-            <Checkbox checked={shouldHaveAccess} handleToggle={() => {
-              setShouldHaveAccess(!shouldHaveAccess)
-              setIsLeader(false)
-            }} />
-            <label>Conceder acesso ao sistema?</label>
-          </fieldset>
-          {shouldHaveAccess && (
-            <fieldset className='flexRowDisplay leaderField'>
-              <Checkbox checked={isLeader} handleToggle={() => setIsLeader(!isLeader)} />
-              <label>É administrador do sistema?</label>
-            </fieldset>
-          )}
-        </>
-        }
-        <div className='buttonWrapper'>
-          <Button variant="primary" onClick={submitForm}> Enviar </Button>
-        </div>
-      </form>
-    </main>
+      {!resource &&
+      <>
+        <CheckboxWrapper>
+          <Checkbox checked={shouldHaveAccess} onChange={() => {
+            setShouldHaveAccess(!shouldHaveAccess)
+            setIsLeader(false)
+          }} />
+          <label>Conceder acesso ao sistema?</label>
+        </CheckboxWrapper>
+        {shouldHaveAccess && (
+          <CheckboxWrapper marginLeft>
+            <Checkbox checked={isLeader} onChange={() => setIsLeader(!isLeader)} />
+            <label>É administrador do sistema?</label>
+          </CheckboxWrapper>
+        )}
+      </>
+      }
+      <div className='buttonWrapper'>
+        <Button variant="primary" onClick={submitForm}> Enviar </Button>
+      </div>
+    </UserForm>
   )
 }

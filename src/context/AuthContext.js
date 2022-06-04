@@ -1,10 +1,12 @@
 import React, {useState, useEffect, createContext} from 'react'
-import Loading from '../common/loading'
+import LoadingLocker from '../modules/LoadingLocker'
 import { api, postLogin, getValidateToken, postResetPassword } from '../services/Api.service'
+import { useChurchContext } from './ChurchContext'
 
 export const AuthContext = createContext()
 
 export function AuthProvider ({children}) {
+  const { setChurch } = useChurchContext()
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState({})
   const [filter, setFilter] = useState({})
@@ -21,6 +23,7 @@ export function AuthProvider ({children}) {
       setFilter(data.filter)
       setLoading(false)
       setAuthenticated(true)
+      setChurch(data.church)
       setUserChurch(data.church)
     })
     .catch(()=>{
@@ -41,6 +44,8 @@ export function AuthProvider ({children}) {
       setUser(data.user)
       setFilter(data.filter)
       api.defaults.headers.Authorization = data.token
+      setChurch(data.church)
+      setUserChurch(data.church)
       localStorage.setItem("authtoken", data.token)
       setAuthenticated(true)
     })
@@ -84,7 +89,7 @@ export function AuthProvider ({children}) {
         handleLogout
       }}>
       {loading?
-      <Loading/>
+      <LoadingLocker/>
       :
       children}
     </AuthContext.Provider>

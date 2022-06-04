@@ -1,28 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import Loading from '../common/loading'
+import LoadingLocker from '../modules/LoadingLocker'
 import { deleteMinistery, deleteProselyte, deleteUser, getChurchMinisteries, getChurchProselytes, getChurchResume, getChurchUsers, postChurchCult, postChurchMinistery, postCultProselyte, postChurchUser, putMinistery, putProselyte, putUser } from '../services/Api.service'
 import { AuthContext } from './AuthContext'
 
 export const ChurchContext = createContext()
 
-export function ChurchProvider ({churchProvided, children}) {
-  const { filter } = useContext(AuthContext)
+export function ChurchProvider ({children}) {
   const [isLoading, setIsLoading] = useState(false)
-  const [church, setChurch] = useState(churchProvided)
+  const [church, setChurch] = useState(null)
   const [users, setUsers] = useState([])
   const [ministeries, setMinisteries] = useState([])
   const [resume, setResume] = useState([])
   const [proselytes, setProselytes] = useState([])
 
-  useEffect(() => {
-    if(!churchProvided || JSON.stringify(churchProvided) === "{}"){
-      setUsers([])
-      setResume({})
-      setMinisteries([])
-      setProselytes([])
-    }
-    setChurch(churchProvided)
-  }, [churchProvided])
 
   useEffect(() => {
     async function reloadChurch() {
@@ -30,12 +20,19 @@ export function ChurchProvider ({churchProvided, children}) {
       await loadResources()
       setTimeout(() => {setIsLoading(false)}, 500);
     }
-    if (church && JSON.stringify(church) !== "{}") reloadChurch()
+    if(!church){
+      setUsers([])
+      setResume({})
+      setMinisteries([])
+      setProselytes([])
+    } else {
+      reloadChurch()
+    }
   }, [church])
 
-  useEffect(() => {
-    getChurchUsers(church.id).then(({data}) => setUsers(data))
-  }, [filter])
+  // useEffect(() => {
+  //   getChurchUsers(church.id).then(({data}) => setUsers(data))
+  // }, [filter])
 
   async function loadResources() {
     await getChurchUsers(church.id).then(({data}) => setUsers(data))
@@ -161,12 +158,17 @@ export function ChurchProvider ({churchProvided, children}) {
       createProselyte,
       destroyMinistery,
       destroyUser,
-      destroyProselyte
+      destroyProselyte,
+      setChurch,
     }}>
       {isLoading &&
-        <Loading message="Carregando informações da igreja"/>
+        <LoadingLocker message="Carregando informações da igreja"/>
       }
       {children}
     </ChurchContext.Provider>
   )
+}
+export const useChurchContext = () => {
+  const context = useContext(ChurchContext)
+  return context
 }

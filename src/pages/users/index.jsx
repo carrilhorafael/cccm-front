@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
-import ResourcesAccordion from '../../common/AccordionTable'
+import ResourcesAccordion from '../../modules/AccordionTable'
 import { ChurchContext } from '../../context/ChurchContext'
 import { AuthContext } from '../../context/AuthContext'
-import IconButton from '../../common/iconButton'
-import GrantAccessModal from '../../common/modals/grantAccessModal'
-import RevokeAccessModal from '../../common/modals/revokeAccessModal'
-import DeleteUserModal from '../../common/modals/deleteUserModal'
+import IconButton from '../../atomics/IconButton'
+import GrantAccessModal from '../../modules/modals/grantAccessModal'
+import RevokeAccessModal from '../../modules/modals/revokeAccessModal'
+import DeleteUserModal from '../../modules/modals/deleteUserModal'
 import FilterSidebar from './components/filterSidebar'
-import MinisteriesAssignModal from '../../common/modals/ministeriesAssignModal'
+import MinisteriesAssignModal from '../../modules/modals/ministeriesAssignModal'
 import { useHistory } from 'react-router-dom'
 import { getMemberCard } from '../../services/Api.service'
 import {
@@ -18,13 +18,10 @@ import {
   ItemHeader,
   ItemTitle,
   NoAccessTitle,
-  PageTitle,
   UsersPageHeader
 } from './styles'
 import getFormattedDate from '../../actions/getFormattedDate'
 import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
-import MainMenu from '../../common/mainMenu'
-import './styles.css'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
@@ -160,7 +157,23 @@ export default function ChurchUsersPage () {
     </>
     )
   }
+  const getBodyHeight = (resource) => {
+    let height = 216
 
+    if (resource.ministeries.length !== 0) {
+      height = height + 52
+    }
+
+    if (!!resource.notes) {
+      height = height + 52
+    }
+
+    if (resource.has_access) {
+      height = height + 12
+    }
+
+    return height
+  }
 
   return (
     <main className='pageLayout'>
@@ -200,6 +213,7 @@ export default function ChurchUsersPage () {
           CardHeader={CardHeader}
           CardBody={CardBody}
           getMenuConfigs={getMenuConfigs}
+          getBodyHeight={getBodyHeight}
           hasMenu
         />
       </>

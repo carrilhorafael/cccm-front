@@ -1,38 +1,45 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import PasswordInput from '../../common/passwordInput'
+import PasswordInput from '../../atomics/PasswordInput'
+import TextInput from '../../atomics/TextInput'
 import { AuthContext } from '../../context/AuthContext'
-import './styles.css'
+import { ButtonsWrapper, Container, Fieldset, FormLogin, GradientLayout, Title } from './styles'
 
 export default function LoginPage() {
   const { handleLogin } = useContext(AuthContext)
-  const email = useRef()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
-    handleLogin(email.current.value, password)
+    handleLogin(email, password)
   }
 
   return (
-    <main className='gradientLayout'>
-      <section className='container'>
-        <form className="formLogin" onSubmit = {onSubmit}>
-          <h2>Acesse o sistema com seu email e senha</h2>
-          <fieldset>
-            <label htmlFor="email">Email</label>
-            <input ref={email} id="email" />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="password">Senha</label>
-            <PasswordInput value={password} onChange={e => setPassword(e.target.value)} id="password"/>
-          </fieldset>
-          <div className='buttonWrapper'>
+    <GradientLayout>
+      <Container>
+        <FormLogin>
+          <Title>Acessar o sistema</Title>
+          <Fieldset>
+            <TextInput
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Email:"
+              />
+          </Fieldset>
+          <Fieldset>
+            <PasswordInput
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              label="Senha:"
+              />
+          </Fieldset>
+          <ButtonsWrapper>
             <Button variant="primary" onClick={onSubmit}>Entrar</Button>
-          </div>
-        </form>
-      </section>
-    </main>
+          </ButtonsWrapper>
+        </FormLogin>
+      </Container>
+    </GradientLayout>
   )
 
 }

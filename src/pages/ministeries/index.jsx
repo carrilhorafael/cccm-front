@@ -1,41 +1,35 @@
 import { Button } from 'react-bootstrap'
 import React, { useContext, useState } from 'react'
 import { ChurchContext } from '../../context/ChurchContext'
-import IconButton from '../../common/iconButton'
-import MinisteryModal from '../../common/modals/ministeryModal'
-import './styles.css'
+import IconButton from '../../atomics/IconButton'
+import MinisteryModal from '../../modules/MinisteryModal'
+import { ActionWrapper, Card, Description, Header, List, Title } from './styles'
+import { useOverlayContext } from '../../context/OverlayContext'
 
 export default function ChurchMinisteriesPage () {
   const { ministeries, destroyMinistery } = useContext(ChurchContext)
-
-  const [showMinisteryModal, setShowMinisteryModal] = useState(false)
-  const [resource, setResource] = useState(null)
+  const { showModal } = useOverlayContext()
 
   return (
-    <main className='pageLayout'>
-      <MinisteryModal resource={resource} show={showMinisteryModal} onHide={() => {
-        setResource(null)
-        setShowMinisteryModal(false)
-      }}/>
-      <section className='ministeriesHeader'>
-        <Button variant="primary" onClick={() => setShowMinisteryModal(true)}>Criar um ministério</Button>
-      </section>
-      <section className='ministeriesPage'>
+    <>
+      <Header>
+          <Button
+            variant="primary"
+            onClick={() => showModal(MinisteryModal)}
+          >Criar um ministério</Button>
+      </Header>
+      <List>
         {ministeries.map((ministery) => (
-          <div className='ministeryCard'>
-            <div className='buttonsWrapper'>
-              <IconButton icon="fa-solid fa-pen" onClick={() => {
-                setResource(ministery)
-                setShowMinisteryModal(true)
-              }}/>
-              <IconButton icon="fa-solid fa-trash" onClick={() => {
-                destroyMinistery(ministery.id)}}/>
-            </div>
-            <h1>{ministery.name}</h1>
-            <p>{ministery.description}</p>
-          </div>
+          <Card>
+            <ActionWrapper>
+              <IconButton icon="fa-solid fa-pen" onClick={() => showModal(MinisteryModal, {resource: ministery})}/>
+              <IconButton icon="fa-solid fa-trash" onClick={() => destroyMinistery(ministery.id)}/>
+            </ActionWrapper>
+            <Title>{ministery.name}</Title>
+            <Description>{ministery.description}</Description>
+          </Card>
         ))}
-      </section>
-    </main>
+      </List>
+    </>
   )
 }
