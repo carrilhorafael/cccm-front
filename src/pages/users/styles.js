@@ -1,6 +1,18 @@
 import styled from 'styled-components'
 import { css } from 'styled-components'
 
+export const GeneralLayout = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 16px 24px;
+`
+export const Item = styled.div`
+  width: 100%;
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 1px 2px 4px #33333380;
+`
 export const ItemTitle = styled.h1`
   font-size: 18px;
   color: #333333;

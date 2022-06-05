@@ -14,7 +14,9 @@ import {
   AccessTitle,
   AccessWrapper,
   AccordionRow,
+  GeneralLayout,
   Icon,
+  Item,
   ItemHeader,
   ItemTitle,
   NoAccessTitle,
@@ -164,8 +166,8 @@ export default function ChurchUsersPage () {
   }
 
   return (
-    <main className='pageLayout'>
-      <>
+    <GeneralLayout>
+      <Item>
         <FilterSidebar show={showFilterSidebar} onHide={() => setShowFilterSidebar(false)}/>
         <UsersPageHeader>
           <span/>
@@ -183,7 +185,7 @@ export default function ChurchUsersPage () {
           getBodyHeight={getBodyHeight}
           hasMenu
         />
-      </>
-    </main>
+      </Item>
+    </GeneralLayout>
   )
 }

@@ -3,8 +3,9 @@ import styled from 'styled-components'
 export const GeneralLayout = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
   gap: 32px;
+  padding: 16px 24px;
 `
 export const BirthdateSection = styled.div`
   border-radius: 8px;
@@ -22,6 +23,13 @@ export const Header = styled.div`
     font-size: 18px;
     font-weight: bolder;
   }
+`
+export const Item = styled.div`
+  height: 100%;
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 1px 2px 4px #33333380;
 `
 export const UsersWrapper = styled.div`
   height: 500px;

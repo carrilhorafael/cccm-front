@@ -3,13 +3,14 @@ import styled from 'styled-components'
 export const Header = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 16px;
+  padding: 16px 24px;
   justify-content: flex-end;
-`
-export const List = styled.div`
+  `
+  export const List = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 16px;
+  padding: 0px 24px;
   column-gap: 8px;
 `
 export const ActionWrapper = styled.div`
@@ -32,7 +33,9 @@ export const Card = styled.div`
   position: relative;
   border-radius: 10px;
   border: #0400D8 2px solid;
+  background: #fafafa;
   padding: 16px 24px;
+  box-shadow: 2px 3px 4px #33333380;
   cursor: default;
   &:hover ${ActionWrapper} {
     display: flex
