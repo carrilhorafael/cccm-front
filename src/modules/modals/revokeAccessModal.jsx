@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 
 export default function RevokeAccessModal({user, show, onHide}) {
@@ -18,7 +19,7 @@ export default function RevokeAccessModal({user, show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="danger" onClick={handleSubmit}>Confirmar</Button>
+        <Button theme="negative" onClick={handleSubmit} title='Excluir'/>
       </Modal.Footer>
     </Modal>
   )

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 
 export default function DeleteUserModal({user, show, onHide}) {
@@ -23,7 +24,7 @@ export default function DeleteUserModal({user, show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="danger" onClick={onConfirm}>Excluir</Button>
+        <Button theme="negative" onClick={onConfirm} title='Excluir' />
       </Modal.Footer>
     </Modal>
   )

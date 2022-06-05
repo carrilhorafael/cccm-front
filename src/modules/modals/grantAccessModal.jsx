@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 import Checkbox from '../../atomics/Checkbox'
 import './styles.css'
@@ -29,7 +30,7 @@ export default function GrantAccessModal({user, show, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="primary" onClick={grantAccess}>Confirmar</Button>
+        <Button theme="primary" onClick={grantAccess} title='Confirmar'/>
       </Modal.Footer>
     </Modal>
   )

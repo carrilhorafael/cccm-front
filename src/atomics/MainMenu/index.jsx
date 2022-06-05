@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { Menu, MenuButton, MenuItem } from '@szhsin/react-menu';
-import '@szhsin/react-menu/dist/index.css';
 import { MenuWrapper } from './styles';
 import IconButton from '../IconButton';
 import DropList from '../DropList';

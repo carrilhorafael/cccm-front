@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import ChurchCard from './components/churchCard'
 import { useHistory } from 'react-router-dom'
 import ChurchModal from '../../modules/ChurchModal'
@@ -56,7 +56,11 @@ export default function ChurchesPage({ setChurchProvided }) {
       <PageLayout>
         <ChurchesHeader>
           <PageTitle>VISÃO GERAL DAS SEDES</PageTitle>
-          <Button variant="primary" onClick={() => showModal(ChurchModal, { onCreate: handleCreate } )}> Adicionar nova sede </Button>
+          <Button
+            theme="primary"
+            onClick={() => showModal(ChurchModal, { onCreate: handleCreate } )}
+            title='Adicionar nova sede'
+          />
         </ChurchesHeader>
         <ChurchesContainer>
           {churches.map(church =>

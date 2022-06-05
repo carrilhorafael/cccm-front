@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import PasswordInput from '../../atomics/PasswordInput'
 import { AuthContext } from '../../context/AuthContext'
-import { ButtonsWrapper, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
+import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
 
 export default function PasswordChangePage() {
   const { handleChangePassword } = useContext(AuthContext)
@@ -41,7 +41,7 @@ export default function PasswordChangePage() {
             />
           </Fieldset>
           <ButtonsWrapper>
-            <Button variant="primary" onClick={onSubmit}>Trocar a senha</Button>
+            <Button theme="primary" onClick={onSubmit} title='Trocar a senha'/>
           </ButtonsWrapper>
         </ChangePasswordForm>
       </Container>

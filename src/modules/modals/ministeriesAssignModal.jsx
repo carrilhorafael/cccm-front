@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 import MultiSelect from '../../atomics/MultiSelect'
 
@@ -37,7 +38,7 @@ export default function MinisteriesAssignModal ({show, user, onHide}) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="primary" onClick={assignMinisteries}>Confirmar</Button>
+        <Button theme="primary" onClick={assignMinisteries} title='Confirmar'/>
       </Modal.Footer>
     </Modal>
   )

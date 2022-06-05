@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from '../../../atomics/Button'
 import Checkbox from '../../../atomics/Checkbox'
 import { Footer } from '../../../atomics/Modal/styles'
 import MultiSelect from '../../../atomics/MultiSelect'
@@ -130,7 +130,7 @@ export default function FilterSidebar ({show, onHide}) {
       placement="right"
       Footer={
         <Footer>
-          <Button variant="primary" onClick={submitFilter}>Salvar</Button>
+          <Button theme="primary" onClick={submitFilter} title='Salvar filtro'/>
         </Footer>
       }
     >

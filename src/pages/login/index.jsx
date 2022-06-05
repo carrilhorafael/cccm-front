@@ -1,5 +1,5 @@
-import React, { useContext, useRef, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import React, { useContext,  useState } from 'react'
+import Button from '../../atomics/Button'
 import PasswordInput from '../../atomics/PasswordInput'
 import TextInput from '../../atomics/TextInput'
 import { AuthContext } from '../../context/AuthContext'
@@ -35,7 +35,7 @@ export default function LoginPage() {
               />
           </Fieldset>
           <ButtonsWrapper>
-            <Button variant="primary" onClick={onSubmit}>Entrar</Button>
+            <Button theme="primary" onClick={onSubmit} title='Entrar' isFullWidth/>
           </ButtonsWrapper>
         </FormLogin>
       </Container>

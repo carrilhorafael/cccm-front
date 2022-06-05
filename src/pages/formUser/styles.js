@@ -24,3 +24,9 @@ export const CheckboxWrapper = styled.div`
     margin-left: 16px;
   }
 `
+export const ButtonsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 32px;
+  justify-content: center;
+`

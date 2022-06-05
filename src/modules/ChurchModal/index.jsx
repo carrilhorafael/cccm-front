@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
@@ -29,7 +29,7 @@ export default function ChurchModal({resource, onUpdate, onCreate}) {
       title={resource ? "Editar uma sede" : "Criar uma nova sede"}
       Footer={
         <Footer>
-          <Button variant="primary" onClick={handleSubmit}>Confirmar</Button>
+          <Button theme="primary" onClick={handleSubmit} title='Confirmar'/>
         </Footer>
       }
     >

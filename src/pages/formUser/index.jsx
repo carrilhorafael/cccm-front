@@ -1,11 +1,11 @@
-import { Button } from 'react-bootstrap'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import Button from '../../atomics/Button'
+import React, { useEffect, useState } from 'react'
 import Checkbox from '../../atomics/Checkbox'
 import { useChurchContext } from '../../context/ChurchContext'
 import { useLocation, useHistory } from 'react-router-dom'
 import TextInput from '../../atomics/TextInput'
 import Select from '../../atomics/Select'
-import { CheckboxWrapper, FormGrid, TextareaWrapper, UserForm } from './styles'
+import { ButtonsWrapper, CheckboxWrapper, FormGrid, TextareaWrapper, UserForm } from './styles'
 import Textarea from '../../atomics/Textarea'
 
 export default function ChurchFormUserPage () {
@@ -143,9 +143,9 @@ export default function ChurchFormUserPage () {
         )}
       </>
       }
-      <div className='buttonWrapper'>
-        <Button variant="primary" onClick={submitForm}> Enviar </Button>
-      </div>
+      <ButtonsWrapper>
+        <Button theme="primary" onClick={submitForm} title='Salvar usuário'/>
+      </ButtonsWrapper>
     </UserForm>
   )
 }

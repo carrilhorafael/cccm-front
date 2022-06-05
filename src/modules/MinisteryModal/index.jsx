@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
@@ -30,7 +30,7 @@ export default function MinisteryModal({ resource }) {
       title={resource ? "Editar um ministério" : "Criar um novo ministério"}
       Footer={
         <Footer>
-          <Button variant="primary" onClick={handleSubmit}>Confirmar</Button>
+          <Button theme="primary" onClick={handleSubmit} title='Confirmar'/>
         </Footer>
       }
     >

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
@@ -20,7 +20,12 @@ export default function DeleteChurchModal({resource, onDelete}) {
       title="Excluir sede"
       Footer={
         <Footer>
-          <Button variant="primary" onClick={onConfirm} disabled={resource && name !== resource.name}>Excluir</Button>
+          <Button
+            theme="negative"
+            onClick={onConfirm}
+            disabled={resource && name !== resource.name}
+            title='Excluir'
+          />
         </Footer>
       }
     >

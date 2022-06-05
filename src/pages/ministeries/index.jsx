@@ -1,5 +1,5 @@
-import { Button } from 'react-bootstrap'
 import React, { useContext, useState } from 'react'
+import Button from '../../atomics/Button'
 import { ChurchContext } from '../../context/ChurchContext'
 import IconButton from '../../atomics/IconButton'
 import MinisteryModal from '../../modules/MinisteryModal'
@@ -13,10 +13,7 @@ export default function ChurchMinisteriesPage () {
   return (
     <>
       <Header>
-          <Button
-            variant="primary"
-            onClick={() => showModal(MinisteryModal)}
-          >Criar um ministério</Button>
+          <Button theme="primary" onClick={() => showModal(MinisteryModal)} title='Criar um ministério' />
       </Header>
       <List>
         {ministeries.map((ministery) => (

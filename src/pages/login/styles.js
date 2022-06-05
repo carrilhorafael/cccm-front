@@ -30,8 +30,9 @@ export const Fieldset = styled.div`
   margin-bottom: 16px;
 `
 export const ButtonsWrapper = styled.div`
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  margin-top: 32px;
+  margin-top: 48px;
   justify-content: center;
 `
