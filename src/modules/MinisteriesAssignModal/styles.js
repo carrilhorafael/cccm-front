@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Input } from '../../atomics/Textarea/styles'
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +6,10 @@ export const Container = styled.div`
   padding-top: 16px;
   flex-direction: column;
   gap: 16px;
-  ${Input} {
-    min-height: 140px;
+`
+export const Description = styled.p`
+  font-size: 18px;
+  b {
+    font-weight: 700
   }
 `

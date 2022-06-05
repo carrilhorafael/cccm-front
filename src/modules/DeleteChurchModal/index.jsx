@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
+import TextInput from '../../atomics/TextInput'
 import { useOverlayContext } from '../../context/OverlayContext'
+import { Container, Description } from './styles'
 
 
 export default function DeleteChurchModal({resource, onDelete}) {
@@ -29,15 +31,16 @@ export default function DeleteChurchModal({resource, onDelete}) {
         </Footer>
       }
     >
-      <div className='churchManagement'>
-        <p className='description'>
-          Tem certeza que deseja deletar essa igreja? Todas os usuários e ministérios serão apagados e essa ação <b>não</b> é reversível.
-        </p>
-        <fieldset>
-          <label>Digite o nome da igreja para confirmar: </label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-        </fieldset>
-      </div>
+      <Container>
+        <Description>
+          Tem certeza que deseja deletar essa igreja? Todas os usuários e ministérios serão apagados e essa ação <b>não</b> é reversível. <br/> Digite o nome da igreja para confirmar:
+        </Description>
+        <TextInput
+          label='Nome da igreja:'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Container>
     </Modal>
   )
 }

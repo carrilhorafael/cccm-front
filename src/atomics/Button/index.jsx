@@ -12,7 +12,7 @@ export default function Button({
   return (
     <Container
       onClick={onClick}
-      theme={theme}
+      theme={disabled ? 'disabled' : theme}
       disabled={disabled}
       isFullWidth={isFullWidth}
     >

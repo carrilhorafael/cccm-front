@@ -2,7 +2,7 @@ import React from 'react'
 import { useOverlayContext } from '../../context/OverlayContext'
 import IconButton from '../IconButton'
 import OverlayLocker from '../OverlayLocker'
-import { Body, Container, FooterWrapper, Header, Title, Wrapper } from './styles'
+import { Body, Container, Header, Title, Wrapper } from './styles'
 
 export default function Modal ({
     children,

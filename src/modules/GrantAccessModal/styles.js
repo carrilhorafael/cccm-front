@@ -5,9 +5,16 @@ export const Container = styled.div`
   padding: 0 16px;
   padding-top: 16px;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 `
 export const Description = styled.p`
   font-size: 18px;
-
+  line-height: 24px;
+  margin-bottom: 16px;
+`
+export const CheckboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  gap: 8px
 `

@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
 import ResourcesAccordion from '../../modules/AccordionTable'
-import { ChurchContext } from '../../context/ChurchContext'
+import { useChurchContext } from '../../context/ChurchContext'
 import { AuthContext } from '../../context/AuthContext'
 import IconButton from '../../atomics/IconButton'
-import GrantAccessModal from '../../modules/modals/grantAccessModal'
-import RevokeAccessModal from '../../modules/modals/revokeAccessModal'
-import DeleteUserModal from '../../modules/modals/deleteUserModal'
+import GrantAccessModal from '../../modules/GrantAccessModal'
+import RevokeAccessModal from '../../modules/RevokeAccessModal'
+import DeleteUserModal from '../../modules/DeleteUserModal'
 import FilterSidebar from './components/filterSidebar'
-import MinisteriesAssignModal from '../../modules/modals/ministeriesAssignModal'
+import MinisteriesAssignModal from '../../modules/MinisteriesAssignModal'
 import { useHistory } from 'react-router-dom'
 import { getMemberCard } from '../../services/Api.service'
 import {
@@ -22,18 +22,15 @@ import {
 } from './styles'
 import getFormattedDate from '../../actions/getFormattedDate'
 import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
+import { useOverlayContext } from '../../context/OverlayContext'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
-  const { users } = useContext(ChurchContext)
+  const { users } = useChurchContext()
+  const { showModal } = useOverlayContext()
   const { user } = useContext(AuthContext)
 
-  const [showGrantAccessModal, setShowGrantAccessModal] = useState(false)
-  const [showRevokeAccessModal, setShowRevokeAccessModal] = useState(false)
-  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false)
-  const [showMinisteriesAssignModal, setShowMinisteriesAssignModal] = useState(false)
   const [showFilterSidebar, setShowFilterSidebar] = useState(false)
-  const [resource, setResource] = useState({})
 
   const getMenuConfigs = (resource) => {
     return [
@@ -53,18 +50,13 @@ export default function ChurchUsersPage () {
         icon: "fa-solid fa-id-card",
         title: "Gerar a carteirinha",
         hasIcon: true,
-        onClick: () => {
-          getMemberCard(resource.id)
-        }
+        onClick: () => getMemberCard(resource.id)
       },
       {
         icon: "fa-solid fa-person-praying",
         title: "Ministérios",
         hasIcon: true,
-        onClick: () => {
-          setResource(resource)
-          setShowMinisteriesAssignModal(true)
-        }
+        onClick: () => showModal(MinisteriesAssignModal, { user: resource })
       },
       {
         icon: resource.has_access ? "fa-solid fa-lock" : "fa-solid fa-unlock",
@@ -73,11 +65,10 @@ export default function ChurchUsersPage () {
         isDanger: resource.has_access,
         hidden: resource.president_pastor,
         onClick: () => {
-          setResource(resource)
           if (resource.has_access) {
-            setShowRevokeAccessModal(true)
+            showModal(RevokeAccessModal, { user: resource })
           } else {
-            setShowGrantAccessModal(true)
+            showModal(GrantAccessModal, { user: resource })
           }
         }
       },
@@ -87,10 +78,7 @@ export default function ChurchUsersPage () {
         hasIcon: true,
         isDanger: true,
         hidden: resource.president_pastor,
-        onClick: () => {
-          setResource(resource)
-          setShowDeleteUserModal(true)
-        }
+        onClick: () => showModal(DeleteUserModal, { user: resource })
       }
     ]
   }
@@ -178,30 +166,9 @@ export default function ChurchUsersPage () {
   return (
     <main className='pageLayout'>
       <>
-        <MinisteriesAssignModal
-          user={resource}
-          show={showMinisteriesAssignModal}
-          onHide={() => setShowMinisteriesAssignModal(false)}
-          />
-        <DeleteUserModal
-          user={resource}
-          show={showDeleteUserModal}
-          onHide={() => setShowDeleteUserModal(false)}
-          />
-        <GrantAccessModal
-          user={resource}
-          show={showGrantAccessModal}
-          onHide={() => setShowGrantAccessModal(false)}
-          />
-        <RevokeAccessModal
-          user={resource}
-          show={showRevokeAccessModal}
-          onHide={() => setShowRevokeAccessModal(false)}
-          />
         <FilterSidebar show={showFilterSidebar} onHide={() => setShowFilterSidebar(false)}/>
         <UsersPageHeader>
           <span/>
-          {/* <PageTitle>Membros da igreja</PageTitle> */}
           <div>
             <IconButton icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
             <IconButton icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />

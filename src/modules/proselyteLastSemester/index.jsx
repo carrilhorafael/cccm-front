@@ -4,43 +4,23 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2'
 import './styles.css'
 import IconButton from '../../atomics/IconButton';
-import ProselyteFormModal from '../modals/proselyteFormModal';
-import ProselytesModal from '../modals/proselytesModal';
+import ProselyteFormModal from '../ProselyteFormModal';
+import { useOverlayContext } from '../../context/OverlayContext';
 ChartJS.register(...registerables)
 
 export default function ProselytesLastSemester ({ type }) {
   const [chartType, setChartType] = useState('bar')
   const { resume } = useContext(ChurchContext)
+  const { showModal } = useOverlayContext()
 
-  const [resource, setResource] = useState(null)
   const [data, setData] = useState([])
-  const [showProselyteFormModal, setShowProselyteFormModal] = useState(false)
-  const [showProselytesModal, setShowProselytesModal] = useState(false)
 
   useEffect(() => {
     setData(Object.values(resume.proselytes_in_last_semester).map((array) => array.length))
   }, [resume])
 
-  const openEditModal = (newResource) => {
-    setResource(newResource)
-    setShowProselyteFormModal(true)
-  }
-
   return (
     <div className='chartMainLayout'>
-      <ProselyteFormModal
-        resource={resource}
-        show={showProselyteFormModal}
-        onHide={() => {
-          setResource(null)
-          setShowProselyteFormModal(false)
-        }}
-      />
-      <ProselytesModal
-        openEditModal={openEditModal}
-        show={showProselytesModal}
-        onHide={() => setShowProselytesModal(false)}
-      />
       <h3>Convertidos por mês (ultimo semestre)</h3>
       <div className='chartMain'>
       {chartType === 'line' ?
@@ -108,7 +88,7 @@ export default function ProselytesLastSemester ({ type }) {
             icon="fa-solid fa-square-arrow-up-right"
             onClick={() => alert('Página em desenvolvimento')}
           />
-          <IconButton icon="fa-solid fa-user-plus" onClick={() => setShowProselyteFormModal(true)}/>
+          <IconButton icon="fa-solid fa-user-plus" onClick={() => showModal(ProselyteFormModal)}/>
         </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ const getThemeStyles = (theme) => {
         border: 2px solid #0989FF;
         color: #0989FF;
         &:hover {
-          background-color: #0570D2;
+          background-color: #0989FF;
           color: #fafafa;
         }
       `
@@ -32,6 +32,16 @@ const getThemeStyles = (theme) => {
           border-color: #7C0404;
         }
       `
+    case 'disabled':
+      return `
+      background-color: #c6c6c6;
+      border: 2px solid #c6c6c6;
+      color: #333;
+      &:hover {
+        background-color: #c6c6c6;
+        border-color: #c6c6c6;
+      }
+    `
     default:
       break;
   }
@@ -45,6 +55,7 @@ export const Container = styled.button`
   border-radius: 4px;
   font-weight: 700;
   box-shadow: 1px 1px 1em #33333380;
+  cursor: ${({disabled}) => disabled ? 'not-allowed' : 'pointer'};
   ${({isFullWidth}) => isFullWidth && `width: 100%;`}
   ${({theme}) => getThemeStyles(theme)}
 `

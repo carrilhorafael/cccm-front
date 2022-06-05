@@ -1,15 +1,17 @@
-import React, { useContext, useRef } from 'react'
+import React, { useState } from 'react'
 import Button from '../../atomics/Button'
-import { ChurchContext } from '../../context/ChurchContext'
+import { useChurchContext } from '../../context/ChurchContext'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
+import TextInput from '../../atomics/TextInput'
+import { Container } from './styles'
 
 export default function MinisteryModal({ resource }) {
-  const { createMinistery, updateMinistery } = useContext(ChurchContext)
+  const { createMinistery, updateMinistery } = useChurchContext()
   const { closeModal } = useOverlayContext()
-  const name = useRef()
-  const description = useRef()
+  const [name, setName] = useState(resource && resource.name)
+  const [description, setDescription] = useState(resource && resource.description)
 
   const handleSubmit = async () => {
     const ministeryParams = {
@@ -30,20 +32,27 @@ export default function MinisteryModal({ resource }) {
       title={resource ? "Editar um ministério" : "Criar um novo ministério"}
       Footer={
         <Footer>
-          <Button theme="primary" onClick={handleSubmit} title='Confirmar'/>
+          <Button
+            theme="primary"
+            onClick={handleSubmit}
+            title='Confirmar'
+            disabled={!name || !description}
+          />
         </Footer>
       }
     >
-      <div className='ministeryManagement'>
-        <fieldset>
-          <label>Nome do ministério: </label>
-          <input type="text" ref={name} defaultValue={resource && resource.name}/>
-        </fieldset>
-        <fieldset>
-          <label>Descrição do ministério: </label>
-          <textarea ref={description} defaultValue={resource && resource.description}/>
-        </fieldset>
-      </div>
+      <Container>
+        <TextInput
+          label='Nome do ministério:'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <TextInput
+          label='Descrição do ministério:'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </Container>
     </Modal>
   )
 }

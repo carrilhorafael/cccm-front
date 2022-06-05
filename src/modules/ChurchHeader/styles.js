@@ -2,15 +2,15 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   width: 100%;
-  padding: 0 70px;
-  padding-top: 40px;
+  padding: 0 24px;
+  padding-top: 30px;
   background-color: #fafafa;
 `
 export const Title = styled.h2`
   text-transform: uppercase;
   display: flex;
   font-size: 32px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   color: #333;
 `
 export const Nav = styled.nav`

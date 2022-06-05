@@ -1,4 +1,10 @@
 import styled from 'styled-components'
+export const Content = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: start;
+`
 
 export const MultiSelectWrapper = styled.div`
   display: flex;
@@ -12,6 +18,12 @@ export const MultiSelectWrapper = styled.div`
     left: 5px;
     top: 13px;
   }
+`
+
+export const Label = styled.label`
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-bottom: 4px;
 `
 
 export const Select = styled.select`

@@ -1,20 +1,23 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
 import { Footer } from '../../atomics/Modal/styles'
+import Textarea from '../../atomics/Textarea'
+import TextInput from '../../atomics/TextInput'
 import { useOverlayContext } from '../../context/OverlayContext'
+import { Container } from './styles'
 
 export default function ChurchModal({resource, onUpdate, onCreate}) {
   const { closeModal } = useOverlayContext()
+  const [name, setName] = useState(resource && resource.name)
+  const [location, setLocation] = useState(resource && resource.location)
 
-  const name = useRef()
-  const location = useRef()
 
   const handleSubmit = async () => {
     const churchParams = {
       church: {
-        name: name.current.value,
-        location: location.current.value
+        name: name,
+        location: location
       }
     }
 
@@ -33,16 +36,18 @@ export default function ChurchModal({resource, onUpdate, onCreate}) {
         </Footer>
       }
     >
-        <div className='churchManagement'>
-          <fieldset>
-            <label>Nome da sede: </label>
-            <input type="text" ref={name} defaultValue={resource && resource.name}/>
-          </fieldset>
-          <fieldset>
-            <label>Endereço da nova sede: </label>
-            <textarea ref={location} defaultValue={resource && resource.location}/>
-          </fieldset>
-        </div>
+        <Container>
+          <TextInput
+            label='Nome da sede:'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Textarea
+            label='Endereço da sede:'
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </Container>
 
     </Modal>
   )
