@@ -5,7 +5,7 @@ import { useChurchContext } from '../../context/ChurchContext'
 import { useLocation, useHistory } from 'react-router-dom'
 import TextInput from '../../atomics/TextInput'
 import Select from '../../atomics/Select'
-import { ButtonsWrapper, CheckboxWrapper, FormGrid, TextareaWrapper, UserForm } from './styles'
+import { ButtonsWrapper, CheckboxWrapper, Container, FormGrid, GeneralLayout, TextareaWrapper, UserForm } from './styles'
 import Textarea from '../../atomics/Textarea'
 
 export default function ChurchFormUserPage () {
@@ -57,95 +57,99 @@ export default function ChurchFormUserPage () {
   }
 
   return (
-    <UserForm>
-      <FormGrid>
-        <TextInput
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          label="Nome:"
-        />
-        <Select label="Titulo:" value={title} onChange={(e) => setTitle(e.target.value)}>
-          <option disabled>Escolha o titulo</option>
-          <option value="Membro(a)">Membro(a)</option>
-          <option value="Obreiro(a)">Obreiro(a)</option>
-          <option value="Diácono(isa)">Diácono(isa)</option>
-          <option value="Pastor(a)">Pastor(a)</option>
-        </Select>
-        <TextInput
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          label="Telefone:"
-        />
-        <TextInput
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          label="Email:"
-        />
-        <TextInput
-          type='date'
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-          label="Aniversário:"
-        />
-        <TextInput
-          type='date'
-          value={member_since}
-          onChange={(e) => setMemberSince(e.target.value)}
-          label="Membro deste:"
-        />
-        <Select label="Estado civil:" value={marital_status} onChange={(e) => setMaritalStatus(e.target.value)}>
-          <option value={-1}>Escolha o estado civil</option>
-          <option value="Solteiro(a)">Solteiro(a)</option>
-          <option value="Casado(a)">Casado(a)</option>
-          <option value="Viúvo(a)">Viúvo(a)</option>
-          <option value="Divorciado(a)">Divorciado(a)</option>
-          <option value="Separado(a)">Separado(a)</option>
-        </Select>
-        <Select label="Gênero:" value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value={-1}>Escolha o genero</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Feminino">Feminino</option>
-        </Select>
-      </FormGrid>
-      <TextareaWrapper>
-        <Textarea
-          value={address}
-          label="Endereço completo:"
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </TextareaWrapper>
-      <TextareaWrapper>
-        <Textarea
-          value={notes}
-          label="Observações sobre o membro:"
-          onChange={(e) => setNotes(e.target.value)}
-        />
-      </TextareaWrapper>
-      <CheckboxWrapper>
-        <Checkbox checked={isBaptized} onChange={() => setIsBaptized(!isBaptized)} defaultValue={resource && resource.isBaptized}/>
-        <label>É batizado?</label>
-      </CheckboxWrapper>
-
-      {!resource &&
-      <>
-        <CheckboxWrapper>
-          <Checkbox checked={shouldHaveAccess} onChange={() => {
-            setShouldHaveAccess(!shouldHaveAccess)
-            setIsLeader(false)
-          }} />
-          <label>Conceder acesso ao sistema?</label>
-        </CheckboxWrapper>
-        {shouldHaveAccess && (
-          <CheckboxWrapper marginLeft>
-            <Checkbox checked={isLeader} onChange={() => setIsLeader(!isLeader)} />
-            <label>É administrador do sistema?</label>
+    <GeneralLayout>
+      <Container>
+        <UserForm>
+          <FormGrid>
+            <TextInput
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              label="Nome:"
+            />
+            <Select label="Titulo:" value={title} onChange={(e) => setTitle(e.target.value)}>
+              <option disabled>Escolha o titulo</option>
+              <option value="Membro(a)">Membro(a)</option>
+              <option value="Obreiro(a)">Obreiro(a)</option>
+              <option value="Diácono(isa)">Diácono(isa)</option>
+              <option value="Pastor(a)">Pastor(a)</option>
+            </Select>
+            <TextInput
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              label="Telefone:"
+            />
+            <TextInput
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Email:"
+            />
+            <TextInput
+              type='date'
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
+              label="Aniversário:"
+            />
+            <TextInput
+              type='date'
+              value={member_since}
+              onChange={(e) => setMemberSince(e.target.value)}
+              label="Membro deste:"
+            />
+            <Select label="Estado civil:" value={marital_status} onChange={(e) => setMaritalStatus(e.target.value)}>
+              <option value={-1}>Escolha o estado civil</option>
+              <option value="Solteiro(a)">Solteiro(a)</option>
+              <option value="Casado(a)">Casado(a)</option>
+              <option value="Viúvo(a)">Viúvo(a)</option>
+              <option value="Divorciado(a)">Divorciado(a)</option>
+              <option value="Separado(a)">Separado(a)</option>
+            </Select>
+            <Select label="Gênero:" value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value={-1}>Escolha o genero</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </Select>
+          </FormGrid>
+          <TextareaWrapper>
+            <Textarea
+              value={address}
+              label="Endereço completo:"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </TextareaWrapper>
+          <TextareaWrapper>
+            <Textarea
+              value={notes}
+              label="Observações sobre o membro:"
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </TextareaWrapper>
+          <CheckboxWrapper>
+            <Checkbox checked={isBaptized} onChange={() => setIsBaptized(!isBaptized)} defaultValue={resource && resource.isBaptized}/>
+            <label>É batizado?</label>
           </CheckboxWrapper>
-        )}
-      </>
-      }
-      <ButtonsWrapper>
-        <Button theme="primary" onClick={submitForm} title='Salvar usuário'/>
-      </ButtonsWrapper>
-    </UserForm>
+
+          {!resource &&
+          <>
+            <CheckboxWrapper>
+              <Checkbox checked={shouldHaveAccess} onChange={() => {
+                setShouldHaveAccess(!shouldHaveAccess)
+                setIsLeader(false)
+              }} />
+              <label>Conceder acesso ao sistema?</label>
+            </CheckboxWrapper>
+            {shouldHaveAccess && (
+              <CheckboxWrapper marginLeft>
+                <Checkbox checked={isLeader} onChange={() => setIsLeader(!isLeader)} />
+                <label>É administrador do sistema?</label>
+              </CheckboxWrapper>
+            )}
+          </>
+          }
+          <ButtonsWrapper>
+            <Button theme="primary" onClick={submitForm} title='Salvar usuário'/>
+          </ButtonsWrapper>
+        </UserForm>
+      </Container>
+    </GeneralLayout>
   )
 }
