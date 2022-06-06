@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "../../styles/colors";
 
 export const OverlayWrapper = styled.div`
   height: 100%;
@@ -13,6 +14,6 @@ export const OverlayWrapper = styled.div`
 export const Message = styled.p`
   font-size: 24px;
   font-weight: 600;
-  color: #fafafa;
+  color: ${colors.gray.lightest};
   width: fit-content;
 `

@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
+import { prettyScrollBar } from '../../styles/prettyScrollBar'
 export const Content = styled.fieldset`
   display: flex;
   flex-direction: column;
@@ -42,23 +44,7 @@ export const ResultsChoosen = styled.div`
   overflow-x: scroll;
   min-height: 24px;
   padding-bottom: 4px;
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-clip: padding-box;
-    background-color: #666;
-  }
-  &::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
+  ${prettyScrollBar}
 `
 
 export const SelectedItem = styled.div`
@@ -66,11 +52,11 @@ export const SelectedItem = styled.div`
   border-radius: 4px;
   flex-wrap: nowrap;
   margin-right: 8px;
-  background-color: #D6F2FB;
+  background-color: ${colors.blue.lighter};
   cursor: pointer;
   &:hover {
-    color: #7C0404;
-    background-color: #84060620;
+    color: ${colors.red.dark};
+    background-color: ${colors.red.light};
   }
   & p {
     font-size: 18px;
@@ -88,6 +74,6 @@ export const ClearAll = styled.p`
   position: absolute;
   right: 0;
   &:hover {
-    color: #7C0404;
+    color: ${colors.red.base};
   }
 `

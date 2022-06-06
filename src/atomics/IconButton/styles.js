@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Button = styled.button`
   width: 32px;
@@ -8,12 +9,13 @@ export const Button = styled.button`
   align-items: center;
   border-radius: 4px;
   border: none;
+  transition: 0.3s;
   ${({ noBackground }) =>
     noBackground
     ? `background: none`
-    : `background-color: #F3FCFF`};
+    : `background-color: ${colors.blue.lightest}`};
 
   &:hover {
-    background-color: #c7c5f0;
+    background-color: ${colors.blue.dark};
   }
 `

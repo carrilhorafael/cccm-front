@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
+
 export const Content = styled.fieldset`
   display: flex;
   flex-direction: column;
@@ -29,8 +31,8 @@ export const EndWrapper = styled.div`
 export const Input = styled.select`
   width: 100%;
   border-radius: 5px;
-  border: #0400D8 2px solid;
-	background-color: #fafafa;
+  border: ${colors.blue.darker} 2px solid;
+	background-color: ${colors.gray.lightest};
   min-height: 42px;
 	font-size: 18px;
   ${({hasPaddingLeft}) =>
@@ -43,6 +45,6 @@ export const Input = styled.select`
   };
 
   &:hover {
-    border: #0400aa 2px solid;
+    border: ${colors.blue.darkest} 2px solid;
   }
 `

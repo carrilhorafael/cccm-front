@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { css } from 'styled-components'
+import colors from '../../styles/colors'
 
 export const GeneralLayout = styled.div`
   display: flex;
@@ -8,24 +9,24 @@ export const GeneralLayout = styled.div`
 `
 export const Item = styled.div`
   width: 100%;
-  background-color: #fafafa;
+  background-color: ${colors.gray.lightest};
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 1px 2px 4px #33333380;
+  box-shadow: 1px 2px 4px ${colors.gray.base};
 `
 export const ItemTitle = styled.h1`
   font-size: 18px;
-  color: #333333;
+  color: ${colors.gray.darkest};
   font-weight: 800;
 `
 export const Icon = styled.i`
-  color: #0400D8;
+  color: ${colors.blue.darker};
   padding-left: 8px;
 `
 export const PageTitle = styled.h1`
   font-size: 24px;
   font-weight: 600;
-  color: #333333;
+  color: ${colors.gray.darkest};
   display: flex;
 `
 export const ItemHeader = styled.div`
@@ -75,12 +76,12 @@ export const AccessWrapper = styled.div`
   }
 `
 export const AccessTitle = styled.h1`
-  color: #043C1A !important;
+  color: ${colors.green.dark} !important;
   font-weight: bolder;
   margin-bottom: 8px;
 `
 export const NoAccessTitle = styled.h1`
-  color: #840606 !important;
+  color: ${colors.red.darker} !important;
   font-weight: bolder;
   margin-bottom: 8px;
 `

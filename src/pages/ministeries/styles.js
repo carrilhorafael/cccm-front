@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Header = styled.div`
   display: flex;
@@ -32,10 +33,10 @@ export const Description = styled.div`
 export const Card = styled.div`
   position: relative;
   border-radius: 10px;
-  border: #0400D8 2px solid;
-  background: #fafafa;
+  border: ${colors.blue.light} 2px solid;
+  background: ${colors.gray.lightest};
   padding: 16px 24px;
-  box-shadow: 2px 3px 4px #33333380;
+  box-shadow: 2px 3px 4px ${colors.gray.base};
   cursor: default;
   &:hover ${ActionWrapper} {
     display: flex

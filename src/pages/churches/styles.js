@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const ChurchesLayout = styled.div`
-  background: linear-gradient(115deg, #FAFAFA80, #73ADBF80, #FAFAFA80);
+  background: linear-gradient(115deg, ${colors.gray.lightest}, ${colors.blue.light}, ${colors.gray.lightest});
   width: 100%;
   height: calc(100vh - 42px);
   display: flex;
@@ -14,7 +15,7 @@ export const ChurchesLayout = styled.div`
 export const PageLayout = styled.div`
   width: calc(100vw - 140px);
   margin: 10px auto;
-  background-color: #fafafa;
+  background-color: ${colors.gray.lightest};
   padding: 20px;
   border-radius: 30px;
 `
@@ -51,16 +52,16 @@ export const ChurchCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border: #0400D8 2px solid;
+  border: ${colors.blue.darker} 2px solid;
   & h2 {
     font-size: 36px;
-    color: #333;
+    color: ${colors.gray.darker};
     font-weight: bold;
     margin-bottom: 24px;
   }
   & p {
     font-size: 16px;
-    color: #666;
+    color: ${colors.gray.darker};
     margin-bottom: 24px;
   }
   & .btn-primary {

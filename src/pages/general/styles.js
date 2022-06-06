@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
+import { prettyScrollBar } from '../../styles/prettyScrollBar'
 
 export const GeneralLayout = styled.div`
   display: grid;
@@ -9,7 +11,7 @@ export const GeneralLayout = styled.div`
 `
 export const BirthdateSection = styled.div`
   border-radius: 8px;
-  border: 2px solid #0400aa;
+  border: 2px solid ${colors.blue.darker};
   height: fit-content;
 `
 export const Header = styled.div`
@@ -18,7 +20,7 @@ export const Header = styled.div`
   align-items: center;
   width: 100%;
   padding: 4px 8px;
-  border-bottom: 2px solid #0400aa;
+  border-bottom: 2px solid ${colors.blue.darker};
   & h3 {
     font-size: 18px;
     font-weight: bolder;
@@ -26,28 +28,15 @@ export const Header = styled.div`
 `
 export const Item = styled.div`
   height: 100%;
-  background-color: #fafafa;
+  background-color: ${colors.gray.lightest};
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 1px 2px 4px #33333380;
+  box-shadow: 1px 2px 4px ${colors.gray.base};
 `
 export const UsersWrapper = styled.div`
   height: 500px;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-clip: padding-box;
-    background-color: #8683EA;
-  }
-  &::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
-  }
+  ${prettyScrollBar}
 `
 export const BirthdateMember = styled.div`
   display: grid;

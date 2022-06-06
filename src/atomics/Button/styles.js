@@ -1,45 +1,46 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 const getThemeStyles = (theme) => {
   switch (theme) {
     case 'primary':
       return `
-        background-color: #0989FF;
-        border: 2px solid #0989FF;
-        color: #fafafa;
+        background-color: ${colors.blue.base};
+        border: 2px solid ${colors.blue.base};
+        color: ${colors.gray.lightest};
         &:hover {
-          border-color: #0570D2;
-          background-color: #0570D2;
+          border-color: ${colors.blue.dark};
+          background-color: ${colors.blue.dark};
         }
       `
     case 'secondary':
       return `
         background-color: none;
-        border: 2px solid #0989FF;
-        color: #0989FF;
+        border: 2px solid ${colors.blue.base};
+        color: ${colors.blue.base};
         &:hover {
-          background-color: #0989FF;
-          color: #fafafa;
+          background-color: ${colors.blue.base};
+          color: ${colors.gray.lightest};
         }
       `
     case 'negative':
       return `
-        background-color: #D1291F;
-        border: 2px solid #D1291F;
-        color: #fafafa;
+        background-color: ${colors.negative.base};
+        border: 2px solid ${colors.negative.base};
+        color: ${colors.gray.lightest};
         &:hover {
-          background-color: #7C0404;
-          border-color: #7C0404;
+          background-color: ${colors.negative.dark};
+          border-color: ${colors.negative.dark};
         }
       `
     case 'disabled':
       return `
-      background-color: #c6c6c6;
-      border: 2px solid #c6c6c6;
-      color: #333;
+      background-color: ${colors.gray.light};
+      border: 2px solid ${colors.gray.light};
+      color: ${colors.gray.darker};
       &:hover {
-        background-color: #c6c6c6;
-        border-color: #c6c6c6;
+        background-color: ${colors.gray.light};
+        border-color: ${colors.gray.light};
       }
     `
     default:
@@ -54,7 +55,7 @@ export const Container = styled.button`
   transition: 0.3s;
   border-radius: 4px;
   font-weight: 700;
-  box-shadow: 1px 1px 1em #33333380;
+  box-shadow: 1px 1px 1em ${colors.gray.base};
   cursor: ${({disabled}) => disabled ? 'not-allowed' : 'pointer'};
   ${({isFullWidth}) => isFullWidth && `width: 100%;`}
   ${({theme}) => getThemeStyles(theme)}

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { css } from 'styled-components'
+import colors from '../../styles/colors'
 
 export const HeaderContainer = styled.div`
   padding: 24px 0px 24px 32px;
@@ -13,23 +14,23 @@ export const Header = styled.div`
   // position: relative;
 `
 export const Item = styled.div`
-  background-color: #F3FCFF;
+  background-color: ${colors.blue.lightest};
   &:nth-child(2n) {
-    background-color: #D6F2FB;
+    background-color: ${colors.blue.lighter};
   }
 `
 export const Accordion = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-shadow: 0 0 1em #33333320;
+  box-shadow: 0 0 1em ${colors.gray.light};
   border-radius: 8px;
   overflow: hidden;
 `
 export const Body = styled.div`
   height: 0px;
   overflow-y: hidden;
-  background-color: #FAFAFA;
+  background-color: ${colors.gray.lightest};
   transition: 0.5s ease-out;
   ${({opened, height}) => opened && css`
     height: ${height}px;
@@ -48,7 +49,8 @@ export const PaginationResourcesConfig = styled.div`
     background: none;
     margin-left: 15px;
     border: none;
-    border-bottom: 2px solid #0400D8;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid ${colors.blue.darker};
   }
 `
 export const PaginationPage = styled.div`

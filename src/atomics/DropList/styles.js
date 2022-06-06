@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Popper = styled.div`
   position: absolute;
@@ -8,8 +9,8 @@ export const Popper = styled.div`
   min-width: 300px;
   padding: 2px 0;
   border-radius: 4px;
-  background-color: #fafafa;
-  box-shadow: 3px 2px 1px #33333320;
+  background-color: ${colors.gray.lightest};
+  box-shadow: 3px 2px 1px ${colors.gray.light};
 `
 
 export const DropListItem = styled.div`
@@ -27,20 +28,17 @@ export const DropListItem = styled.div`
   }
   ${({danger}) => danger ?
     `
-      color: #840606;
+      color: ${colors.red.dark};
       &:hover {
-        background-color: #84060620;
+        background-color: ${colors.red.light};
       }
     `
     :
     `
-      color: #333;
+      color: ${colors.gray.darker};
       &:hover {
-        background-color: #0066cc20;
+        background-color: ${colors.blue.lighter};
       }
     `
-  }
-  &:hover {
-    background-color:
   }
 `

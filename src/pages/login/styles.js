@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const GradientLayout = styled.div`
-  background: linear-gradient(115deg, #FAFAFA80, #73ADBF80, #FAFAFA80);
+  background: linear-gradient(115deg, ${colors.gray.lightest}, ${colors.blue.light}, ${colors.gray.lightest});
   width: 100%;
   height: calc(100vh - 42px);
   display: flex;
@@ -14,7 +15,7 @@ export const Container = styled.div`
   margin: auto;
 `
 export const FormLogin = styled.div`
-  background-color: #fafafa;
+  background-color: ${colors.gray.lightest};
   width: 70%;
   margin: auto;
   height: 680px;

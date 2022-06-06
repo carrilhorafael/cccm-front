@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Container = styled.header`
-  background-color: #D6F2FB;
+  background-color: ${colors.blue.darkest};
 `
 export const HeaderName = styled.div`
   width: 100%;
@@ -12,7 +13,7 @@ export const HeaderName = styled.div`
 `
 export const Title = styled.h1`
   font-size: 42px;
-  color: #333;
+  color: ${colors.gray.lightest};
   text-align: center;
   font-weight: 700;
 `

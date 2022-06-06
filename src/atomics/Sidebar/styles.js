@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
+import { prettyScrollBar } from '../../styles/prettyScrollBar'
 
 const getPlacementPosition = (placement) => {
   if(placement === 'left'){
@@ -18,7 +20,7 @@ export const SidebarWrapper = styled.div`
   height: 100%;
   position: absolute;
   width: 520px;
-  background-color: #fafafa;
+  background-color: ${colors.gray.lightest};
   ${({ placement }) => getPlacementPosition(placement)}
 `
 export const Header = styled.div`
@@ -27,7 +29,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #e6e6e6;
+  border-bottom: 2px solid ${colors.gray.lighter};
 `
 export const Title = styled.h1`
   font-size: 24px;
@@ -39,26 +41,10 @@ export const Body = styled.div`
   width: 100%;
   padding: 0 24px;
   overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-clip: padding-box;
-    background-color: #666;
-  }
-  &::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none;
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
+  ${prettyScrollBar}
 `
 export const FooterWrapper = styled.div`
   height: 66px;
-  border-top: 2px solid #e6e6e6;
+  border-top: 2px solid ${colors.gray.lighter};
 `
 

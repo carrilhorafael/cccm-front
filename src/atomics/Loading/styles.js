@@ -1,13 +1,14 @@
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 const getThemeStyles = (theme) => {
   if (theme === 'primary') {
     return `
-      background-color: #0400D8
+      background-color: ${colors.blue.darker}
     `
   } else if (theme === 'secondary') {
     return `
-      background-color: #fafafa
+      background-color: ${colors.gray.lightest}
     `
   }
 }
