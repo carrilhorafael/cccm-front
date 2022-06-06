@@ -81,14 +81,20 @@ export default function ProselytesLastSemester ({ type }) {
         }
         <div className='actionsProselyteGraph'>
           <IconButton
+            theme='secondary'
             icon={chartType === 'line' ? 'fa-solid fa-chart-simple' : 'fa-solid fa-chart-line'}
             onClick={() => setChartType(chartType === 'line' ? 'bars' : 'line')}
           />
           <IconButton
+            theme='primary'
             icon="fa-solid fa-square-arrow-up-right"
             onClick={() => alert('Página em desenvolvimento')}
           />
-          <IconButton icon="fa-solid fa-user-plus" onClick={() => showModal(ProselyteFormModal)}/>
+          <IconButton
+            theme='primary'
+            icon="fa-solid fa-user-plus"
+            onClick={() => showModal(ProselyteFormModal)}
+          />
         </div>
       </div>
     </div>

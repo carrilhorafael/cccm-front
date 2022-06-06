@@ -11,8 +11,8 @@ export default function ChurchCard ({church, onNavigate, onEdit, onDelete}) {
   return (
     <ChurchCardContainer>
       <ButtonWrapper>
-        <IconButton icon="fa-solid fa-pen" onClick={onEdit}/>
-        <IconButton icon="fa-solid fa-trash" onClick={onDelete}/>
+        <IconButton theme='primary' icon="fa-solid fa-pen" onClick={onEdit}/>
+        <IconButton theme='negative' icon="fa-solid fa-trash" onClick={onDelete}/>
       </ButtonWrapper>
       <h2>{church.name}</h2>
       <p>{church.users_count} membro{church.users_count === 1 ? '' : 's'}</p>

@@ -8,7 +8,13 @@ export default function MainMenu ({ menuConfigs }) {
   const [openedDroplist, setOpenedDroplist] = useState(false)
   return (
     <MenuWrapper>
-      <IconButton onClick={() => setOpenedDroplist(!openedDroplist)} icon='fa-solid fa-ellipsis' anchorRef={anchorRef} noBackground></IconButton>
+      <IconButton
+        theme='secondary'
+        onClick={() => setOpenedDroplist(!openedDroplist)}
+        icon='fa-solid fa-ellipsis'
+        anchorRef={anchorRef}
+        noBackground
+      />
       <DropList opened={openedDroplist} onClose={() => setOpenedDroplist(false)} anchorRef={anchorRef} options={menuConfigs}/>
     </MenuWrapper>
   )

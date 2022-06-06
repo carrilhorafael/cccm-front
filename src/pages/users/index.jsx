@@ -172,8 +172,8 @@ export default function ChurchUsersPage () {
         <UsersPageHeader>
           <span/>
           <div>
-            <IconButton icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
-            <IconButton icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
+            <IconButton theme='primary' icon="fa-solid fa-filter" onClick={() => setShowFilterSidebar(true)} />
+            <IconButton theme='primary' icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
           </div>
         </UsersPageHeader>
         <ResourcesAccordion

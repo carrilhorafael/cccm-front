@@ -23,8 +23,8 @@ export default function Header () {
         <Title>CCCM</Title>
         {authenticated && (
           <ButtonWrapper>
-            {user.president_pastor && <IconButton icon='fa-solid fa-house' onClick={onClick}/>}
-            <IconButton icon='fa-solid fa-right-from-bracket' onClick={handleLogout}/>
+            {user.president_pastor && <IconButton theme='secondary' icon='fa-solid fa-grip' onClick={onClick}/>}
+            <IconButton theme='primary' icon='fa-solid fa-right-from-bracket' onClick={handleLogout}/>
           </ButtonWrapper>
         )}
       </HeaderName>

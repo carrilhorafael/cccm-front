@@ -19,8 +19,8 @@ export default function ChurchMinisteriesPage () {
         {ministeries.map((ministery) => (
           <Card>
             <ActionWrapper>
-              <IconButton icon="fa-solid fa-pen" onClick={() => showModal(MinisteryModal, {resource: ministery})}/>
-              <IconButton icon="fa-solid fa-trash" onClick={() => destroyMinistery(ministery.id)}/>
+              <IconButton theme='primary' icon="fa-solid fa-pen" onClick={() => showModal(MinisteryModal, {resource: ministery})}/>
+              <IconButton theme='negative' icon="fa-solid fa-trash" onClick={() => destroyMinistery(ministery.id)}/>
             </ActionWrapper>
             <Title>{ministery.name}</Title>
             <Description>{ministery.description}</Description>

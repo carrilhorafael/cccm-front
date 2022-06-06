@@ -20,6 +20,7 @@ export default function Sidebar ({
           <Header>
             <Title>{title}</Title>
             <IconButton
+              theme='secondary'
               icon='fa-solid fa-xmark'
               onClick={onHide}
               noBackground

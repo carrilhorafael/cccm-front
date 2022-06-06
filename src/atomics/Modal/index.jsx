@@ -19,6 +19,7 @@ export default function Modal ({
           <Header>
             <Title>{title}</Title>
             <IconButton
+              theme='secondary'
               icon='fa-solid fa-xmark'
               onClick={closeModal}
               noBackground

@@ -81,7 +81,7 @@ export const AccessTitle = styled.h1`
   margin-bottom: 8px;
 `
 export const NoAccessTitle = styled.h1`
-  color: ${colors.red.darker} !important;
+  color: ${colors.red.dark} !important;
   font-weight: bolder;
   margin-bottom: 8px;
 `
