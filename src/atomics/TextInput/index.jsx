@@ -1,11 +1,12 @@
 import React from 'react'
-import { Content, EndWrapper, Input, InputWrapper, Label, StartIcon } from './styles'
+import { Content, EndWrapper, ErrorLabel, Input, InputWrapper, Label, StartIcon } from './styles'
 
 export default function TextInput ({
     type,
     value,
     id,
     label,
+    error,
     onChange,
     placeholder,
     hasStartIcon,
@@ -26,11 +27,13 @@ export default function TextInput ({
           onChange={onChange}
           hasPaddingLeft={hasStartIcon}
           hasPaddingRight={endAdornment}
+          hasError={!!error}
           />
         <EndWrapper>
           {endAdornment}
         </EndWrapper>
       </InputWrapper>
+      {error && <ErrorLabel>{error}</ErrorLabel>}
     </Content>
   )
 }

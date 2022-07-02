@@ -1,12 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import PasswordInput from '../../atomics/PasswordInput'
-import { AuthContext } from '../../context/AuthContext'
+import { useAuthContext } from '../../context/AuthContext'
+import { useOverlayContext } from '../../context/OverlayContext'
 import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
 
 export default function PasswordChangePage() {
-  const { handleChangePassword } = useContext(AuthContext)
+  const { handleChangePassword } = useAuthContext()
+  const { fireToast } = useOverlayContext()
 
+  const [errors, setErrors] = useState(null)
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
@@ -19,6 +22,13 @@ export default function PasswordChangePage() {
       password_confirmation: passwordConfirmation
     }
     handleChangePassword(data)
+    .catch(({response}) => {
+      if (response.status >= 500) {
+        fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
+      } else {
+        setErrors(response.data)
+      }
+    })
   }
 
   return (
@@ -30,6 +40,7 @@ export default function PasswordChangePage() {
             <PasswordInput
               label="Nova senha:"
               value={password}
+              error={errors && errors.password && errors.password[0]}
               onChange={e => setPassword(e.target.value)}
             />
           </Fieldset>
@@ -37,6 +48,7 @@ export default function PasswordChangePage() {
             <PasswordInput
               label="Confirme a senha:"
               value={passwordConfirmation}
+              error={errors && errors.password_confirmation && errors.password_confirmation[0]}
               onChange={e => setPasswordConfirmation(e.target.value)}
             />
           </Fieldset>

@@ -9,22 +9,44 @@ import { Container } from './styles'
 
 export default function MinisteryModal({ resource }) {
   const { createMinistery, updateMinistery } = useChurchContext()
-  const { closeModal } = useOverlayContext()
+  const { closeModal, fireToast } = useOverlayContext()
+  const [errors, setErrors] = useState(null)
   const [name, setName] = useState(resource && resource.name)
   const [description, setDescription] = useState(resource && resource.description)
 
   const handleSubmit = async () => {
     const ministeryParams = {
       ministery: {
-        name: name.current.value,
-        description: description.current.value
+        name: name,
+        description: description
       }
     }
 
-    if (resource) await updateMinistery(resource.id, ministeryParams)
-    else await createMinistery(ministeryParams)
-
-    closeModal()
+    if (resource) {
+      updateMinistery(resource.id, ministeryParams)
+      .then(() => closeModal())
+      .catch(({response}) => {
+        if (response.status > 500) {
+          fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
+        }
+        else {
+          setErrors(response.data)
+        }
+      })
+    }
+    else {
+      createMinistery(ministeryParams)
+      .then(() => closeModal())
+      .catch(({response}) => {
+        console.log(response)
+        if (response.status >= 500) {
+          fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
+        }
+        else {
+          setErrors(response.data)
+        }
+      })
+    }
   }
 
   return (
@@ -46,10 +68,12 @@ export default function MinisteryModal({ resource }) {
           label='Nome do ministério:'
           value={name}
           onChange={(e) => setName(e.target.value)}
+          error={errors && errors.name && errors.name[0]}
         />
         <TextInput
           label='Descrição do ministério:'
           value={description}
+          error={errors && errors.description && errors.description[0]}
           onChange={(e) => setDescription(e.target.value)}
         />
       </Container>

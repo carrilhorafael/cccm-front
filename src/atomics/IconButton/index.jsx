@@ -16,7 +16,7 @@ export default function IconButton ({
       ref={anchorRef}
       noBackground={noBackground}
     >
-      <i className={icon}/>
+      {!!icon && <i className={icon}/>}
     </Button>
   )
 }

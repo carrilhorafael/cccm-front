@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../atomics/Button'
 import Checkbox from '../../../atomics/Checkbox'
 import { Footer } from '../../../atomics/Modal/styles'
 import MultiSelect from '../../../atomics/MultiSelect'
 import Sidebar from '../../../atomics/Sidebar'
 import TextInput from '../../../atomics/TextInput'
-import { AuthContext } from '../../../context/AuthContext'
-import { ChurchContext } from '../../../context/ChurchContext'
+import { useAuthContext } from '../../../context/AuthContext'
+import { useChurchContext } from '../../../context/ChurchContext'
+import { useOverlayContext } from '../../../context/OverlayContext'
 import {
   CheckboxFieldset,
   FilterBody,
@@ -18,8 +19,9 @@ import {
 } from '../styles'
 
 export default function FilterSidebar ({show, onHide}) {
-  const { church, ministeries } = useContext(ChurchContext)
-  const { filter, updateFilter } = useContext(AuthContext)
+  const { church, ministeries } = useChurchContext()
+  const { filter, updateFilter } = useAuthContext()
+  const { fireToast } = useOverlayContext()
 
   const churchTitles = church.titles.map(title => ({ label: title, value: title }))
   const churchMinisteries = ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
@@ -55,7 +57,9 @@ export default function FilterSidebar ({show, onHide}) {
       if (ministeriesFilterTypes.includes('choosen-ministeries')) filterBody.filter.restriction.ministeries.choosed_ministeries_ids = ministeriesIds
     }
 
-    await updateFilter(filterBody)
+    updateFilter(filterBody)
+    .then(() => fireToast('positive', 'Filtro alterado com sucesso'))
+    .catch(() => fireToast('negative', 'Não foi possível alterar seu filtro'))
   }
 
   const handleToggleBaptism = () => {

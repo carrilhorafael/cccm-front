@@ -1,12 +1,14 @@
 import React, { Component, createContext, useContext, useState } from 'react';
+import { Toast } from '../atomics/Toast';
 
 const OverlayContext = createContext({})
 
 const OverlayProvider = ({ children }) => {
   const [modalState, setModalState] = useState({ visible: false, Component: null })
+  const [toastState, setToastState] = useState({ visible: false })
 
   const showModal = (ModalComponent, props) => {
-    console.log(ModalComponent, props)
+    // console.log(ModalComponent, props)
     setModalState({
       visible: true,
       Component: () => (
@@ -22,8 +24,17 @@ const OverlayProvider = ({ children }) => {
     })
   }
 
-  const fireToast = () => {
-
+  const fireToast = (theme, message) => {
+    setToastState({
+      visible: true,
+      theme: theme,
+      message: message
+    })
+    setTimeout(() => {
+      setToastState({
+        visible: false
+      })
+    }, 10000);
   }
 
   return (
@@ -37,6 +48,7 @@ const OverlayProvider = ({ children }) => {
     >
       {modalState.visible && <modalState.Component/>}
       {children}
+      {toastState.visible && <Toast theme={toastState.theme} message={toastState.message}/> }
     </OverlayContext.Provider>
   )
 }

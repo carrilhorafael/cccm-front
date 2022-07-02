@@ -44,6 +44,16 @@ const getThemeStyles = (theme, noBackground) => {
           border-color: ${colors.green.dark};
         }
       `
+    case 'tertiary':
+      return `
+        background-color: ${colors.blue.darkest};
+        border: 2px solid ${colors.blue.darkest};
+        color: ${colors.gray.lightest};
+        &:hover {
+          background-color: ${colors.blue.base};
+          border: 2px solid ${colors.blue.base};
+        }
+      `
     default:
       break;
   }

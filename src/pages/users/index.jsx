@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import ResourcesAccordion from '../../modules/AccordionTable'
 import { useChurchContext } from '../../context/ChurchContext'
-import { AuthContext } from '../../context/AuthContext'
+import { useAuthContext } from '../../context/AuthContext'
 import IconButton from '../../atomics/IconButton'
 import GrantAccessModal from '../../modules/GrantAccessModal'
 import RevokeAccessModal from '../../modules/RevokeAccessModal'
@@ -30,7 +30,7 @@ export default function ChurchUsersPage () {
   const history = useHistory()
   const { users } = useChurchContext()
   const { showModal } = useOverlayContext()
-  const { user } = useContext(AuthContext)
+  const { user } = useAuthContext()
 
   const [showFilterSidebar, setShowFilterSidebar] = useState(false)
 

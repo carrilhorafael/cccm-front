@@ -18,9 +18,11 @@ const colors = {
     darkest: '#04016F'
   },
   red: {
+    lighter: '#FFCBCB',
     light: '#F39791',
     base: '#D1291F',
-    dark: '#7C0404'
+    dark: '#7C0404',
+    darker: '#300000'
   },
   green: {
     light: '#ADF38C',

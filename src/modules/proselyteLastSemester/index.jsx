@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ChurchContext } from '../../context/ChurchContext'
+import React, { useEffect, useState } from 'react'
+import { useChurchContext } from '../../context/ChurchContext'
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2'
 import './styles.css'
@@ -10,7 +10,7 @@ ChartJS.register(...registerables)
 
 export default function ProselytesLastSemester ({ type }) {
   const [chartType, setChartType] = useState('bar')
-  const { resume } = useContext(ChurchContext)
+  const { resume } = useChurchContext()
   const { showModal } = useOverlayContext()
 
   const [data, setData] = useState([])

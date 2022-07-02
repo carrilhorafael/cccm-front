@@ -19,7 +19,7 @@ export const FormLogin = styled.div`
   width: 70%;
   margin: auto;
   height: 680px;
-  padding: 60px 32px;
+  padding: 40px 32px;
   border-radius: 30px;
 `
 export const Title = styled.div`

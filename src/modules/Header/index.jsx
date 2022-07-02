@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
+import { useAuthContext } from '../../context/AuthContext'
 import ChurchHeader from '../ChurchHeader'
 import IconButton from '../../atomics/IconButton'
 import { ButtonWrapper, Container, HeaderName, Title } from './styles'
@@ -10,7 +10,7 @@ export default function Header () {
   const { setChurch } = useChurchContext()
   const location = useLocation()
   const history = useHistory()
-  const { user, authenticated, handleLogout } = useContext(AuthContext)
+  const { user, authenticated, handleLogout } = useAuthContext()
 
   const onClick = () => {
     setChurch(null)
@@ -23,7 +23,7 @@ export default function Header () {
         <Title>CCCM</Title>
         {authenticated && (
           <ButtonWrapper>
-            {user.president_pastor && <IconButton theme='secondary' icon='fa-solid fa-grip' onClick={onClick}/>}
+            {user.president_pastor && <IconButton theme='primary' icon='fa-solid fa-building-shield' onClick={onClick}/>}
             <IconButton theme='primary' icon='fa-solid fa-right-from-bracket' onClick={handleLogout}/>
           </ButtonWrapper>
         )}

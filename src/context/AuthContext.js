@@ -1,4 +1,5 @@
 import React, {useState, useEffect, createContext} from 'react'
+import { useContext } from 'react'
 import LoadingLocker from '../modules/LoadingLocker'
 import { api, postLogin, getValidateToken, postResetPassword } from '../services/Api.service'
 import { useChurchContext } from './ChurchContext'
@@ -6,7 +7,7 @@ import { useChurchContext } from './ChurchContext'
 export const AuthContext = createContext()
 
 export function AuthProvider ({children}) {
-  const { setChurch } = useChurchContext()
+  const { setChurch, loadResources } = useChurchContext()
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState({})
   const [filter, setFilter] = useState({})
@@ -31,6 +32,10 @@ export function AuthProvider ({children}) {
     })
   }, [])
 
+  useEffect(() => {
+    loadResources()
+  }, [filter])
+
   const handleLogin = (email, password) => {
     let loginData = {
       user: {
@@ -39,7 +44,7 @@ export function AuthProvider ({children}) {
       }
     }
 
-    postLogin(loginData)
+    return postLogin(loginData)
     .then(({data}) => {
       setUser(data.user)
       setFilter(data.filter)
@@ -52,7 +57,7 @@ export function AuthProvider ({children}) {
   }
 
   const updateFilter = (filterParams) => {
-    api.put(`filters/${filter.id}`, filterParams)
+    return api.put(`filters/${filter.id}`, filterParams)
     .then(({data}) => setFilter(data))
   }
 
@@ -65,7 +70,7 @@ export function AuthProvider ({children}) {
   }
 
   const handleChangePassword = (data) => {
-    postResetPassword(data)
+    return postResetPassword(data)
     .then(({ data }) => {
       setUser(data.user)
       setUserChurch(data.church)
@@ -95,4 +100,9 @@ export function AuthProvider ({children}) {
     </AuthContext.Provider>
   )
 
+}
+
+export function useAuthContext () {
+  const context = useContext(AuthContext)
+  return context
 }

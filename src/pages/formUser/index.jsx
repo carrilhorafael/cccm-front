@@ -13,6 +13,7 @@ export default function ChurchFormUserPage () {
   const location = useLocation()
   const history = useHistory()
   const [resource, setResource] = useState(null)
+  const [errors, setErrors] = useState(null)
   const [name, setName] = useState(resource && resource.name)
   const [title, setTitle] = useState(resource && resource.title)
   const [phone, setPhone] = useState(resource && resource.phone)
@@ -51,9 +52,13 @@ export default function ChurchFormUserPage () {
       }
     }
     if (resource) await updateUser(resource.id, userParams)
-    else await createUser(userParams)
-
-    history.push(`/church/users`)
+    else {
+      createUser(userParams)
+      .then(() => history.push(`/church/users`))
+      .catch(({response}) => {
+        setErrors(response.data)
+      })
+    }
   }
 
   return (
@@ -63,10 +68,16 @@ export default function ChurchFormUserPage () {
           <FormGrid>
             <TextInput
               value={name}
+              error={errors && errors.name && errors.name[0]}
               onChange={(e) => setName(e.target.value)}
               label="Nome:"
             />
-            <Select label="Titulo:" value={title} onChange={(e) => setTitle(e.target.value)}>
+            <Select
+              label="Titulo:"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              error={errors && errors.title && errors.title[0]}
+            >
               <option disabled>Escolha o titulo</option>
               <option value="Membro(a)">Membro(a)</option>
               <option value="Obreiro(a)">Obreiro(a)</option>
@@ -74,28 +85,37 @@ export default function ChurchFormUserPage () {
               <option value="Pastor(a)">Pastor(a)</option>
             </Select>
             <TextInput
+              label="Telefone:"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              label="Telefone:"
+              error={errors && errors.phone && errors.phone[0]}
             />
             <TextInput
+              label="Email:"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              label="Email:"
+              error={errors && errors.email && errors.email[0]}
             />
             <TextInput
               type='date'
+              label="Aniversário:"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
-              label="Aniversário:"
+              error={errors && errors.birthdate && errors.birthdate[0]}
             />
             <TextInput
               type='date'
+              error={errors && errors.member_since && errors.member_since[0]}
               value={member_since}
               onChange={(e) => setMemberSince(e.target.value)}
               label="Membro deste:"
             />
-            <Select label="Estado civil:" value={marital_status} onChange={(e) => setMaritalStatus(e.target.value)}>
+            <Select
+              label="Estado civil:"
+              error={errors && errors.marital_status && errors.marital_status[0]}
+              value={marital_status}
+              onChange={(e) => setMaritalStatus(e.target.value)}
+            >
               <option value={-1}>Escolha o estado civil</option>
               <option value="Solteiro(a)">Solteiro(a)</option>
               <option value="Casado(a)">Casado(a)</option>
@@ -103,7 +123,12 @@ export default function ChurchFormUserPage () {
               <option value="Divorciado(a)">Divorciado(a)</option>
               <option value="Separado(a)">Separado(a)</option>
             </Select>
-            <Select label="Gênero:" value={gender} onChange={(e) => setGender(e.target.value)}>
+            <Select
+              label="Gênero:"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              error={errors && errors.gender && errors.gender[0]}
+            >
               <option value={-1}>Escolha o genero</option>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
@@ -114,6 +139,7 @@ export default function ChurchFormUserPage () {
               value={address}
               label="Endereço completo:"
               onChange={(e) => setAddress(e.target.value)}
+              error={errors && errors.address && errors.address[0]}
             />
           </TextareaWrapper>
           <TextareaWrapper>
@@ -121,6 +147,7 @@ export default function ChurchFormUserPage () {
               value={notes}
               label="Observações sobre o membro:"
               onChange={(e) => setNotes(e.target.value)}
+              error={errors && errors.notes && errors.notes[0]}
             />
           </TextareaWrapper>
           <CheckboxWrapper>

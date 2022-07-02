@@ -1,11 +1,12 @@
 import React from 'react'
-import { Content, Input, InputWrapper, Label } from './styles'
+import { Content, ErrorLabel, Input, InputWrapper, Label } from './styles'
 
 export default function Textarea ({
     value,
     id,
     label,
     onChange,
+    error,
     placeholder
   }) {
 
@@ -20,6 +21,7 @@ export default function Textarea ({
           onChange={onChange}
         />
       </InputWrapper>
+      {error && <ErrorLabel>{error}</ErrorLabel>}
     </Content>
   )
 }

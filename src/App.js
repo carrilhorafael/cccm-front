@@ -9,13 +9,13 @@ import { ChurchProvider } from './context/ChurchContext';
 
 function App() {
   return (
-    <ChurchProvider>
-      <AuthProvider>
-        <OverlayProvider>
-            <CustomRoutes/>
-        </OverlayProvider>
-      </AuthProvider>
-    </ChurchProvider>
+    <OverlayProvider>
+      <ChurchProvider>
+        <AuthProvider>
+          <CustomRoutes/>
+        </AuthProvider>
+      </ChurchProvider>
+    </OverlayProvider>
   );
 }
 

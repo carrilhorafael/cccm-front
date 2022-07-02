@@ -10,6 +10,7 @@ export const InputWrapper = styled.div`
   position: relative;
   display: flex;
   width: 100%;
+  margin: 4px;
 `
 export const StartIcon = styled.i`
   position: absolute;
@@ -19,7 +20,13 @@ export const StartIcon = styled.i`
 export const Label = styled.label`
   text-transform: uppercase;
   font-size: 14px;
-  padding-bottom: 4px;
+  color: ${colors.gray.darker}
+`
+export const ErrorLabel = styled.label`
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${colors.red.dark};
 `
 export const EndWrapper = styled.div`
   position: absolute;
@@ -30,7 +37,7 @@ export const EndWrapper = styled.div`
 export const Input = styled.textarea`
   width: 100%;
   border-radius: 5px;
-  border: ${colors.blue.darker} 2px solid;
+  border: ${({hasError}) => hasError ? colors.red.base : colors.blue.darker} 2px solid;
 	background-color: ${colors.gray.lightest};
   min-height: 42px;
 	font-size: 18px;
@@ -44,6 +51,6 @@ export const Input = styled.textarea`
   };
 
   &:hover {
-    border: ${colors.blue.darkest} 2px solid;
+    border: ${({hasError}) => hasError ? colors.red.dark : colors.blue.darkest} 2px solid;
   }
 `

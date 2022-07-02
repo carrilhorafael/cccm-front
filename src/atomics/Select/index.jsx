@@ -1,11 +1,12 @@
 import React from 'react'
-import { Content, Input, InputWrapper, Label } from './styles'
+import { Content, ErrorLabel, Input, InputWrapper, Label } from './styles'
 
 export default function Select ({
     children,
     value,
     id,
     label,
+    error,
     onChange,
     placeholder
   }) {
@@ -19,10 +20,12 @@ export default function Select ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          hasError={!!error}
         >
           {children}
         </Input>
       </InputWrapper>
+      {error && <ErrorLabel>{error}</ErrorLabel>}
     </Content>
   )
 }
