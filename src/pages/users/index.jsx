@@ -25,23 +25,21 @@ import {
 } from './styles'
 import getFormattedDate from '../../actions/getFormattedDate'
 import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
-import { useOverlayContext } from '../../context/OverlayContext'
 import Loading from '../../atomics/Loading'
+import { showModal, showToast } from 'global'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
   const { church } = useChurchContext()
-  const { fireToast } = useOverlayContext()
   const [users, setUsers] = useState([])
   const [isLoading, setLoading] = useState(true)
-  const { showModal } = useOverlayContext()
   const { user } = useAuthContext()
 
   useEffect(() => {
     if (!church) return
     getChurchUsers(church.id, { with_my_filter: true })
       .then(({ data }) => setUsers(data))
-      .catch(() => fireToast('negative', 'Ops, algo deu errado em nosso servidor.'))
+      .catch(() => showToast('negative', 'Ops, algo deu errado em nosso servidor.'))
       .finally(() => setLoading(false))
   }, [church])
 

@@ -1,9 +1,9 @@
+import { showToast } from 'global'
 import React, { useState } from 'react'
 import Button from '../../../atomics/Button'
 import { Footer } from '../../../atomics/Modal/styles'
 import Sidebar from '../../../atomics/Sidebar'
 import { useAuthContext } from '../../../context/AuthContext'
-import { useOverlayContext } from '../../../context/OverlayContext'
 import { FilterBody, FilterSubtitle, OrderBody } from '../styles'
 import BaptismFilter from './BaptismFilter'
 import MinisteriesFilter from './MinisteriesFilter'
@@ -23,7 +23,6 @@ const sortOptions = [
 
 export default function FilterSidebar ({show, onHide}) {
   const { filter, updateFilter } = useAuthContext()
-  const { fireToast } = useOverlayContext()
 
   const [filterParams, setFilterParams] = useState({
     restriction: filter.restriction,
@@ -32,8 +31,8 @@ export default function FilterSidebar ({show, onHide}) {
 
   const submitFilter = async () => {
     updateFilter(filterParams)
-    .then(() => fireToast('positive', 'Filtro alterado com sucesso'))
-    .catch(() => fireToast('negative', 'Não foi possível alterar seu filtro'))
+    .then(() => showToast('positive', 'Filtro alterado com sucesso'))
+    .catch(() => showToast('negative', 'Não foi possível alterar seu filtro'))
   }
 
   const handleHide = () => {

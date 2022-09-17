@@ -5,12 +5,11 @@ import { useChurchContext } from '../../context/ChurchContext'
 import Checkbox from '../../atomics/Checkbox'
 // import './styles.css'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { CheckboxWrapper, Container, Description } from './styles'
+import { closeModal } from 'global'
 
 export default function GrantAccessModal({ user }) {
   const { updateUser } = useChurchContext()
-  const { closeModal } = useOverlayContext()
   const [isLeader, setIsLeader] = useState(false)
 
   const grantAccess = async () => {

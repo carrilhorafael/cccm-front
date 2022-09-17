@@ -1,5 +1,5 @@
+import { closeModal } from 'global'
 import React from 'react'
-import { useOverlayContext } from '../../context/OverlayContext'
 import IconButton from '../IconButton'
 import OverlayLocker from '../OverlayLocker'
 import { Body, CloseButtonWrapper, Container, HeaderTitle, Wrapper } from './styles'
@@ -8,10 +8,8 @@ export default function Modal ({
     children,
     size,
     Header,
-    Footer,
-    noHeader
+    Footer
   }) {
-  const { closeModal } = useOverlayContext()
 
 
   return (

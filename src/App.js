@@ -3,18 +3,18 @@ import CustomRoutes from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css"
 import { AuthProvider } from './context/AuthContext';
-import { OverlayProvider } from './context/OverlayContext';
 import { ChurchProvider } from './context/ChurchContext';
+import { GlobalEnvironment } from './global';
 
 
 function App() {
   return (
     <ChurchProvider>
-      <OverlayProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <GlobalEnvironment>
           <CustomRoutes/>
-        </AuthProvider>
-      </OverlayProvider>
+        </GlobalEnvironment>
+      </AuthProvider>
     </ChurchProvider>
   );
 }

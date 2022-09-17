@@ -1,13 +1,12 @@
+import { showToast } from 'global'
 import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import PasswordInput from '../../atomics/PasswordInput'
 import { useAuthContext } from '../../context/AuthContext'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
 
 export default function PasswordChangePage() {
   const { handleChangePassword } = useAuthContext()
-  const { fireToast } = useOverlayContext()
 
   const [errors, setErrors] = useState(null)
   const [password, setPassword] = useState('')
@@ -24,7 +23,7 @@ export default function PasswordChangePage() {
     handleChangePassword(data)
     .catch(({response}) => {
       if (response.status >= 500) {
-        fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
+        showToast('negative', 'Ops, algo deu errado em nosso servidor.')
       } else {
         setErrors(response.data)
       }

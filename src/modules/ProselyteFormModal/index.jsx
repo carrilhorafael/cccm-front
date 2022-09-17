@@ -3,14 +3,13 @@ import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useChurchContext } from '../../context/ChurchContext'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { Container } from './styles'
 import TextInput from '../../atomics/TextInput'
 import { Description } from '../DeleteChurchModal/styles'
+import { closeModal } from 'global'
 
 export default function ProselyteFormModal ({ resource }) {
   const { createProselyte, updateProselyte } = useChurchContext()
-  const { closeModal } = useOverlayContext()
 
   const [name, setName] = useState(resource && resource.name)
   const [phone, setPhone] = useState(resource && resource.phone)

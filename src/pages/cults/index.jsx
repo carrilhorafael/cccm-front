@@ -13,14 +13,13 @@ import {
 import IconButton from '../../atomics/IconButton'
 import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
 import Button from '../../atomics/Button'
-import { useOverlayContext } from '../../context/OverlayContext'
 import CultModal from '../../modules/CultModal'
 import { getChurchCults } from '../../services/Api.service'
 import Loading from '../../atomics/Loading'
+import { showModal, showToast } from 'global'
 
 export default function ChurchCults () {
   const { church } = useChurchContext()
-  const { fireToast, showModal } = useOverlayContext()
   const [isLoading, setLoading] = useState([])
   const [cults, setCults] = useState([])
 
@@ -28,7 +27,7 @@ export default function ChurchCults () {
     if (!church) return
     getChurchCults(church.id)
       .then(({ data }) => setCults(data))
-      .catch(() => fireToast('negative', 'Ops, algo deu errado em nosso servidor.'))
+      .catch(() => showToast('negative', 'Ops, algo deu errado em nosso servidor.'))
       .finally(() => setLoading(false))
   }, [church])
 

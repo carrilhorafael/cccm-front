@@ -5,12 +5,11 @@ import BirthdatePerMonth from './components/birthdatePerMonth'
 import { GeneralLayout, Item } from './styles'
 import { useEffect } from 'react'
 import { getChurchResume } from '../../services/Api.service'
-import { useOverlayContext } from '../../context/OverlayContext'
 import LoadingLocker from '../../modules/LoadingLocker'
+import { showToast } from 'global'
 
 export default function ChurchGeneralPage () {
   const { church } = useChurchContext()
-  const { fireToast } = useOverlayContext()
   const [resume, setResume] = useState({})
   const [isLoading, setLoading] = useState(true)
 
@@ -18,9 +17,9 @@ export default function ChurchGeneralPage () {
     if (!church) return
     getChurchResume(church.id)
       .then(({ data }) => setResume(data))
-      .catch(() => fireToast('negative', 'Ops, algo deu errado em nosso servidor.'))
+      .catch(() => showToast('negative', 'Ops, algo deu errado em nosso servidor.'))
       .finally(() => setLoading(false))
-  }, [church, fireToast])
+  }, [church])
 
   return (
     <GeneralLayout>

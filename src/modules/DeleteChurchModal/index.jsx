@@ -1,15 +1,14 @@
+import { closeModal } from 'global'
 import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import TextInput from '../../atomics/TextInput'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
 
 
 export default function DeleteChurchModal({resource, onDelete}) {
   const [name, setName] = useState("")
-  const { closeModal } = useOverlayContext()
 
   const onConfirm = async () => {
     await onDelete()

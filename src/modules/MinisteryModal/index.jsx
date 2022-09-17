@@ -3,13 +3,12 @@ import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import Modal from '../../atomics/Modal'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { useOverlayContext } from '../../context/OverlayContext'
 import TextInput from '../../atomics/TextInput'
 import { Container } from './styles'
+import { closeModal, showToast } from 'global'
 
 export default function MinisteryModal({ resource }) {
   const { createMinistery, updateMinistery } = useChurchContext()
-  const { closeModal, fireToast } = useOverlayContext()
   const [errors, setErrors] = useState(null)
   const [name, setName] = useState(resource && resource.name)
   const [description, setDescription] = useState(resource && resource.description)
@@ -22,30 +21,20 @@ export default function MinisteryModal({ resource }) {
       }
     }
 
-    if (resource) {
-      updateMinistery(resource.id, ministeryParams)
-      .then(() => closeModal())
-      .catch(({response}) => {
-        if (response.status > 500) {
-          fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
-        }
-        else {
-          setErrors(response.data)
-        }
-      })
-    }
-    else {
-      createMinistery(ministeryParams)
-      .then(() => closeModal())
-      .catch(({response}) => {
-        console.log(response)
-        if (response.status >= 500) {
-          fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
-        }
-        else {
-          setErrors(response.data)
-        }
-      })
+    try{
+      const { data } = resource
+        ? await updateMinistery(resource.id, ministeryParams)
+        : await createMinistery(ministeryParams)
+      console.log(data)
+      closeModal()
+
+    } catch ({ response }) {
+      if (response.status > 500) {
+        showToast('negative', 'Ops, algo deu errado em nosso servidor.')
+      }
+      else {
+        setErrors(response.data)
+      }
     }
   }
 

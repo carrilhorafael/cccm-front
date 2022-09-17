@@ -3,12 +3,11 @@ import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
+import { closeModal } from 'global'
 
 export default function DeleteUserModal({ user }) {
   const { destroyUser } = useChurchContext()
-  const { closeModal } = useOverlayContext()
 
   const onConfirm = async () => {
     await destroyUser(user.id)

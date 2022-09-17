@@ -4,13 +4,12 @@ import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import MultiSelect from '../../atomics/MultiSelect'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
+import { closeModal } from 'global'
 
 
 export default function MinisteriesAssignModal ({ user }) {
   const { ministeries } = useChurchContext()
-  const { closeModal } = useOverlayContext()
   const ministeriesItems = ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
 
   const [ministeriesIds, setMinisteriesIds] = useState([])

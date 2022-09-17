@@ -4,13 +4,12 @@ import { ChurchContext } from '../../context/ChurchContext'
 import IconButton from '../../atomics/IconButton'
 import MinisteryModal from '../../modules/MinisteryModal'
 import { ActionWrapper, Card, Description, Header, List, LoadingWrapper, Title } from './styles'
-import { useOverlayContext } from '../../context/OverlayContext'
 import { getChurchMinisteries } from '../../services/Api.service'
 import Loading from '../../atomics/Loading'
+import { showModal, showToast } from 'global'
 
 export default function ChurchMinisteriesPage () {
   const { church, destroyMinistery } = useContext(ChurchContext)
-  const { showModal, fireToast } = useOverlayContext()
 
   const [ministeries, setMinisteries] = useState([])
   const [isLoading, setLoading] = useState(true)
@@ -19,7 +18,7 @@ export default function ChurchMinisteriesPage () {
     if (!church) return
     getChurchMinisteries(church.id)
       .then(({ data }) => setMinisteries(data))
-      .catch(() => fireToast('negative', 'Ops, algo deu errado em nosso servidor.'))
+      .catch(() => showToast('negative', 'Ops, algo deu errado em nosso servidor.'))
       .finally(() => setLoading(false))
   }, [church])
 
