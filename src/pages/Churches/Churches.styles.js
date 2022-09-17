@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import colors from '../../styles/colors'
 
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
 export const ChurchesLayout = styled.div`
   background: linear-gradient(115deg, ${colors.gray.lightest}, ${colors.blue.light}, ${colors.gray.lightest});
   width: 100%;

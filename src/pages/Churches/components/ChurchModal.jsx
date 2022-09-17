@@ -1,30 +1,23 @@
 import React, { useState } from 'react'
-import Button from '../../atomics/Button'
-import Modal from '../../atomics/Modal'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import Textarea from '../../atomics/Textarea'
-import TextInput from '../../atomics/TextInput'
-import { useOverlayContext } from '../../context/OverlayContext'
-import { Container } from './styles'
+import Button from 'atomics/Button'
+import Modal from 'atomics/Modal'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import Textarea from 'atomics/Textarea'
+import TextInput from 'atomics/TextInput'
+import { Container } from './ChurchModal.styles'
 
-export default function ChurchModal({resource, onUpdate, onCreate}) {
-  const { closeModal } = useOverlayContext()
+export default function ChurchModal({resource, onSubmit}) {
   const [name, setName] = useState(resource && resource.name)
   const [location, setLocation] = useState(resource && resource.location)
 
 
-  const handleSubmit = async () => {
-    const churchParams = {
+  const handleSubmit = () => {
+    onSubmit({
       church: {
         name: name,
         location: location
       }
-    }
-
-    if (resource) await onUpdate(churchParams)
-    else await onCreate(churchParams)
-
-    closeModal()
+    })
   }
 
   return (

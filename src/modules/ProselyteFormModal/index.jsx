@@ -3,9 +3,8 @@ import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
 import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useChurchContext } from '../../context/ChurchContext'
-import { Container } from './styles'
+import { Container, Description } from './styles'
 import TextInput from '../../atomics/TextInput'
-import { Description } from '../DeleteChurchModal/styles'
 import { closeModal } from 'global'
 
 export default function ProselyteFormModal ({ resource }) {

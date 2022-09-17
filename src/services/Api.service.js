@@ -81,7 +81,7 @@ export function putChurch(churchId, churchParams) {
   return api.put(`churches/${churchId}`, churchParams)
 }
 
-export function deleteChurch(churchId) {
+export function destroyChurch(churchId) {
   return api.delete(`churches/${churchId}`)
 }
 

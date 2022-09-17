@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input } from '../../atomics/Textarea/styles'
+import { Input } from 'atomics/Textarea/styles'
 
 export const Container = styled.div`
   display: flex;

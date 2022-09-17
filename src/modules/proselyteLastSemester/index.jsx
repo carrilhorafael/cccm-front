@@ -1,16 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { useChurchContext } from '../../context/ChurchContext'
+import React, { useMemo, useState } from 'react'
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2'
 import './styles.css'
 import IconButton from '../../atomics/IconButton';
 import ProselyteFormModal from '../ProselyteFormModal';
-import { useOverlayContext } from '../../context/OverlayContext';
+import { showModal } from 'global';
 ChartJS.register(...registerables)
 
 export default function ProselytesLastSemester ({ type, graph }) {
   const [chartType, setChartType] = useState('bar')
-  const { showModal } = useOverlayContext()
 
   const data = useMemo(
     () => Object.values(graph).map((array) => array.length)

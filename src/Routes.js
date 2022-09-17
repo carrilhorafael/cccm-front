@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import Header from './modules/Header'
 import { useAuthContext } from './context/AuthContext'
-import ChurchesPage from './pages/churches'
+import { Churches } from 'pages/Churches'
 import LoginPage from './pages/login'
 import ChurchGeneralPage from './pages/general'
 import ChurchUsersPage from './pages/users'
@@ -25,7 +25,7 @@ export default function Routes () {
         </Switch>
         :
         <Switch>
-          <Route path="/churches" component={ChurchesPage}></Route>
+          <Route path="/churches" component={Churches}></Route>
           <Route path="/church/general" component={ChurchGeneralPage}/>
           <Route path="/church/users" component={ChurchUsersPage}/>
           <Route path="/church/user" component={ChurchFormUserPage}/>

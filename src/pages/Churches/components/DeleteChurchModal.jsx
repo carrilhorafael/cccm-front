@@ -1,19 +1,17 @@
-import { closeModal } from 'global'
 import React, { useState } from 'react'
-import Button from '../../atomics/Button'
-import Modal from '../../atomics/Modal'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import TextInput from '../../atomics/TextInput'
-import { Container, Description } from './styles'
+import Button from '../../../atomics/Button'
+import Modal from '../../../atomics/Modal'
+import { Footer, Header, HeaderTitle } from '../../../atomics/Modal/styles'
+import TextInput from '../../../atomics/TextInput'
+import { Container, Description } from './DeleteChurchModal.styles'
 
 
-export default function DeleteChurchModal({resource, onDelete}) {
+export default function DeleteChurchModal({resource, onConfirm}) {
   const [name, setName] = useState("")
 
-  const onConfirm = async () => {
-    await onDelete()
+  const onDelete = async () => {
+    await onConfirm()
     setName("")
-    closeModal()
   }
 
   return (
@@ -27,7 +25,7 @@ export default function DeleteChurchModal({resource, onDelete}) {
         <Footer>
           <Button
             theme="negative"
-            onClick={onConfirm}
+            onClick={onDelete}
             disabled={resource && name !== resource.name}
             title='Excluir'
           />

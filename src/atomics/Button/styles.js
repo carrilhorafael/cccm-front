@@ -25,12 +25,12 @@ const getThemeStyles = (theme) => {
       `
     case 'negative':
       return `
-        background-color: ${colors.negative.base};
-        border: 2px solid ${colors.negative.base};
+        background-color: ${colors.red.base};
+        border: 2px solid ${colors.red.base};
         color: ${colors.gray.lightest};
         &:hover {
-          background-color: ${colors.negative.dark};
-          border-color: ${colors.negative.dark};
+          background-color: ${colors.red.dark};
+          border-color: ${colors.red.dark};
         }
       `
     case 'disabled':
