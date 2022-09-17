@@ -35,25 +35,6 @@ function reducer(state, action) {
         churches: [...state.churches.filter(({ id }) => id !== action.payload)]
       }
 
-
-
-    case ActionType.SET_FETCHING:
-      return {
-        ...state,
-        status: ActionStatus.FETCHING
-      }
-
-    case ActionType.UPDATE_COMPLETE:
-      return {
-        ...state,
-        status: ActionStatus.COMPLETED
-      }
-
-    case ActionType.CREATE:
-      return {
-        ...state
-      }
-
     default:
       throw new Error(`Unhandled action type ${action.type}`)
   }
