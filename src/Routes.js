@@ -3,8 +3,8 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import Header from './modules/Header'
 import { useAuthContext } from './context/AuthContext'
 import { Churches } from 'pages/Churches'
+import { General } from './pages/General'
 import LoginPage from './pages/login'
-import ChurchGeneralPage from './pages/general'
 import ChurchUsersPage from './pages/users'
 import ChurchFormUserPage from './pages/formUser'
 import ChurchMinisteriesPage from './pages/ministeries'
@@ -26,7 +26,7 @@ export default function Routes () {
         :
         <Switch>
           <Route path="/churches" component={Churches}></Route>
-          <Route path="/church/general" component={ChurchGeneralPage}/>
+          <Route path="/church/general" component={General}/>
           <Route path="/church/users" component={ChurchUsersPage}/>
           <Route path="/church/user" component={ChurchFormUserPage}/>
           <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>

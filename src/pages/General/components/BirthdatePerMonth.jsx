@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import getFormattedDateWithoutYear from '../../../actions/getFormattedDateWithoutYear'
 import Select from '../../../atomics/Select'
-import { ChurchContext } from '../../../context/ChurchContext'
-import { BirthdateMember, BirthdateSection, DateWrapper, Header, Name, UsersWrapper } from '../styles'
+import { BirthdateMember, BirthdateSection, DateWrapper, Header, Name, UsersWrapper } from '../General.styles'
 
 export default function BirthdatePerMonth({ birthdates }) {
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -28,13 +27,13 @@ export default function BirthdatePerMonth({ birthdates }) {
         <h3>Aniversariantes</h3>
         <Select value={selectedMonth} onChange={(e) => setSelectedMonth(parseInt(e.target.value))}>
           {months.map((month, idx) => (
-            <option value={idx + 1}>{month}</option>
+            <option key={idx} value={idx + 1}>{month}</option>
             ))}
         </Select>
       </Header>
       <UsersWrapper>
         {birthdates && birthdates[selectedMonth].map((user) => (
-          <BirthdateMember>
+          <BirthdateMember key={user.id}>
             <Name>{user.name}</Name>
             <DateWrapper>
               <p>{getFormattedDateWithoutYear(user.birthdate)}</p>
