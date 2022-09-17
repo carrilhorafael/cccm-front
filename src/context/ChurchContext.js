@@ -4,53 +4,30 @@ import {
   deleteMinistery,
   deleteProselyte,
   deleteUser,
-  getChurchMinisteries,
-  getChurchProselytes,
-  getChurchResume,
-  getChurchUsers,
+  getChurch,
   postChurchCult,
   postChurchMinistery,
   postCultProselyte,
   postChurchUser,
   putMinistery,
   putProselyte,
-  putUser
+  putUser,
 } from '../services/Api.service'
 
 export const ChurchContext = createContext()
 
 export function ChurchProvider ({children}) {
-  const [isLoading, setIsLoading] = useState(false)
   const [church, setChurch] = useState(null)
   const [users, setUsers] = useState([])
   const [ministeries, setMinisteries] = useState([])
   const [resume, setResume] = useState([])
   const [proselytes, setProselytes] = useState([])
+  const [cults, setCults] = useState([])
 
+  function updateChurch(params) {
+    let newObj = {...church}
 
-  useEffect(() => {
-    async function reloadChurch() {
-      setIsLoading(true)
-      await loadResources()
-      setTimeout(() => {setIsLoading(false)}, 500);
-    }
-    if(!church){
-      setUsers([])
-      setResume({})
-      setMinisteries([])
-      setProselytes([])
-    } else {
-      reloadChurch()
-    }
-  }, [church])
-
-
-
-  async function loadResources() {
-    await getChurchUsers(church.id).then(({data}) => setUsers(data))
-    await getChurchMinisteries(church.id).then(({data}) => setMinisteries(data))
-    await getChurchResume(church.id).then(({data}) => setResume(data))
-    await getChurchProselytes(church.id).then(({data}) => setProselytes(data))
+    setChurch({...newObj, ...params})
   }
 
   async function createUser(userParams) {
@@ -65,13 +42,14 @@ export function ChurchProvider ({children}) {
         ...newUsers.slice(position)
       ]
 
-      setUsers(newUsers)
+      updateChurch({
+        users: newUsers
+      })
     })
   }
 
   async function createMinistery(ministeryParams) {
     return postChurchMinistery(church.id, ministeryParams)
-    .then(({data}) => setMinisteries([...ministeries, data]))
   }
 
   async function createProselyte(cultDate, proselyteParams) {
@@ -86,7 +64,6 @@ export function ChurchProvider ({children}) {
 
         let newResume = resume
         newResume.proselytes_in_last_semester[object_key].push(data)
-        console.log(newResume)
         setResume(newResume)
       })
     })
@@ -157,11 +134,8 @@ export function ChurchProvider ({children}) {
 
   return (
     <ChurchContext.Provider value={{
+
       church,
-      users,
-      ministeries,
-      resume,
-      proselytes,
       updateUser,
       updateMinistery,
       updateProselyte,
@@ -171,12 +145,8 @@ export function ChurchProvider ({children}) {
       destroyMinistery,
       destroyUser,
       destroyProselyte,
-      setChurch,
-      loadResources
+      setChurch
     }}>
-      {isLoading &&
-        <LoadingLocker message="Carregando informações da igreja"/>
-      }
       {children}
     </ChurchContext.Provider>
   )

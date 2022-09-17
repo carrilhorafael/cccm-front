@@ -1,18 +1,22 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
-import { Footer } from '../../atomics/Modal/styles'
-import { ChurchContext } from '../../context/ChurchContext'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
+import { useChurchContext } from '../../context/ChurchContext'
 import { Container, Description } from './styles'
 
 export default function RevokeAccessModal({user, show, onHide}) {
-  const { updateUser } = useContext(ChurchContext)
+  const { updateUser } = useChurchContext()
 
   const handleSubmit = () => updateUser(user.id, { user: { should_have_access: false } })
 
   return (
     <Modal
-      title='Revogar acesso'
+      Header={
+        <Header>
+          <HeaderTitle>Revogar acesso</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button

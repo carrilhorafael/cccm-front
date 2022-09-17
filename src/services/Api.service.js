@@ -17,6 +17,10 @@ export function getChurches(){
   return api.get("churches/")
 }
 
+export function getChurch(churchId) {
+  return api.get(`churches/${churchId}`)
+}
+
 export function getValidateToken (token) {
   api.defaults.headers.Authorization = token
   return api.get("validate_user")
@@ -26,8 +30,10 @@ export function postResetPassword (data) {
   return api.post('auth/reset', data)
 }
 
-export function getChurchUsers(churchId) {
-  return api.get(`churches/${churchId}/users`)
+export function getChurchUsers(churchId, params) {
+  return api.get(`churches/${churchId}/users`, {
+    params
+  })
 }
 
 export function getChurchMinisteries(churchId) {
@@ -40,6 +46,10 @@ export function getChurchResume(churchId) {
 
 export function getChurchProselytes(churchId) {
   return api.get(`churches/${churchId}/proselytes`)
+}
+
+export function getChurchCults(churchId) {
+  return api.get(`churches/${churchId}/cults`)
 }
 
 export function postChurchUser(churchId, userParams) {

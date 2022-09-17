@@ -15,7 +15,7 @@ export default function LoginPage() {
   const onSubmit = (e) => {
     e.preventDefault()
     handleLogin(email, password)
-    .catch((response) => {
+    .catch(({ response }) => {
       if (!response || response.status >= 500)
         fireToast('negative', 'Ops, algo deu errado em nosso servidor.')
       else

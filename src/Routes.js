@@ -9,6 +9,7 @@ import ChurchUsersPage from './pages/users'
 import ChurchFormUserPage from './pages/formUser'
 import ChurchMinisteriesPage from './pages/ministeries'
 import PasswordChangePage from './pages/passwordChange'
+import ChurchCults from './pages/cults'
 
 export default function Routes () {
   const { authenticated } = useAuthContext()
@@ -29,6 +30,7 @@ export default function Routes () {
           <Route path="/church/users" component={ChurchUsersPage}/>
           <Route path="/church/user" component={ChurchFormUserPage}/>
           <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
+          <Route path="/church/cults" component={ChurchCults}/>
           {/* <Route path="/church/proselytes" component={ChurchProselytesPage}/> */}
           {/* {user.president_pastor && <Route path="*"/> && <Redirect to="/churches"/>} */}
           <Route path="*"> <Redirect to="/church/general"/> </Route>

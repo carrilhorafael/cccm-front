@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import Modal from '../../atomics/Modal'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
 import TextInput from '../../atomics/TextInput'
 import { Container } from './styles'
@@ -51,7 +51,11 @@ export default function MinisteryModal({ resource }) {
 
   return (
     <Modal
-      title={resource ? "Editar um ministério" : "Criar um novo ministério"}
+      Header={
+        <Header>
+          <HeaderTitle>{resource ? "Editar um ministério" : "Criar um novo ministério"}</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button

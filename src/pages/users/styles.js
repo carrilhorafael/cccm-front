@@ -37,6 +37,11 @@ export const ItemHeader = styled.div`
     display: flex;
   }
 `
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
 export const UsersPageHeader = styled.div`
   display: flex;
   align-items: center;

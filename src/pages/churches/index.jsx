@@ -71,8 +71,7 @@ export default function ChurchesPage({ setChurchProvided }) {
               onEdit={() => showModal(ChurchModal, { resource: church, onUpdate: handleUpdate })}
               onDelete={() => showModal(DeleteChurchModal, { resource: church, onDelete: handleDelete })}
             />
-            )
-          }
+          )}
         </ChurchesContainer>
       </PageLayout>
     </ChurchesLayout>

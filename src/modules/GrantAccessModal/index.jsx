@@ -4,7 +4,7 @@ import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import Checkbox from '../../atomics/Checkbox'
 // import './styles.css'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
 import { CheckboxWrapper, Container, Description } from './styles'
 
@@ -21,7 +21,11 @@ export default function GrantAccessModal({ user }) {
 
   return (
     <Modal
-      title='Conceder acesso'
+      Header={
+        <Header>
+          <HeaderTitle>Conceder acesso</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button theme="primary" onClick={grantAccess} title='Confirmar'/>

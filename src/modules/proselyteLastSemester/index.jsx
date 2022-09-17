@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useChurchContext } from '../../context/ChurchContext'
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2'
@@ -8,16 +8,13 @@ import ProselyteFormModal from '../ProselyteFormModal';
 import { useOverlayContext } from '../../context/OverlayContext';
 ChartJS.register(...registerables)
 
-export default function ProselytesLastSemester ({ type }) {
+export default function ProselytesLastSemester ({ type, graph }) {
   const [chartType, setChartType] = useState('bar')
-  const { resume } = useChurchContext()
   const { showModal } = useOverlayContext()
 
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    setData(Object.values(resume.proselytes_in_last_semester).map((array) => array.length))
-  }, [resume])
+  const data = useMemo(
+    () => Object.values(graph).map((array) => array.length)
+  , [graph])
 
   return (
     <div className='chartMainLayout'>
@@ -26,7 +23,7 @@ export default function ProselytesLastSemester ({ type }) {
       {chartType === 'line' ?
         (
           <Line data={{
-            labels: Object.keys(resume.proselytes_in_last_semester),
+            labels: Object.keys(graph),
             datasets: [
               {
                 label: 'Convertidos no mês',
@@ -42,7 +39,7 @@ export default function ProselytesLastSemester ({ type }) {
         :
         (
           <Bar data={{
-            labels: Object.keys(resume.proselytes_in_last_semester),
+            labels: Object.keys(graph),
             datasets: [{
               label: 'Convertidos no mês',
               data: data,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import TextInput from '../../atomics/TextInput'
 import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
@@ -19,7 +19,11 @@ export default function DeleteChurchModal({resource, onDelete}) {
 
   return (
     <Modal
-      title="Excluir sede"
+      Header={
+        <Header>
+          <HeaderTitle>Excluir sede</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button

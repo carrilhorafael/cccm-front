@@ -42,3 +42,8 @@ export const Card = styled.div`
     display: flex
   }
 `
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`

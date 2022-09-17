@@ -7,7 +7,7 @@ import { useChurchContext } from './ChurchContext'
 export const AuthContext = createContext()
 
 export function AuthProvider ({children}) {
-  const { setChurch, loadResources } = useChurchContext()
+  const { setChurch } = useChurchContext()
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState({})
   const [filter, setFilter] = useState({})
@@ -31,10 +31,6 @@ export function AuthProvider ({children}) {
       setLoading(false)
     })
   }, [])
-
-  useEffect(() => {
-    loadResources()
-  }, [filter])
 
   const handleLogin = (email, password) => {
     let loginData = {

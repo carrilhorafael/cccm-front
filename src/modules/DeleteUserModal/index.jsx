@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
 
@@ -17,7 +17,11 @@ export default function DeleteUserModal({ user }) {
 
   return (
     <Modal
-      title='Excluir usuário'
+      Header={
+        <Header>
+          <HeaderTitle>Excluir usuário</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button

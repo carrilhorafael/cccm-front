@@ -31,6 +31,11 @@ export default function ChurchHeader ({churchProvided}) {
           onClick={() => goToPage('/church/ministeries')}>
             Ministérios
         </Link>
+        <Link
+          className={`link ${location.pathname === '/church/cults' && 'active'}`}
+          onClick={() => goToPage('/church/cults')}>
+            Cultos
+        </Link>
       </Nav>
     </Wrapper>
   )

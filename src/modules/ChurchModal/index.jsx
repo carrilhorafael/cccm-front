@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../../atomics/Button'
 import Modal from '../../atomics/Modal'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import Textarea from '../../atomics/Textarea'
 import TextInput from '../../atomics/TextInput'
 import { useOverlayContext } from '../../context/OverlayContext'
@@ -29,7 +29,11 @@ export default function ChurchModal({resource, onUpdate, onCreate}) {
 
   return (
     <Modal
-      title={resource ? "Editar uma sede" : "Criar uma nova sede"}
+      Header={
+        <Header>
+          <HeaderTitle>{resource ? "Editar uma sede" : "Criar uma nova sede"}</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button theme="primary" onClick={handleSubmit} title='Confirmar'/>

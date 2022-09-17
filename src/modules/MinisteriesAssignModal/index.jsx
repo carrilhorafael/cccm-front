@@ -3,7 +3,7 @@ import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
 import { useChurchContext } from '../../context/ChurchContext'
 import MultiSelect from '../../atomics/MultiSelect'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useOverlayContext } from '../../context/OverlayContext'
 import { Container, Description } from './styles'
 
@@ -27,7 +27,11 @@ export default function MinisteriesAssignModal ({ user }) {
 
   return (
     <Modal
-      title='Alocar membro em ministério'
+      Header={
+        <Header>
+          <HeaderTitle>Alocar membro em ministério</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button theme="primary" onClick={assignMinisteries} title='Confirmar'/>

@@ -4,12 +4,11 @@ import Select from '../../../atomics/Select'
 import { ChurchContext } from '../../../context/ChurchContext'
 import { BirthdateMember, BirthdateSection, DateWrapper, Header, Name, UsersWrapper } from '../styles'
 
-export default function BirthdatePerMonth() {
+export default function BirthdatePerMonth({ birthdates }) {
   const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
   const today = new Date()
   const [selectedMonth, setSelectedMonth] = useState(parseInt(today.getMonth() + 1))
-  const { resume } = useContext(ChurchContext)
 
   const getIcon = (birthdateStr) => {
     const birthdate = new Date(today.getFullYear(), parseInt(birthdateStr.split('-')[1]) - 1, birthdateStr.split('-')[2])
@@ -34,7 +33,7 @@ export default function BirthdatePerMonth() {
         </Select>
       </Header>
       <UsersWrapper>
-        {resume.users_grouped_by_birthdate_month && resume.users_grouped_by_birthdate_month[selectedMonth].map((user) => (
+        {birthdates && birthdates[selectedMonth].map((user) => (
           <BirthdateMember>
             <Name>{user.name}</Name>
             <DateWrapper>

@@ -1,4 +1,4 @@
-import React, { Component, createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Toast } from '../atomics/Toast';
 
 const OverlayContext = createContext({})
@@ -8,7 +8,6 @@ const OverlayProvider = ({ children }) => {
   const [toastState, setToastState] = useState({ visible: false })
 
   const showModal = (ModalComponent, props) => {
-    // console.log(ModalComponent, props)
     setModalState({
       visible: true,
       Component: () => (

@@ -2,12 +2,14 @@ import React from 'react'
 import { useOverlayContext } from '../../context/OverlayContext'
 import IconButton from '../IconButton'
 import OverlayLocker from '../OverlayLocker'
-import { Body, Container, Header, Title, Wrapper } from './styles'
+import { Body, CloseButtonWrapper, Container, HeaderTitle, Wrapper } from './styles'
 
 export default function Modal ({
     children,
-    title,
-    Footer
+    size,
+    Header,
+    Footer,
+    noHeader
   }) {
   const { closeModal } = useOverlayContext()
 
@@ -15,17 +17,17 @@ export default function Modal ({
   return (
     <OverlayLocker>
       <Container>
-        <Wrapper>
-          <Header>
-            <Title>{title}</Title>
+        <Wrapper size={size || 'medium'}>
+          {Header}
+          <CloseButtonWrapper>
             <IconButton
               theme='secondary'
               icon='fa-solid fa-xmark'
               onClick={closeModal}
               noBackground
             />
-          </Header>
-          <Body>
+          </CloseButtonWrapper>
+          <Body size={size || 'medium'}>
             {children}
           </Body>
           {Footer}

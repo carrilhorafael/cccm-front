@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Modal from '../../atomics/Modal'
 import Button from '../../atomics/Button'
-import { Footer } from '../../atomics/Modal/styles'
+import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
 import { useChurchContext } from '../../context/ChurchContext'
 import { useOverlayContext } from '../../context/OverlayContext'
 import { Container } from './styles'
@@ -30,7 +30,11 @@ export default function ProselyteFormModal ({ resource }) {
 
   return (
     <Modal
-      title={resource ? "Editar um convertido" : "Criar um novo convertido"}
+      Header={
+        <Header>
+          <HeaderTitle>{resource ? "Editar um convertido" : "Criar um novo convertido"}</HeaderTitle>
+        </Header>
+      }
       Footer={
         <Footer>
           <Button

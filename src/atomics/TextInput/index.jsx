@@ -8,6 +8,9 @@ export default function TextInput ({
     label,
     error,
     onChange,
+    onFocus,
+    onFocusOut,
+    editable,
     placeholder,
     hasStartIcon,
     startIcon,
@@ -25,6 +28,9 @@ export default function TextInput ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          onFocus={onFocus}
+          onFocusOut={onFocusOut}
+          contentEditable={editable || true}
           hasPaddingLeft={hasStartIcon}
           hasPaddingRight={endAdornment}
           hasError={!!error}

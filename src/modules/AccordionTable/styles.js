@@ -3,8 +3,25 @@ import { css } from 'styled-components'
 import colors from '../../styles/colors'
 
 export const HeaderContainer = styled.div`
-  padding: 24px 0px 24px 32px;
+  padding: 18px 0px 18px 24px;
   width: 100%;
+`
+export const EmptyState = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  p {
+    font-size: 24px;
+    font-weight: 700;
+  }
+`
+export const SearchIcon = styled.i.attrs({className: 'fa-solid fa-magnifying-glass'})`
+  font-size: 32px;
+  border-radius: 50%;
+  padding: 24px;
+  background-color: ${colors.gray.lighter};
 `
 export const Header = styled.div`
   cursor: pointer;
@@ -33,7 +50,7 @@ export const Body = styled.div`
   background-color: ${colors.gray.lightest};
   transition: 0.5s ease-out;
   ${({opened, height}) => opened && css`
-    height: ${height}px;
+    height: ${height === 'auto' ? 'auto' : `${height}px`};
   `};
 `
 export const PaginationWrapper = styled.div`

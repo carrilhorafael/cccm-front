@@ -5,7 +5,7 @@ export default function ClickAwayListener({onClickAway, customRule, children}) {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target) && (!!customRule && customRule(event))) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target) && (!customRule || customRule(event))) {
         onClickAway()
       }
     }

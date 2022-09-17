@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ResourcesAccordion from '../../modules/AccordionTable'
 import { useChurchContext } from '../../context/ChurchContext'
 import { useAuthContext } from '../../context/AuthContext'
@@ -9,7 +9,7 @@ import DeleteUserModal from '../../modules/DeleteUserModal'
 import FilterSidebar from './components/filterSidebar'
 import MinisteriesAssignModal from '../../modules/MinisteriesAssignModal'
 import { useHistory } from 'react-router-dom'
-import { getMemberCard } from '../../services/Api.service'
+import { getChurchUsers, getMemberCard } from '../../services/Api.service'
 import {
   AccessTitle,
   AccessWrapper,
@@ -19,18 +19,32 @@ import {
   Item,
   ItemHeader,
   ItemTitle,
+  LoadingWrapper,
   NoAccessTitle,
   UsersPageHeader
 } from './styles'
 import getFormattedDate from '../../actions/getFormattedDate'
 import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
 import { useOverlayContext } from '../../context/OverlayContext'
+import Loading from '../../atomics/Loading'
 
 export default function ChurchUsersPage () {
   const history = useHistory()
-  const { users } = useChurchContext()
+  const { church } = useChurchContext()
+  const { fireToast } = useOverlayContext()
+  const [users, setUsers] = useState([])
+  const [isLoading, setLoading] = useState(true)
   const { showModal } = useOverlayContext()
   const { user } = useAuthContext()
+
+  useEffect(() => {
+    if (!church) return
+    getChurchUsers(church.id, { with_my_filter: true })
+      .then(({ data }) => setUsers(data))
+      .catch(() => fireToast('negative', 'Ops, algo deu errado em nosso servidor.'))
+      .finally(() => setLoading(false))
+  }, [church])
+
 
   const [showFilterSidebar, setShowFilterSidebar] = useState(false)
 
@@ -176,15 +190,21 @@ export default function ChurchUsersPage () {
             <IconButton theme='primary' icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
           </div>
         </UsersPageHeader>
-        <ResourcesAccordion
-          resources={users}
-          resourceName="Membros"
-          CardHeader={CardHeader}
-          CardBody={CardBody}
-          getMenuConfigs={getMenuConfigs}
-          getBodyHeight={getBodyHeight}
-          hasMenu
-        />
+        {isLoading ?
+          <LoadingWrapper>
+            <Loading size='md' theme='primary'/>
+          </LoadingWrapper>
+          :
+          <ResourcesAccordion
+            resources={users}
+            resourceName="Membros"
+            CardHeader={CardHeader}
+            CardBody={CardBody}
+            getMenuConfigs={getMenuConfigs}
+            getBodyHeight={getBodyHeight}
+            hasMenu
+          />
+        }
       </Item>
     </GeneralLayout>
   )

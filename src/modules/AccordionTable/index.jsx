@@ -4,7 +4,9 @@ import {
   PaginationPage,
   PaginationResourcesConfig,
   PaginationWrapper,
-  Accordion
+  Accordion,
+  SearchIcon,
+  EmptyState
 } from './styles';
 export default function ResourcesAccordion({ resources, resourceName, CardHeader, CardBody, getMenuConfigs, getBodyHeight, hasMenu}) {
   const [resourcesOnPage, setResourcesOnPage] = useState([])
@@ -15,6 +17,16 @@ export default function ResourcesAccordion({ resources, resourceName, CardHeader
     setResourcesOnPage(resources.slice(page * resourcesPerPage, (page + 1) * resourcesPerPage))
   }, [resources, page, resourcesPerPage])
 
+  console.log(!resources)
+  if (resources.length === 0) {
+    return (
+      <EmptyState>
+        <SearchIcon/>
+        <p>Sem resultados</p>
+      </EmptyState>
+    )
+  }
+
   return (
     <>
       <Accordion>
@@ -24,7 +36,7 @@ export default function ResourcesAccordion({ resources, resourceName, CardHeader
             CardHeader={CardHeader}
             CardBody={CardBody}
             getMenuConfigs={getMenuConfigs}
-            getBodyHeight={getBodyHeight}
+            getBodyHeight={getBodyHeight || 'auto'}
             hasMenu={hasMenu}
           />
         ))}
