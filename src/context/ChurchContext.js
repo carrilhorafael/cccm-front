@@ -1,14 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import LoadingLocker from '../modules/LoadingLocker'
+import React, { createContext, useContext,  useState } from 'react'
 import {
-  deleteMinistery,
   deleteProselyte,
   postChurchCult,
   postChurchMinistery,
   postCultProselyte,
   putMinistery,
   putProselyte
-} from '../services/Api.service'
+} from 'services/Api.service'
 
 export const ChurchContext = createContext()
 
@@ -17,13 +15,6 @@ export function ChurchProvider ({children}) {
   const [ministeries, setMinisteries] = useState([])
   const [resume, setResume] = useState([])
   const [proselytes, setProselytes] = useState([])
-  const [cults, setCults] = useState([])
-
-  function updateChurch(params) {
-    let newObj = {...church}
-
-    setChurch({...newObj, ...params})
-  }
 
   async function createMinistery(ministeryParams) {
     return postChurchMinistery(church.id, ministeryParams)
@@ -78,10 +69,6 @@ export function ChurchProvider ({children}) {
     })
   }
 
-  async function destroyMinistery(ministeryId){
-    return deleteMinistery(ministeryId)
-    .then(() => setMinisteries(ministeries.filter(ministery => ministery.id !== ministeryId)))
-  }
 
   async function destroyProselyte(proselyteId){
     return deleteProselyte(proselyteId)

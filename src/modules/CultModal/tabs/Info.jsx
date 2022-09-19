@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { numberWithTwoDigits } from '../../../actions/getNumberWithTwoDigits'
-import Button from '../../../atomics/Button'
-import Calendar from '../../../atomics/Calendar'
-import Select from '../../../atomics/Select'
-import TextInput from '../../../atomics/TextInput'
-import { useChurchContext } from '../../../context/ChurchContext'
-import DatePicker from '../../DatePicker'
+import { numberWithTwoDigits } from 'utils/getNumberWithTwoDigits'
+import Button from 'atomics/Button'
+import Select from 'atomics/Select'
+import TextInput from 'atomics/TextInput'
+import { useChurchContext } from 'context/ChurchContext'
+import DatePicker from 'modules/DatePicker'
 import { InfoWrapper } from '../styles'
 
 const getInitialDate = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useChurchContext } from '../../context/ChurchContext'
+import { useChurchContext } from 'context/ChurchContext'
 import { Link, Nav, Title, Wrapper } from './styles'
 
 export default function ChurchHeader ({churchProvided}) {

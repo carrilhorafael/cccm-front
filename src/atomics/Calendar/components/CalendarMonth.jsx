@@ -1,5 +1,5 @@
 import React from 'react'
-import IconButton from '../../IconButton'
+import IconButton from 'atomics/IconButton'
 import { MonthWrapper, SelectedMonth } from '../styles'
 
 export default function CalendarMonth ({monthViewed, updateMonthViewed}) {

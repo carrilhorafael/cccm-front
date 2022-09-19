@@ -1,6 +1,6 @@
 import React from 'react'
-import Loading from '../../atomics/Loading'
-import OverlayLocker from '../../atomics/OverlayLocker'
+import Loading from 'atomics/Loading'
+import OverlayLocker from 'atomics/OverlayLocker'
 import { Message, OverlayWrapper } from './styles'
 
 export default function LoadingLocker ({ message }) {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import colors from 'styles/colors'
+import colors from 'utils/colors'
 
 export const ChartMainLayout = styled.div`
   height: fit-content;

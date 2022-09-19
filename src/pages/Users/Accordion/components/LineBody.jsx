@@ -1,5 +1,5 @@
-import getFormattedDate from "actions/getFormattedDate";
-import getFormattedTimestamp from "actions/getFormattedTimestamp";
+import getFormattedDate from "utils/getFormattedDate";
+import getFormattedTimestamp from "utils/getFormattedTimestamp";
 import { AccessTitle, AccessWrapper, AccordionRow, NoAccessTitle } from "../Accordion.styles";
 
 export default function LineBody ({resource}) {

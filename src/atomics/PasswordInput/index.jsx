@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import TextInput from '../TextInput'
+import TextInput from 'atomics/TextInput'
 
 export default function PasswordInput({value, onChange, id, label}){
   const [type, setType] = useState("password")

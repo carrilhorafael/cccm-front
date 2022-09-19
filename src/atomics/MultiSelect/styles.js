@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import colors from '../../styles/colors'
-import { prettyScrollBar } from '../../styles/prettyScrollBar'
+import colors from 'utils/colors'
+import { prettyScrollBar } from 'utils/prettyScrollBar'
 export const Content = styled.fieldset`
   display: flex;
   flex-direction: column;

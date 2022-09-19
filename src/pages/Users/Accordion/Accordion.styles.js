@@ -1,4 +1,4 @@
-import colors from 'styles/colors'
+import colors from 'utils/colors'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 export const Icon = styled.i`

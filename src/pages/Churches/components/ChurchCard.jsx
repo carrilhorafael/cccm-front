@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from '../../../atomics/Button'
-import IconButton from '../../../atomics/IconButton'
+import Button from 'atomics/Button'
+import IconButton from 'atomics/IconButton'
 import { ButtonWrapper, ChurchCardContainer } from '../Churches.styles'
 
 export default function ChurchCard ({church, onNavigate, onEditClick, onDeleteClick}) {

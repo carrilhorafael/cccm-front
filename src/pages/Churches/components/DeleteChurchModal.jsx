@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Button from '../../../atomics/Button'
-import Modal from '../../../atomics/Modal'
-import { Footer, Header, HeaderTitle } from '../../../atomics/Modal/styles'
-import TextInput from '../../../atomics/TextInput'
+import Button from 'atomics/Button'
+import Modal from 'atomics/Modal'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import TextInput from 'atomics/TextInput'
 import { Container, Description } from './DeleteChurchModal.styles'
 
 

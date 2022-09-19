@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import colors from '../../styles/colors'
+import colors from 'utils/colors'
 
 export const GradientLayout = styled.div`
   background: linear-gradient(115deg, ${colors.gray.lightest}, ${colors.blue.light}, ${colors.gray.lightest});

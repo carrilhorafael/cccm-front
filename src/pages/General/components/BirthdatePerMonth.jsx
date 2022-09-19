@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import getFormattedDateWithoutYear from '../../../actions/getFormattedDateWithoutYear'
-import Select from '../../../atomics/Select'
+import getFormattedDateWithoutYear from 'utils/getFormattedDateWithoutYear'
+import Select from 'atomics/Select'
 import { BirthdateMember, BirthdateSection, DateWrapper, Header, Name, UsersWrapper } from '../General.styles'
 
 export default function BirthdatePerMonth({ birthdates }) {

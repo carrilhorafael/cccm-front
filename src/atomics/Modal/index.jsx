@@ -1,8 +1,8 @@
 import { closeModal } from 'global'
 import React from 'react'
-import IconButton from '../IconButton'
-import OverlayLocker from '../OverlayLocker'
-import { Body, CloseButtonWrapper, Container, HeaderTitle, Wrapper } from './styles'
+import IconButton from 'atomics/IconButton'
+import OverlayLocker from 'atomics/OverlayLocker'
+import { Body, CloseButtonWrapper, Container, Wrapper } from './styles'
 
 export default function Modal ({
     children,

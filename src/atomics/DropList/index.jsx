@@ -1,5 +1,5 @@
 import React from 'react'
-import ClickAwayListener from '../ClickAwayListener'
+import ClickAwayListener from 'atomics/ClickAwayListener'
 import { DropListItem, Paper, Popper } from './styles'
 
 export default function DropList ({opened, onClose, anchorRef, options }) {

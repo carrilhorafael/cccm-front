@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AccordionItem } from './components/AccordionItem';
+import AccordionItem from './components/AccordionItem';
 import {
   PaginationPage,
   PaginationResourcesConfig,

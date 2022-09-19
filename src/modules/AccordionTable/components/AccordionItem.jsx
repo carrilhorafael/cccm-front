@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import MainMenu from "../../../../atomics/MainMenu";
-import { Body, Header, HeaderContainer, Item } from "../../styles";
+import MainMenu from "atomics/MainMenu";
+import { Body, Header, HeaderContainer, Item } from "../styles";
 
-export function AccordionItem ({
+export default function AccordionItem ({
     resource,
     CardHeader,
     CardBody,

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
-import Modal from '../../atomics/Modal'
-import Button from '../../atomics/Button'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { useChurchContext } from '../../context/ChurchContext'
+import React, { useState } from 'react'
+import Modal from 'atomics/Modal'
+import Button from 'atomics/Button'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import { useChurchContext } from 'context/ChurchContext'
 import { Container, Description } from './styles'
-import TextInput from '../../atomics/TextInput'
+import TextInput from 'atomics/TextInput'
 import { closeModal } from 'global'
 
 export default function ProselyteFormModal ({ resource }) {

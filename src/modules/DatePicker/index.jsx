@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { numberWithTwoDigits } from '../../actions/getNumberWithTwoDigits'
-import Calendar from '../../atomics/Calendar'
-import ClickAwayListener from '../../atomics/ClickAwayListener'
-import TextInput from '../../atomics/TextInput'
+import { numberWithTwoDigits } from 'utils/getNumberWithTwoDigits'
+import Calendar from 'atomics/Calendar'
+import ClickAwayListener from 'atomics/ClickAwayListener'
+import TextInput from 'atomics/TextInput'
 import { Label, PopoverWrapper } from './styles'
 
 const getValueForString = (value) => {
@@ -31,7 +31,7 @@ export default function DatePicker ({ label, value, onChange }) {
 
   useEffect(() => {
     onChange(`${numberWithTwoDigits(dateParams.day)}/${numberWithTwoDigits(dateParams.month)}/${dateParams.year} ${numberWithTwoDigits(dateParams.hours)}:${numberWithTwoDigits(dateParams.minutes)}`)
-  }, [dateParams])
+  }, [dateParams, onChange])
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>

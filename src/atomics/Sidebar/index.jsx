@@ -1,6 +1,6 @@
 import React from 'react'
-import IconButton from '../../atomics/IconButton'
-import OverlayLocker from '../../atomics/OverlayLocker'
+import IconButton from 'atomics/IconButton'
+import OverlayLocker from 'atomics/OverlayLocker'
 import { Body, Header, SidebarWrapper, Title } from './styles'
 
 export default function Sidebar ({

@@ -1,9 +1,9 @@
 import { showToast } from 'global'
 import React, { useState } from 'react'
-import Button from '../../atomics/Button'
-import PasswordInput from '../../atomics/PasswordInput'
-import TextInput from '../../atomics/TextInput'
-import { useAuthContext } from '../../context/AuthContext'
+import Button from 'atomics/Button'
+import PasswordInput from 'atomics/PasswordInput'
+import TextInput from 'atomics/TextInput'
+import { useAuthContext } from 'context/AuthContext'
 import { ButtonsWrapper, Container, Fieldset, FormLogin, GradientLayout, Title } from './styles'
 
 export default function LoginPage() {

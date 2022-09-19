@@ -1,8 +1,8 @@
 import { showToast } from 'global'
 import React, { useState } from 'react'
-import Button from '../../atomics/Button'
-import PasswordInput from '../../atomics/PasswordInput'
-import { useAuthContext } from '../../context/AuthContext'
+import Button from 'atomics/Button'
+import PasswordInput from 'atomics/PasswordInput'
+import { useAuthContext } from 'context/AuthContext'
 import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
 
 export default function PasswordChangePage() {

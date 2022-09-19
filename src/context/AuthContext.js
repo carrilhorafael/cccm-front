@@ -1,7 +1,7 @@
 import React, {useState, useEffect, createContext} from 'react'
 import { useContext } from 'react'
-import LoadingLocker from '../modules/LoadingLocker'
-import { api, postLogin, getValidateToken, postResetPassword } from '../services/Api.service'
+import LoadingLocker from 'modules/LoadingLocker'
+import { api, postLogin, getValidateToken, postResetPassword } from 'services/Api.service'
 import { useChurchContext } from './ChurchContext'
 
 export const AuthContext = createContext()

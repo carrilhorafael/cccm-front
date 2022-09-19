@@ -1,10 +1,10 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useAuthContext } from '../../context/AuthContext'
-import ChurchHeader from '../ChurchHeader'
-import IconButton from '../../atomics/IconButton'
+import { useAuthContext } from 'context/AuthContext'
+import ChurchHeader from 'modules/ChurchHeader'
+import IconButton from 'atomics/IconButton'
 import { ButtonWrapper, Container, HeaderName, Title } from './styles'
-import { useChurchContext } from '../../context/ChurchContext'
+import { useChurchContext } from 'context/ChurchContext'
 
 export default function Header () {
   const { setChurch } = useChurchContext()

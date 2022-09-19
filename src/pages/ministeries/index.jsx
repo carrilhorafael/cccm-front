@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Button from '../../atomics/Button'
-import { ChurchContext } from '../../context/ChurchContext'
-import IconButton from '../../atomics/IconButton'
-import MinisteryModal from '../../modules/MinisteryModal'
+import Button from 'atomics/Button'
+import { ChurchContext } from 'context/ChurchContext'
+import IconButton from 'atomics/IconButton'
+import MinisteryModal from 'modules/MinisteryModal'
 import { ActionWrapper, Card, Description, Header, List, LoadingWrapper, Title } from './styles'
-import { getChurchMinisteries } from '../../services/Api.service'
-import Loading from '../../atomics/Loading'
+import { getChurchMinisteries } from 'services/Api.service'
+import Loading from 'atomics/Loading'
 import { showModal, showToast } from 'global'
 
 export default function ChurchMinisteriesPage () {

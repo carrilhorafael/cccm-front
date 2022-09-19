@@ -1,6 +1,6 @@
 import React from 'react'
-import { numberWithTwoDigits } from '../../../actions/getNumberWithTwoDigits'
-import Select from '../../Select'
+import { numberWithTwoDigits } from 'utils/getNumberWithTwoDigits'
+import Select from 'atomics/Select'
 import { SelectWrapper } from '../styles'
 
 export default function CalendarHours ({ hours, minutes, updateHours }) {

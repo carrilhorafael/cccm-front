@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { MenuWrapper } from './styles';
-import IconButton from '../IconButton';
-import DropList from '../DropList';
+import IconButton from 'atomics/IconButton';
+import DropList from 'atomics/DropList';
 
 export default function MainMenu ({ menuConfigs }) {
   const anchorRef = useRef(null)

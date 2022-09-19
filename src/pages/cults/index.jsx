@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ResourcesAccordion from '../../modules/AccordionTable'
-import { useChurchContext } from '../../context/ChurchContext'
+import ResourcesAccordion from 'modules/AccordionTable'
+import { useChurchContext } from 'context/ChurchContext'
 import {
   GeneralLayout,
   Header,
@@ -10,12 +10,12 @@ import {
   AccordionRow,
   LoadingWrapper
 } from './styles'
-import IconButton from '../../atomics/IconButton'
-import getFormattedTimestamp from '../../actions/getFormattedTimestamp'
-import Button from '../../atomics/Button'
-import CultModal from '../../modules/CultModal'
-import { getChurchCults } from '../../services/Api.service'
-import Loading from '../../atomics/Loading'
+import IconButton from 'atomics/IconButton'
+import getFormattedTimestamp from 'utils/getFormattedTimestamp'
+import Button from 'atomics/Button'
+import CultModal from 'modules/CultModal'
+import { getChurchCults } from 'services/Api.service'
+import Loading from 'atomics/Loading'
 import { showModal, showToast } from 'global'
 
 export default function ChurchCults () {

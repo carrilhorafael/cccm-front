@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import colors from '../../styles/colors'
+import colors from 'utils/colors'
 
 export const HeaderContainer = styled.div`
   padding: 18px 0px 18px 24px;
