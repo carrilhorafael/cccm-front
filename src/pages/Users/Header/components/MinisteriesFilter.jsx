@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import Checkbox from "../../../atomics/Checkbox";
-import MultiSelect from "../../../atomics/MultiSelect";
-import { useChurchContext } from "../../../context/ChurchContext";
-import { getChurchMinisteries } from "../../../services/Api.service";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../styles";
+import Checkbox from "atomics/Checkbox";
+import MultiSelect from "atomics/MultiSelect";
+import { useChurchContext } from "context/ChurchContext";
+import { getChurchMinisteries } from "services/Api.service";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
 
 export default function MinisteriesFilter ({ value, onToggle, onChange }) {
   const { church } = useChurchContext()

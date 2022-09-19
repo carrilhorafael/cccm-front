@@ -3,22 +3,17 @@ import LoadingLocker from '../modules/LoadingLocker'
 import {
   deleteMinistery,
   deleteProselyte,
-  deleteUser,
-  getChurch,
   postChurchCult,
   postChurchMinistery,
   postCultProselyte,
-  postChurchUser,
   putMinistery,
-  putProselyte,
-  putUser,
+  putProselyte
 } from '../services/Api.service'
 
 export const ChurchContext = createContext()
 
 export function ChurchProvider ({children}) {
   const [church, setChurch] = useState(null)
-  const [users, setUsers] = useState([])
   const [ministeries, setMinisteries] = useState([])
   const [resume, setResume] = useState([])
   const [proselytes, setProselytes] = useState([])
@@ -28,24 +23,6 @@ export function ChurchProvider ({children}) {
     let newObj = {...church}
 
     setChurch({...newObj, ...params})
-  }
-
-  async function createUser(userParams) {
-    return postChurchUser(church.id, userParams)
-    .then(({data}) => {
-      let newUsers = users
-      let position = newUsers.findIndex(user => !user.is_leader)
-
-      newUsers = [
-        ...newUsers.slice(0, position),
-        data,
-        ...newUsers.slice(position)
-      ]
-
-      updateChurch({
-        users: newUsers
-      })
-    })
   }
 
   async function createMinistery(ministeryParams) {
@@ -85,22 +62,6 @@ export function ChurchProvider ({children}) {
     })
   }
 
-  async function updateUser(userId, userParams) {
-    return putUser(userId, userParams)
-    .then(({data}) => {
-      let newUsers = users
-      const resourceIndex = newUsers.findIndex(user => user.id === data.id)
-
-      newUsers = [
-        ...newUsers.slice(0, resourceIndex),
-        data,
-        ...newUsers.slice(resourceIndex + 1)
-      ]
-
-      setUsers(newUsers)
-    })
-  }
-
   async function updateProselyte(proselyteId, proselyteParams) {
     return putProselyte(proselyteId, proselyteParams)
     .then(({data}) => {
@@ -122,11 +83,6 @@ export function ChurchProvider ({children}) {
     .then(() => setMinisteries(ministeries.filter(ministery => ministery.id !== ministeryId)))
   }
 
-  async function destroyUser(userId){
-    return deleteUser(userId)
-    .then(() => setUsers(users.filter(user => user.id !== userId)))
-  }
-
   async function destroyProselyte(proselyteId){
     return deleteProselyte(proselyteId)
     .then(() => setProselytes(proselytes.filter(proselyte => proselyte.id !== proselyteId)))
@@ -136,14 +92,10 @@ export function ChurchProvider ({children}) {
     <ChurchContext.Provider value={{
 
       church,
-      updateUser,
       updateMinistery,
       updateProselyte,
       createMinistery,
-      createUser,
       createProselyte,
-      destroyMinistery,
-      destroyUser,
       destroyProselyte,
       setChurch
     }}>

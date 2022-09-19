@@ -5,7 +5,6 @@ import Calendar from '../../../atomics/Calendar'
 import Select from '../../../atomics/Select'
 import TextInput from '../../../atomics/TextInput'
 import { useChurchContext } from '../../../context/ChurchContext'
-import { getChurchUsers } from '../../../services/Api.service'
 import DatePicker from '../../DatePicker'
 import { InfoWrapper } from '../styles'
 
@@ -23,10 +22,10 @@ export function Info ({ resource }) {
   const [responsible, setResponsible] = useState('')
 
   useEffect(() => {
-    getChurchUsers(church.id, {})
-    .then(({ data }) => {
-      setUsers(data)
-    })
+    // getChurchUsers(church.id, {})
+    // .then(({ data }) => {
+    //   setUsers(data)
+    // })
   }, [church])
 
 

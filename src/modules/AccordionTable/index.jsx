@@ -17,7 +17,6 @@ export default function ResourcesAccordion({ resources, resourceName, CardHeader
     setResourcesOnPage(resources.slice(page * resourcesPerPage, (page + 1) * resourcesPerPage))
   }, [resources, page, resourcesPerPage])
 
-  console.log(!resources)
   if (resources.length === 0) {
     return (
       <EmptyState>

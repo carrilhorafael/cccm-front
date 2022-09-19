@@ -5,7 +5,7 @@ import { useAuthContext } from './context/AuthContext'
 import { Churches } from 'pages/Churches'
 import { General } from './pages/General'
 import LoginPage from './pages/login'
-import ChurchUsersPage from './pages/users'
+import { Users } from './pages/Users'
 import ChurchFormUserPage from './pages/formUser'
 import ChurchMinisteriesPage from './pages/ministeries'
 import PasswordChangePage from './pages/passwordChange'
@@ -25,9 +25,9 @@ export default function Routes () {
         </Switch>
         :
         <Switch>
-          <Route path="/churches" component={Churches}></Route>
+          <Route path="/churches" component={Churches}/>
           <Route path="/church/general" component={General}/>
-          <Route path="/church/users" component={ChurchUsersPage}/>
+          <Route path="/church/users" component={Users}/>
           <Route path="/church/user" component={ChurchFormUserPage}/>
           <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
           <Route path="/church/cults" component={ChurchCults}/>

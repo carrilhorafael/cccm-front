@@ -1,22 +1,12 @@
 import React, { useState } from 'react'
-import Modal from '../../atomics/Modal'
-import Button from '../../atomics/Button'
-import { useChurchContext } from '../../context/ChurchContext'
-import Checkbox from '../../atomics/Checkbox'
-// import './styles.css'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { CheckboxWrapper, Container, Description } from './styles'
-import { closeModal } from 'global'
+import Modal from 'atomics/Modal'
+import Button from 'atomics/Button'
+import Checkbox from 'atomics/Checkbox'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import { CheckboxWrapper, Container, Description } from './Modal.styles'
 
-export default function GrantAccessModal({ user }) {
-  const { updateUser } = useChurchContext()
+export default function GrantAccessModal({ user, onConfirm }) {
   const [isLeader, setIsLeader] = useState(false)
-
-  const grantAccess = async () => {
-    const accessParams = { user: { should_have_access: true, is_leader: isLeader } }
-    await updateUser(user.id, accessParams)
-    closeModal()
-  }
 
   return (
     <Modal
@@ -27,7 +17,11 @@ export default function GrantAccessModal({ user }) {
       }
       Footer={
         <Footer>
-          <Button theme="primary" onClick={grantAccess} title='Confirmar'/>
+          <Button
+            theme="primary"
+            onClick={() => onConfirm({ user: { should_have_access: true, is_leader: isLeader } })}
+            title='Confirmar'
+          />
         </Footer>
       }
     >

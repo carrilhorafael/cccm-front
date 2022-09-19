@@ -1,6 +1,6 @@
-import Checkbox from "../../../atomics/Checkbox";
-import TextInput from "../../../atomics/TextInput";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../styles";
+import Checkbox from "atomics/Checkbox";
+import TextInput from "atomics/TextInput";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
 
 export default function FilterItem ({ value, onToggle, onChange }) {
 

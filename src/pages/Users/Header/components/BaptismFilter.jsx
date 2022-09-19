@@ -1,5 +1,5 @@
-import Checkbox from "../../../atomics/Checkbox";
-import { CheckboxFieldset, FilterType, RadioFieldset } from "../styles";
+import Checkbox from "atomics/Checkbox";
+import { CheckboxFieldset, FilterType, RadioFieldset } from "../Header.styles";
 
 export default function BaptismFilter ({ value, onToggle, onChange }) {
   return (

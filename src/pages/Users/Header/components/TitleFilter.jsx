@@ -1,7 +1,7 @@
-import Checkbox from "../../../atomics/Checkbox";
-import MultiSelect from "../../../atomics/MultiSelect";
-import { useChurchContext } from "../../../context/ChurchContext";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../styles";
+import Checkbox from "atomics/Checkbox";
+import MultiSelect from "atomics/MultiSelect";
+import { useChurchContext } from "context/ChurchContext";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
 
 export default function TitleFilter ({ value, onToggle, onChange }) {
   const { church } = useChurchContext()

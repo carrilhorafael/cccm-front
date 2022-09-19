@@ -1,9 +1,9 @@
 import React from 'react'
-import Modal from '../../atomics/Modal'
-import Button from '../../atomics/Button'
-import { useChurchContext } from '../../context/ChurchContext'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { Container, Description } from './styles'
+import Modal from 'atomics/Modal'
+import Button from 'atomics/Button'
+import { useChurchContext } from 'context/ChurchContext'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import { Container, Description } from './Modal.styles'
 import { closeModal } from 'global'
 
 export default function DeleteUserModal({ user }) {

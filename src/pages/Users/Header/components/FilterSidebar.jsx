@@ -1,10 +1,8 @@
-import { showToast } from 'global'
-import React, { useState } from 'react'
-import Button from '../../../atomics/Button'
-import { Footer } from '../../../atomics/Modal/styles'
-import Sidebar from '../../../atomics/Sidebar'
-import { useAuthContext } from '../../../context/AuthContext'
-import { FilterBody, FilterSubtitle, OrderBody } from '../styles'
+import React from 'react'
+import Button from 'atomics/Button'
+import { Footer } from 'atomics/Modal/styles'
+import Sidebar from 'atomics/Sidebar'
+import { FilterBody, FilterSubtitle, OrderBody } from '../Header.styles'
 import BaptismFilter from './BaptismFilter'
 import MinisteriesFilter from './MinisteriesFilter'
 import NameFilter from './NameFilter'
@@ -21,26 +19,10 @@ const sortOptions = [
   { type: 'member_since', label: 'Membro desde' },
 ]
 
-export default function FilterSidebar ({show, onHide}) {
-  const { filter, updateFilter } = useAuthContext()
-
-  const [filterParams, setFilterParams] = useState({
-    restriction: filter.restriction,
-    sortable: filter.sortable
-  })
-
-  const submitFilter = async () => {
-    updateFilter(filterParams)
-    .then(() => showToast('positive', 'Filtro alterado com sucesso'))
-    .catch(() => showToast('negative', 'Não foi possível alterar seu filtro'))
-  }
-
-  const handleHide = () => {
-    onHide()
-  }
-
+export default function FilterSidebar ({ filter, onHide, onChange, onSubmit }) {
   const handleToggleCheckbox = (key, defaultValue) => () => {
-    let newRestriction = { ...filterParams.restriction }
+    let newRestriction = { ...filter.restriction }
+
 
     if (newRestriction.hasOwnProperty(key)) {
       delete newRestriction[key]
@@ -48,56 +30,55 @@ export default function FilterSidebar ({show, onHide}) {
       newRestriction[key] = defaultValue
     }
 
-    setFilterParams({ ...filterParams, restriction: newRestriction })
+    onChange({ ...filter, restriction: newRestriction})
   }
 
   const handleChangeRestriction = (key) => (value) => {
-    let newRestriction = { ...filterParams.restriction }
+    let newRestriction = { ...filter.restriction }
     newRestriction[key] = value
 
-    setFilterParams({ ...filterParams, restriction: newRestriction })
+    onChange({ ...filter, restriction: newRestriction })
   }
 
   const handleChangeOrder = (value) => {
-    setFilterParams({ ...filterParams, sortable: value })
+    onChange({ ...filter, sortable: value })
   }
 
   return (
     <Sidebar
-      show={show}
-      onHide={handleHide}
+      onHide={onHide}
       title="Filtros"
       placement="right"
       Footer={
         <Footer>
-          <Button theme="primary" onClick={submitFilter} title='Salvar filtro'/>
+          <Button theme="primary" onClick={onSubmit} title='Salvar filtro'/>
         </Footer>
       }
     >
       <FilterBody>
         <FilterSubtitle>Filtrar tabela por:</FilterSubtitle>
         <NameFilter
-          value={filterParams.restriction.name}
+          value={filter.restriction.name}
           onChange={handleChangeRestriction('name')}
           onToggle={handleToggleCheckbox('name', '')}
         />
         <TitleFilter
-          value={filterParams.restriction.titles}
+          value={filter.restriction.titles}
           onChange={handleChangeRestriction('titles')}
           onToggle={handleToggleCheckbox('titles', [])}
         />
         <BaptismFilter
-          value={filterParams.restriction.is_baptized}
+          value={filter.restriction.is_baptized}
           onChange={handleChangeRestriction('is_baptized')}
-          onToggle={handleToggleCheckbox('is_baptized', null)}
+          onToggle={handleToggleCheckbox('is_baptized', false)}
         />
         <MinisteriesFilter
-          value={filterParams.restriction.ministeries}
+          value={filter.restriction.ministeries}
           onChange={handleChangeRestriction('ministeries')}
           onToggle={handleToggleCheckbox('ministeries', {})}
         />
         <SystemAccessFilter
-          value={filterParams.restriction.system_access}
+          value={filter.restriction.system_access}
           onToggle={handleToggleCheckbox('system_access', true)}
         />
       </FilterBody>
@@ -108,7 +89,7 @@ export default function FilterSidebar ({show, onHide}) {
         <OrderBody>
           {sortOptions.map(({ type, label }) => (
             <RadioOrder
-              value={filterParams.sortable}
+              value={filter.sortable}
               type={type}
               label={label}
               onChange={handleChangeOrder}

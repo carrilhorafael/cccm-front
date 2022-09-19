@@ -1,5 +1,5 @@
-import Checkbox from "../../../atomics/Checkbox";
-import { CheckboxFieldset, FilterType } from "../styles";
+import Checkbox from "atomics/Checkbox";
+import { CheckboxFieldset, FilterType } from "../Header.styles";
 
 export default function SystemAccessFilter ({value, onToggle}) {
 

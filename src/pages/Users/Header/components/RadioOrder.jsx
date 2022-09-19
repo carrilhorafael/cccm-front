@@ -1,4 +1,4 @@
-import { RadioFieldset } from "../styles";
+import { RadioFieldset } from "../Header.styles";
 
 export default function RadioOrder ({ type, label, value, onChange }) {
 

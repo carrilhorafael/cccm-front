@@ -10,7 +10,6 @@ export function AuthProvider ({children}) {
   const { setChurch } = useChurchContext()
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState({})
-  const [filter, setFilter] = useState({})
   const [userChurch, setUserChurch] = useState({})
   const [loading, setLoading] = useState(false)
 
@@ -21,7 +20,6 @@ export function AuthProvider ({children}) {
     getValidateToken(token)
     .then(({data}) => {
       setUser(data.user)
-      setFilter(data.filter)
       setLoading(false)
       setAuthenticated(true)
       setChurch(data.church)
@@ -30,7 +28,7 @@ export function AuthProvider ({children}) {
     .catch(()=>{
       setLoading(false)
     })
-  }, [])
+  }, [setChurch])
 
   const handleLogin = (email, password) => {
     let loginData = {
@@ -43,7 +41,6 @@ export function AuthProvider ({children}) {
     return postLogin(loginData)
     .then(({data}) => {
       setUser(data.user)
-      setFilter(data.filter)
       api.defaults.headers.Authorization = data.token
       setChurch(data.church)
       setUserChurch(data.church)
@@ -52,16 +49,10 @@ export function AuthProvider ({children}) {
     })
   }
 
-  const updateFilter = (filterParams) => {
-    return api.put(`filters/${filter.id}`, filterParams)
-    .then(({data}) => setFilter(data))
-  }
-
   const handleLogout = () => {
     localStorage.removeItem('authtoken')
     setUser({})
     setUserChurch({})
-    setFilter({})
     setAuthenticated(false)
   }
 
@@ -70,7 +61,6 @@ export function AuthProvider ({children}) {
     .then(({ data }) => {
       setUser(data.user)
       setUserChurch(data.church)
-      setFilter(data.filter)
       api.defaults.headers.Authorization = data.token
       localStorage.setItem("authtoken", data.token)
       setAuthenticated(true)
@@ -82,11 +72,9 @@ export function AuthProvider ({children}) {
       value={{
         user,
         userChurch,
-        filter,
         authenticated,
         handleLogin,
         handleChangePassword,
-        updateFilter,
         handleLogout
       }}>
       {loading?

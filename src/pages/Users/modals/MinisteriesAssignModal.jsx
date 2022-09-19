@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import Modal from '../../atomics/Modal'
-import Button from '../../atomics/Button'
-import { useChurchContext } from '../../context/ChurchContext'
-import MultiSelect from '../../atomics/MultiSelect'
-import { Footer, Header, HeaderTitle } from '../../atomics/Modal/styles'
-import { Container, Description } from './styles'
+import Modal from 'atomics/Modal'
+import Button from 'atomics/Button'
+import { useChurchContext } from 'context/ChurchContext'
+import MultiSelect from 'atomics/MultiSelect'
+import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
+import { Container, Description } from './Modal.styles'
 import { closeModal } from 'global'
 
 
-export default function MinisteriesAssignModal ({ user }) {
+export default function MinisteriesAssignModal ({ user, onConfirm }) {
   const { ministeries } = useChurchContext()
   const ministeriesItems = ministeries.map(ministery => ({ label: ministery.name, value: ministery.id }))
 
@@ -21,6 +21,7 @@ export default function MinisteriesAssignModal ({ user }) {
   }
 
   const assignMinisteries = () => {
+    onConfirm()
     closeModal()
   }
 

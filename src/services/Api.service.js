@@ -30,12 +30,6 @@ export function postResetPassword (data) {
   return api.post('auth/reset', data)
 }
 
-export function getChurchUsers(churchId, params) {
-  return api.get(`churches/${churchId}/users`, {
-    params
-  })
-}
-
 export function getChurchMinisteries(churchId) {
   return api.get(`churches/${churchId}/ministeries`)
 }
@@ -50,10 +44,6 @@ export function getChurchProselytes(churchId) {
 
 export function getChurchCults(churchId) {
   return api.get(`churches/${churchId}/cults`)
-}
-
-export function postChurchUser(churchId, userParams) {
-  return api.post(`churches/${churchId}/users`, userParams)
 }
 
 export function postChurchMinistery(churchId, ministeryParams) {
@@ -85,14 +75,6 @@ export function destroyChurch(churchId) {
   return api.delete(`churches/${churchId}`)
 }
 
-export function deleteUser(userId) {
-  return api.delete(`users/${userId}`)
-}
-
-export function putUser(userId, userParams){
-  return api.put(`users/${userId}`, userParams)
-}
-
 export function deleteMinistery(ministeryId) {
   return api.delete(`ministeries/${ministeryId}`)
 }
@@ -107,8 +89,4 @@ export function putProselyte(proselyteId, proselyteParams) {
 
 export function deleteProselyte(proselyteId) {
   return api.delete(`proselyte/${proselyteId}`)
-}
-
-export function getMemberCard(userId) {
-  window.open(`${api.defaults.baseURL}/users/${userId}/member_card`)
 }
