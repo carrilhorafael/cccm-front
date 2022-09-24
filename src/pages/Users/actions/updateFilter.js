@@ -1,17 +1,20 @@
 import { showToast } from "global";
 import { putFilter } from "services/User.service";
 import { ActionType } from "../store";
-import loadUsers from "./loadUsers";
 
 
 export default function updateFilter (dispatch, filter, church) {
   putFilter(filter)
   .then(({ data }) => {
     dispatch({
-      type: ActionType.UPDATE_FILTER,
+      type: ActionType.SET_FILTER,
       payload: data
     })
-    loadUsers(dispatch, church)
+
+    dispatch({
+      type: ActionType.LOAD_USERS
+    })
+
     showToast('positive', 'Filtro alterado com sucesso')
   })
   .catch(() => {

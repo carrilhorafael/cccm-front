@@ -1,5 +1,4 @@
 import IconButton from "atomics/IconButton"
-import { useChurchContext } from "context/ChurchContext"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { updateFilter } from "../actions"
@@ -9,12 +8,11 @@ import { UsersPageHeader } from "./Header.styles"
 
 export default function Header ({ dispatch, filter }) {
   const history = useHistory()
-  const { church } = useChurchContext()
   const [show, setShow] = useState(false)
 
   const handleChange = (filterParams) => {
     dispatch({
-      type: ActionType.UPDATE_FILTER,
+      type: ActionType.SET_FILTER,
       payload: filterParams
     })
   }
@@ -27,7 +25,7 @@ export default function Header ({ dispatch, filter }) {
   }
 
   const handleSubmit = () => {
-    updateFilter(dispatch, filter, church)
+    updateFilter(dispatch, filter)
     setShow(false)
   }
 
@@ -44,7 +42,7 @@ export default function Header ({ dispatch, filter }) {
       <UsersPageHeader>
         <span/>
         <div>
-          <IconButton theme='primary' icon="fa-solid fa-filter" onClick={() => setShow(true)} />
+          <IconButton theme='secondary' icon="fa-solid fa-filter" onClick={() => setShow(true)} />
           <IconButton theme='primary' icon="fa-solid fa-user-plus" onClick={() => history.push("/church/user")} />
         </div>
       </UsersPageHeader>

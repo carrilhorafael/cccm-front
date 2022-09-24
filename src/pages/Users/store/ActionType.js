@@ -1,6 +1,8 @@
 const ActionType = Object.freeze({
-  SET_FILTER: 'Users/SET_FILTER',
+  LOAD_USERS: 'Users/LOAD_USERS',
   SET_USERS: 'Users/SET_USERS',
+  SET_FILTER: 'Users/SET_FILTER',
+  COMPLETE_LOADING: 'Users/COMPLETE_LOADING',
   ADD_TO_USERS: 'Users/ADD_TO_USERS',
   UPDATE_USER: 'Users/UPDATE_USER',
   REMOVE_USER: 'Users/REMOVE_USER',

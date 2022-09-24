@@ -6,15 +6,22 @@ import { ActionStatus, initialState, reducer } from './store'
 import Accordion from './Accordion/Accordion'
 import Header from './Header/Header'
 import { useEffect } from 'react'
-import { loadFilter, loadUsers } from './actions'
+import { loadUsers, setInitialState} from './actions'
 
 export default function Users () {
   const [{ users, filter, status }, dispatch] = useReducer(reducer, initialState)
   const { church } = useChurchContext()
 
   useEffect(() => {
-    loadUsers(dispatch, church)
-    loadFilter(dispatch)
+    if (status === ActionStatus.LOADING_USERS) {
+      console.log('entrei LOADING_USERS')
+      loadUsers(dispatch, church.id)
+    }
+  }, [church, status])
+
+  useEffect(() => {
+    console.log('entrei LOADING')
+    setInitialState(dispatch, church.id)
   }, [church])
 
   return (
