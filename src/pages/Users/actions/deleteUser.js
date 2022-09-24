@@ -1,6 +1,6 @@
 
 import { closeModal, showToast } from 'global'
-import { destroyUser } from '../services/User.service'
+import { destroyUser } from 'services/User.service'
 import { ActionType } from '../store'
 
 const deleteUser = async (dispatch, user) => {

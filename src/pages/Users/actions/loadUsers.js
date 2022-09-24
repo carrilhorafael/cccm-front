@@ -1,5 +1,5 @@
 import { showToast } from "global"
-import { getUsers } from "../services/User.service"
+import { getUsers } from "services/User.service"
 import { ActionType } from "../store"
 
 export default async function loadUsers (dispatch, church) {

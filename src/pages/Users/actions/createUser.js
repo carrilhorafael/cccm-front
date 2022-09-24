@@ -1,6 +1,6 @@
 
 import { closeModal, showToast } from 'global'
-import { postUser } from '../services/User.service'
+import { postUser } from 'services/User.service'
 import { ActionType } from '../store'
 
 const createUser = async (dispatch, userParams) => {

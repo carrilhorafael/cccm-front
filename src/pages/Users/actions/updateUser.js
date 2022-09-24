@@ -1,6 +1,6 @@
 
 import { closeModal, showToast } from 'global'
-import { putUser } from '../services/User.service'
+import { putUser } from 'services/User.service'
 import { ActionType } from '../store'
 
 const updateUser = async (dispatch, user, userParams) => {

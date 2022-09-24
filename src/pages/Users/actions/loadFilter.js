@@ -1,4 +1,4 @@
-import { getFilter } from "../services/User.service"
+import { getFilter } from "services/User.service"
 import { ActionType } from "../store"
 
 export default async function loadFilter (dispatch) {

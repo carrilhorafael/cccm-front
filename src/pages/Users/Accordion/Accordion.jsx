@@ -4,7 +4,7 @@ import ResourcesAccordion from "modules/AccordionTable";
 import { DeleteUserModal, GrantAccessModal, RevokeAccessModal, MinisteriesAssignModal } from "../modals";
 import { useHistory } from "react-router-dom";
 import { deleteUser, updateUser } from "../actions";
-import { getMemberCard } from "../services/User.service";
+import { getMemberCard } from "services/User.service";
 import LineBody from "./components/LineBody";
 import LineHeader from "./components/LineHeader";
 

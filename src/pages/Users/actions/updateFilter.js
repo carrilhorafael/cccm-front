@@ -1,5 +1,5 @@
 import { showToast } from "global";
-import { putFilter } from "../services/User.service";
+import { putFilter } from "services/User.service";
 import { ActionType } from "../store";
 import loadUsers from "./loadUsers";
 
