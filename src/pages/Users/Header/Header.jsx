@@ -7,7 +7,7 @@ import { ActionType } from "../store"
 import FilterSidebar from "./components/FilterSidebar"
 import { UsersPageHeader } from "./Header.styles"
 
-export default function Header ({ dispatch, filter, }) {
+export default function Header ({ dispatch, filter }) {
   const history = useHistory()
   const { church } = useChurchContext()
   const [show, setShow] = useState(false)

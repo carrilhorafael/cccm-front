@@ -18,7 +18,6 @@ export default function MinisteriesFilter ({ value, onToggle, onChange }) {
   }, [])
 
   const handleToggleMinisteriesTypeFilter = (filterType) => {
-    console.log(value, value.filter_types)
     if (value.filter_types?.includes(filterType)) {
       if (filterType === 'choosen-ministeries') {
         return onChange({ filter_types: value.filter_types.filter(old => old !== filterType) })

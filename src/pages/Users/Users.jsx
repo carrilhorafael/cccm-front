@@ -25,7 +25,7 @@ export default function Users () {
           </LoadingWrapper>
           :
           <Item>
-            <Header dispatch={dispatch} filter={filter} church={church} />
+            <Header dispatch={dispatch} filter={filter} />
             <Accordion dispatch={dispatch} users={users} />
           </Item>
         }
