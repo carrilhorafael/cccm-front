@@ -5,8 +5,7 @@ import { useAuthContext } from './context/AuthContext'
 import { Churches } from 'pages/Churches'
 import { General } from './pages/General'
 import LoginPage from './pages/login'
-import { Users } from './pages/Users'
-import ChurchFormUserPage from './pages/formUser'
+import { Users, FormUser } from './pages/Users'
 import ChurchMinisteriesPage from './pages/ministeries'
 import PasswordChangePage from './pages/passwordChange'
 import ChurchCults from './pages/cults'
@@ -28,7 +27,7 @@ export default function Routes () {
           <Route path="/churches" component={Churches}/>
           <Route path="/church/general" component={General}/>
           <Route path="/church/users" component={Users}/>
-          <Route path="/church/user" component={ChurchFormUserPage}/>
+          <Route path="/church/user" component={FormUser}/>
           <Route path="/church/ministeries" component={ChurchMinisteriesPage}/>
           <Route path="/church/cults" component={ChurchCults}/>
           {/* <Route path="/church/proselytes" component={ChurchProselytesPage}/> */}
