@@ -35,28 +35,29 @@ function reducer(state, action) {
         ...state,
         users: [
           ...state.users.slice(0, actualIndex - 1),
-          action.payload.data,
+          action.payload,
           ...state.users.slice(actualIndex + 1)
         ]
       }
     }
 
-    case ActionType.RESET_FILTER:
+    case ActionType.CLOSE_USERS_FILTER:
       return {
         ...state,
+        showUsersFilter: false,
         filter: state.actualFilter
+      }
+
+    case ActionType.OPEN_USERS_FILTER:
+      return {
+        ...state,
+        showUsersFilter: true,
       }
 
     case ActionType.REMOVE_USER:
       return {
         ...state,
         users: [...state.users.filter(({ id }) => id !== action.payload)]
-      }
-
-    case ActionType.LOAD_USERS:
-      return {
-        ...state,
-        status: ActionStatus.LOADING_USERS
       }
 
     default:

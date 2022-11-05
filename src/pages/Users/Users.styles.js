@@ -1,6 +1,19 @@
 import styled from 'styled-components'
 import colors from 'utils/colors'
 
+export const UsersPageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 24px;
+  justify-content: space-between;
+  & div {
+    display: flex;
+  }
+  & div button:last-of-type {
+    margin-left: 8px;
+  }
+`
+
 export const LoadingWrapper = styled.div`
   width: 100%;
   display: flex;

@@ -1,21 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Checkbox from "atomics/Checkbox";
 import MultiSelect from "atomics/MultiSelect";
-import { useChurchContext } from "context/ChurchContext";
-import { getChurchMinisteries } from "services/Api.service";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../UsersFilter.styles";
+import useChurchMinisteries from "pages/Users/hooks/useChurchMinisteries";
 
-export default function MinisteriesFilter ({ value, onToggle, onChange }) {
-  const { church } = useChurchContext()
-  const [ministeries, setMinisteries] = useState([])
+export default function MinisteriesFilter ({ value, onCheck, onChange }) {
+  const { ministeries } = useChurchMinisteries()
   const churchMinisteries = useMemo(() => ministeries.map(ministery => ({ label: ministery.name, value: ministery.id })), [ministeries])
-
-  useEffect(()=>{
-    getChurchMinisteries(church.id)
-    .then(({data}) => {
-      setMinisteries(data)
-    })
-  }, [])
 
   const handleToggleMinisteriesTypeFilter = (filterType) => {
     if (value.filter_types?.includes(filterType)) {
@@ -40,7 +31,7 @@ export default function MinisteriesFilter ({ value, onToggle, onChange }) {
         <Checkbox
           checked={value != null}
           id="filterByMinisteries"
-          onChange={onToggle}
+          onChange={onCheck}
         />
         <label htmlFor="filterByMinisteries">Ministerios</label>
       </CheckboxFieldset>

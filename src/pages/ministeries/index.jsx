@@ -1,33 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Button from 'atomics/Button'
 import { ChurchContext } from 'context/ChurchContext'
 import IconButton from 'atomics/IconButton'
 import MinisteryModal from 'modules/MinisteryModal'
 import { ActionWrapper, Card, Description, Header, List, LoadingWrapper, Title } from './styles'
-import { getChurchMinisteries } from 'services/Api.service'
 import Loading from 'atomics/Loading'
-import { showModal, showToast } from 'global'
+import { showModal } from 'global'
+import useChurchMinisteries from 'pages/Users/hooks/useChurchMinisteries'
 
 export default function ChurchMinisteriesPage () {
-  const { church, destroyMinistery } = useContext(ChurchContext)
-
-  const [ministeries, setMinisteries] = useState([])
-  const [isLoading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (!church) return
-    getChurchMinisteries(church.id)
-      .then(({ data }) => setMinisteries(data))
-      .catch(() => showToast('negative', 'Ops, algo deu errado em nosso servidor.'))
-      .finally(() => setLoading(false))
-  }, [church])
+  const { destroyMinistery } = useContext(ChurchContext)
+  const { ministeries, loading } = useChurchMinisteries()
 
   return (
     <>
       <Header>
           <Button theme="primary" onClick={() => showModal(MinisteryModal)} title='Criar um ministério' />
       </Header>
-      {isLoading ?
+      {loading ?
         <LoadingWrapper>
           <Loading size='md' theme='primary'/>
         </LoadingWrapper>

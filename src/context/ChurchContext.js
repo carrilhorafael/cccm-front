@@ -2,9 +2,7 @@ import React, { createContext, useContext,  useState } from 'react'
 import {
   deleteProselyte,
   postChurchCult,
-  postChurchMinistery,
   postCultProselyte,
-  putMinistery,
   putProselyte
 } from 'services/Api.service'
 
@@ -12,13 +10,9 @@ export const ChurchContext = createContext()
 
 export function ChurchProvider ({children}) {
   const [church, setChurch] = useState(null)
-  const [ministeries, setMinisteries] = useState([])
   const [resume, setResume] = useState([])
   const [proselytes, setProselytes] = useState([])
 
-  async function createMinistery(ministeryParams) {
-    return postChurchMinistery(church.id, ministeryParams)
-  }
 
   async function createProselyte(cultDate, proselyteParams) {
     return postChurchCult(church.id, cultDate)
@@ -34,22 +28,6 @@ export function ChurchProvider ({children}) {
         newResume.proselytes_in_last_semester[object_key].push(data)
         setResume(newResume)
       })
-    })
-  }
-
-  async function updateMinistery(ministeryId, ministeryParams) {
-    return putMinistery(ministeryId, ministeryParams)
-    .then(({data}) => {
-      let newMinisteries = ministeries
-      const resourceIndex = newMinisteries.findIndex(ministery => ministery.id === data.id)
-
-      newMinisteries = [
-        ...newMinisteries.slice(0, resourceIndex),
-        data,
-        ...newMinisteries.slice(resourceIndex + 1)
-      ]
-
-      setMinisteries(newMinisteries)
     })
   }
 
@@ -79,9 +57,7 @@ export function ChurchProvider ({children}) {
     <ChurchContext.Provider value={{
 
       church,
-      updateMinistery,
       updateProselyte,
-      createMinistery,
       createProselyte,
       destroyProselyte,
       setChurch

@@ -1,17 +1,10 @@
 import styled from "styled-components";
 
-export const UsersPageHeader = styled.div`
+export const SidebarBody = styled.div`
   display: flex;
-  align-items: center;
-  padding-bottom: 24px;
-  justify-content: space-between;
-  & div {
-    display: flex;
-  }
-  & div button:last-of-type {
-    margin-left: 8px;
-  }
+  flex-direction: column;
 `
+
 export const CheckboxFieldset = styled.fieldset`
   display: flex;
   align-items: center;

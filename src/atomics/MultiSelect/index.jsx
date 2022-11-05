@@ -1,4 +1,6 @@
+import Loading from 'atomics/Loading'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import {
   ClearAll,
   Content,

@@ -10,6 +10,7 @@ export default function GrantAccessModal({ user, onConfirm }) {
 
   return (
     <Modal
+      size='sm'
       Header={
         <Header>
           <HeaderTitle>Conceder acesso</HeaderTitle>

@@ -18,3 +18,8 @@ export const CheckboxWrapper = styled.div`
   font-size: 18px;
   gap: 8px
 `
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`

@@ -15,7 +15,7 @@ export default function Modal ({
   return (
     <OverlayLocker>
       <Container>
-        <Wrapper size={size || 'medium'}>
+        <Wrapper size={size || 'md'}>
           {Header}
           <CloseButtonWrapper>
             <IconButton
@@ -25,7 +25,7 @@ export default function Modal ({
               noBackground
             />
           </CloseButtonWrapper>
-          <Body size={size || 'medium'}>
+          <Body size={size || 'md'}>
             {children}
           </Body>
           {Footer}

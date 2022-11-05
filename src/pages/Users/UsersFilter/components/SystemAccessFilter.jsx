@@ -1,7 +1,7 @@
 import Checkbox from "atomics/Checkbox";
-import { CheckboxFieldset, FilterType } from "../Header.styles";
+import { CheckboxFieldset, FilterType } from "../UsersFilter.styles";
 
-export default function SystemAccessFilter ({value, onToggle}) {
+export default function SystemAccessFilter ({value, onCheck}) {
 
   return (
     <FilterType>
@@ -9,7 +9,7 @@ export default function SystemAccessFilter ({value, onToggle}) {
         <Checkbox
           checked={value != null}
           id="filterBySystemAccess"
-          onChange={onToggle}/>
+          onChange={onCheck}/>
         <label htmlFor="filterBySystemAccess">Tem acesso ao sistema</label>
       </CheckboxFieldset>
     </FilterType>

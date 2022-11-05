@@ -1,8 +1,8 @@
 import getFormattedDate from "utils/getFormattedDate";
 import getFormattedTimestamp from "utils/getFormattedTimestamp";
-import { AccessTitle, AccessWrapper, AccordionRow, NoAccessTitle } from "../Accordion.styles";
+import { AccessTitle, AccessWrapper, AccordionRow, NoAccessTitle } from "./Accordion.styles";
 
-export default function LineBody ({resource}) {
+export default function AccordionLineBody ({resource}) {
   const ministeriesTxt = resource.ministeries.map(m => m.name).join(', ')
   return (
   <>

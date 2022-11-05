@@ -1,6 +1,6 @@
-import { Icon, ItemHeader, ItemTitle } from "../Accordion.styles";
+import { Icon, ItemHeader, ItemTitle } from "./Accordion.styles";
 
-export default function LineHeader ({resource}) {
+export default function AccordionLineHeader ({resource}) {
   return (
     <ItemHeader>
       <div>

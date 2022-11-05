@@ -4,7 +4,8 @@ const initialState = {
   users: [],
   filter: {},
   actualFilter: {},
-  status: ActionStatus.LOADING
+  status: ActionStatus.LOADING,
+  showUsersFilter: false
 }
 
 export default initialState

@@ -10,19 +10,19 @@ export const Container = styled.div`
   align-items: center;
 `
 const wrapperModifier = {
-  small: {
+  sm: {
     width: '30%',
     height: '200px'
   },
-  medium: {
+  md: {
     width: '50%',
     height: '300px'
   },
-  large: {
+  lg: {
     width: '70%',
     height: '600px'
   },
-  extraLarge: {
+  xl: {
     width: '90%',
     height: '700px'
   }

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const api = axios.create({
   baseURL: "https://cccm-back.herokuapp.com/",
   headers: {
@@ -30,10 +29,6 @@ export function postResetPassword (data) {
   return api.post('auth/reset', data)
 }
 
-export function getChurchMinisteries(churchId) {
-  return api.get(`churches/${churchId}/ministeries`)
-}
-
 export function getChurchResume(churchId) {
   return api.get(`churches/${churchId}/resume`)
 }
@@ -44,10 +39,6 @@ export function getChurchProselytes(churchId) {
 
 export function getChurchCults(churchId) {
   return api.get(`churches/${churchId}/cults`)
-}
-
-export function postChurchMinistery(churchId, ministeryParams) {
-  return api.post(`churches/${churchId}/ministeries`, ministeryParams)
 }
 
 export function postCultProselyte(cultId, proselyteParams) {
@@ -73,14 +64,6 @@ export function putChurch(churchId, churchParams) {
 
 export function destroyChurch(churchId) {
   return api.delete(`churches/${churchId}`)
-}
-
-export function deleteMinistery(ministeryId) {
-  return api.delete(`ministeries/${ministeryId}`)
-}
-
-export function putMinistery(ministeryId, ministeryParams) {
-  return api.put(`ministeries/${ministeryId}`, ministeryParams)
 }
 
 export function putProselyte(proselyteId, proselyteParams) {

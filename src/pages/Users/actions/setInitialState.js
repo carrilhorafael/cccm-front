@@ -1,4 +1,4 @@
-import { showToast } from "global"
+import { handleRequestErrors } from "global"
 import { getFilter, getUsers } from "services/User.service"
 import { ActionType } from "../store"
 
@@ -31,8 +31,7 @@ export default async function setInitialState (dispatch, churchId) {
     dispatch({
       type: ActionType.COMPLETE_LOADING
     })
-
-  } catch (e) {
-    showToast('negative', 'Ops, algo deu errado em nosso servidor.')
+  } catch (error) {
+    handleRequestErrors(error)
   }
 }

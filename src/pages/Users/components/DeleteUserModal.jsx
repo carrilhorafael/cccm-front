@@ -4,27 +4,27 @@ import Button from 'atomics/Button'
 import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
 import { Container, Description } from './Modal.styles'
 
-export default function RevokeAccessModal({ user, onConfirm }) {
+export default function DeleteUserModal({ user, onConfirm }) {
   return (
     <Modal
       Header={
         <Header>
-          <HeaderTitle>Revogar acesso</HeaderTitle>
+          <HeaderTitle>Excluir usuário</HeaderTitle>
         </Header>
       }
       Footer={
         <Footer>
           <Button
-            theme="negative"
-            onClick={() => onConfirm({ user: { should_have_access: false } })}
+            theme='negative'
             title='Excluir'
+            onClick={onConfirm}
           />
         </Footer>
       }
     >
       <Container>
         <Description>
-          Você tem certeza? Ao clicar em Confirmar, o usuário <b>{user.name}</b> perderá completamente o acesso ao sistema, mas seu registro não será apagado da tabela de membros da igreja.
+          Tem certeza que deseja deletar o membro? Essa ação <b>não</b> é reversível.
         </Description>
       </Container>
     </Modal>

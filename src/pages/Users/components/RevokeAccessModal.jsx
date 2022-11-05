@@ -1,39 +1,31 @@
 import React from 'react'
 import Modal from 'atomics/Modal'
 import Button from 'atomics/Button'
-import { useChurchContext } from 'context/ChurchContext'
 import { Footer, Header, HeaderTitle } from 'atomics/Modal/styles'
 import { Container, Description } from './Modal.styles'
-import { closeModal } from 'global'
 
-export default function DeleteUserModal({ user }) {
-  const { destroyUser } = useChurchContext()
-
-  const onConfirm = async () => {
-    await destroyUser(user.id)
-    closeModal()
-  }
-
+export default function RevokeAccessModal({ user, onConfirm }) {
   return (
     <Modal
+      size='sm'
       Header={
         <Header>
-          <HeaderTitle>Excluir usuário</HeaderTitle>
+          <HeaderTitle>Revogar acesso</HeaderTitle>
         </Header>
       }
       Footer={
         <Footer>
           <Button
-            theme='negative'
+            theme="negative"
+            onClick={() => onConfirm({ user: { should_have_access: false } })}
             title='Excluir'
-            onClick={onConfirm}
           />
         </Footer>
       }
     >
       <Container>
         <Description>
-          Tem certeza que deseja deletar o membro? Essa ação <b>não</b> é reversível.
+          Você tem certeza? Ao clicar em Confirmar, o usuário <b>{user.name}</b> perderá completamente o acesso ao sistema, mas seu registro não será apagado da tabela de membros da igreja.
         </Description>
       </Container>
     </Modal>

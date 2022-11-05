@@ -1,5 +1,5 @@
 
-import { closeModal, showToast } from 'global'
+import { closeModal, handleRequestErrors, showToast } from 'global'
 import { putUser } from 'services/User.service'
 import { ActionType } from '../store'
 
@@ -12,10 +12,10 @@ const updateUser = async (dispatch, user, userParams) => {
       payload: data
     })
 
-    showToast('positive', `Igreja ${data.name} editada com sucesso`)
+    showToast('positive', `Usuário editado com sucesso`)
     closeModal()
-  } catch({ response }) {
-    showToast(response.data)
+  } catch(error) {
+    handleRequestErrors(error)
   }
 }
 

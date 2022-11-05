@@ -4,11 +4,12 @@ import Checkbox from 'atomics/Checkbox'
 import { useLocation, useHistory } from 'react-router-dom'
 import TextInput from 'atomics/TextInput'
 import Select from 'atomics/Select'
-import { ButtonsWrapper, CheckboxWrapper, Container, FormGrid, GeneralLayout, TextareaWrapper, UserForm } from './FormUser.styles'
+import { ButtonsWrapper, CheckboxWrapper, Container, FormGrid, GeneralLayout, HeaderTitle, HeaderUser, TextareaWrapper, UserForm } from './FormUser.styles'
 import Textarea from 'atomics/Textarea'
 import { ActionStatus, ActionType, reducer } from './store'
 import submitForm from './actions/submitForm'
 import { useChurchContext } from 'context/ChurchContext'
+import IconButton from 'atomics/IconButton'
 
 export default function FormUser () {
   const { church } = useChurchContext()
@@ -49,11 +50,17 @@ export default function FormUser () {
     })
   }
 
-  console.log(errors)
-
   return (
     <GeneralLayout>
       <Container>
+        <HeaderUser>
+          <IconButton
+            icon='fa-solid fa-delete-left'
+            theme='negative'
+            onClick={() => history.goBack()}
+          />
+          <HeaderTitle>{location.state ? "Editar usuário" : "Criar usuário"}</HeaderTitle>
+        </HeaderUser>
         <UserForm>
           <FormGrid>
             <TextInput

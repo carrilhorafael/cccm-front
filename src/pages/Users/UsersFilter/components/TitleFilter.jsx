@@ -1,9 +1,9 @@
 import Checkbox from "atomics/Checkbox";
 import MultiSelect from "atomics/MultiSelect";
 import { useChurchContext } from "context/ChurchContext";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../UsersFilter.styles";
 
-export default function TitleFilter ({ value, onToggle, onChange }) {
+export default function TitleFilter ({ value, onCheck, onChange }) {
   const { church } = useChurchContext()
   const churchTitles = church.titles.map(title => ({ label: title, value: title }))
 
@@ -20,7 +20,7 @@ export default function TitleFilter ({ value, onToggle, onChange }) {
         <Checkbox
           checked={value != null}
           id="filterByTitle"
-          onChange={onToggle}
+          onChange={onCheck}
         />
         <label htmlFor="filterByTitle">Titulo</label>
       </CheckboxFieldset>

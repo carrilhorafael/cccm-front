@@ -1,16 +1,15 @@
 import Checkbox from "atomics/Checkbox";
 import TextInput from "atomics/TextInput";
-import { CheckboxFieldset, FilterType, InfoFieldset } from "../Header.styles";
+import { CheckboxFieldset, FilterType, InfoFieldset } from "../UsersFilter.styles";
 
-export default function FilterItem ({ value, onToggle, onChange }) {
-
+export default function NameFilter ({ value, onCheck, onChange }) {
   return (
     <FilterType>
       <CheckboxFieldset>
         <Checkbox
           checked={value != null}
           id='nameCheckbox'
-          onChange={onToggle}
+          onChange={onCheck}
         />
         <label htmlFor='nameCheckbox'>Nome</label>
       </CheckboxFieldset>
