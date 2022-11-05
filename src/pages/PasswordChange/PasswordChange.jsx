@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import Button from 'atomics/Button'
 import PasswordInput from 'atomics/PasswordInput'
 import { useAuthContext } from 'context/AuthContext'
-import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './styles'
+import { ButtonsWrapper, Container, ChangePasswordForm, Fieldset, GradientLayout, Title } from './PasswordChange.styles'
 
-export default function PasswordChangePage() {
+export default function PasswordChange() {
   const { handleChangePassword } = useAuthContext()
 
   const [errors, setErrors] = useState(null)

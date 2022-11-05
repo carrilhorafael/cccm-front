@@ -4,7 +4,7 @@ import Button from 'atomics/Button'
 import PasswordInput from 'atomics/PasswordInput'
 import TextInput from 'atomics/TextInput'
 import { useAuthContext } from 'context/AuthContext'
-import { ButtonsWrapper, Container, Fieldset, FormLogin, GradientLayout, Title } from './styles'
+import { ButtonsWrapper, Container, Fieldset, FormLogin, GradientLayout, Title } from './Login.styles'
 
 export default function LoginPage() {
   const { handleLogin } = useAuthContext()

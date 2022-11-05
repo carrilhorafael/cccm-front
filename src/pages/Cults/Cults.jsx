@@ -9,7 +9,7 @@ import {
   ItemTitle,
   AccordionRow,
   LoadingWrapper
-} from './styles'
+} from './Cults.styles'
 import IconButton from 'atomics/IconButton'
 import getFormattedTimestamp from 'utils/getFormattedTimestamp'
 import Button from 'atomics/Button'

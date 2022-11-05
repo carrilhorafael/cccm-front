@@ -3,12 +3,12 @@ import Button from 'atomics/Button'
 import { ChurchContext } from 'context/ChurchContext'
 import IconButton from 'atomics/IconButton'
 import MinisteryModal from 'modules/MinisteryModal'
-import { ActionWrapper, Card, Description, Header, List, LoadingWrapper, Title } from './styles'
+import { ActionWrapper, Card, Description, Header, List, LoadingWrapper, Title } from './Ministeries.styles'
 import Loading from 'atomics/Loading'
 import { showModal } from 'global'
 import useChurchMinisteries from 'pages/Users/hooks/useChurchMinisteries'
 
-export default function ChurchMinisteriesPage () {
+export default function Ministeries () {
   const { destroyMinistery } = useContext(ChurchContext)
   const { ministeries, loading } = useChurchMinisteries()
 
